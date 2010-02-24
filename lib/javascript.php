@@ -26,7 +26,7 @@
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/ufo.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/dropdown.js"></script>
 
-//jquery files
+<!-- jquery files  -->
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-ui-1.7.2.custom.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.droppy.js"></script>
