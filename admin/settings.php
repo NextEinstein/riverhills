@@ -1,4 +1,4 @@
-<?php // $Id: settings.php,v 1.40.2.4 2008/04/02 06:09:57 dongsheng Exp $
+<?php // $Id: settings.php,v 1.1 2009/12/21 00:53:48 michaelpenne Exp $
 
 require_once('../config.php');
 require_once($CFG->libdir.'/adminlib.php');

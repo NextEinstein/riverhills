@@ -1,4 +1,4 @@
-<?php  // $Id: index.php,v 1.201.2.10 2009/04/25 21:18:24 stronk7 Exp $
+<?php  // $Id: index.php,v 1.1 2009/12/21 00:53:49 michaelpenne Exp $
        // index.php - the front page.
 
 ///////////////////////////////////////////////////////////////////////////
@@ -113,6 +113,10 @@
                  '<meta name="description" content="'. strip_tags(format_text($SITE->summary, FORMAT_HTML)) .'" />',
                  true, '', user_login_string($SITE).$langmenu);
 
+    //-michael for flex on front page //
+        require_once($CFG->dirroot.'/course/format/page/lib.php');
+        page_frontpage();
+ 
 ?>
 
 
