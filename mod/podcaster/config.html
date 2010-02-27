@@ -1,0 +1,83 @@
+<?php
+/**
+ * podcaster module config. Form data will be preprocessed 
+ * in podcaster_process_options (defined in lib.php)
+ *
+ * @author  Humboldt Universitaet zu Berlin
+ *            Christoph Soergel <christoph.soergel@cms.hu-berlin.de>
+ * @version 1.0
+ * @package podcaster
+ *
+ **/
+  // set up tabs
+  $tab     = optional_param ('tab',   'main', PARAM_TEXT);
+  $error   = optional_param ('error', 0,      PARAM_INT);
+  $subject = optional_param ('subject', '',   PARAM_TEXT);
+  switch ($tab) {
+    case 'main':
+    case 'license':
+    case 'repository':
+    case 'metachannel':
+    case 'language':
+    case 'tools':
+      // OK
+      break;
+    default:
+      $tab = 'main';
+  }
+
+  $tabs = array (
+      array (
+        // channel / summary tab
+            new tabobject('main',
+                            $CFG->wwwroot.'/'.$CFG->admin.'/module.php?'.
+                            'module=podcaster&amp;tab=main',
+                            get_string('main_tabtitle', 'podcaster')),
+
+            new tabobject('license',
+                            $CFG->wwwroot.'/'.$CFG->admin.'/module.php?'.
+                            'module=podcaster&amp;tab=license',
+                            get_string('license_tabtitle', 'podcaster')),
+
+            new tabobject('repository',
+                            $CFG->wwwroot.'/'.$CFG->admin.'/module.php?'.
+                            'module=podcaster&amp;tab=repository',
+                            get_string('repository_tabtitle', 'podcaster')),
+
+            new tabobject('metachannel',
+                            $CFG->wwwroot.'/'.$CFG->admin.'/module.php?'.
+                            'module=podcaster&amp;tab=metachannel',
+                            get_string('metachannel_tabtitle', 'podcaster')),
+
+            new tabobject('language',
+                            $CFG->wwwroot.'/'.$CFG->admin.'/module.php?'.
+                            'module=podcaster&amp;tab=language',
+                            get_string('language_tabtitle', 'podcaster')),
+            new tabobject('tools',
+                            $CFG->wwwroot.'/'.$CFG->admin.'/module.php?'.
+                            'module=podcaster&amp;tab=tools',
+                            get_string('tools_tabtitle', 'podcaster')),
+        )
+      ); 
+  print_tabs ($tabs, $tab);
+?>
+<form method="post" action="module.php" id="form">
+  <input type="hidden" name="sesskey" value="<?php print isset($USER->sesskey) ? $USER->sesskey : '' ?>" />
+  <input type="hidden" name="module" value="podcaster" />
+  <input type="hidden" name="tab" value="<?php echo $tab; ?>" />
+  <div>
+    <table cellpadding="9" cellspacing="0" width="100%">
+<?php
+  require_once ($CFG->dirroot.'/mod/podcaster/lib/admin.php');
+  $admin =& podcaster_admin::get_instance ();
+  $admin->print_form ($tab, $error, $subject);
+?>
+      <tr>
+          <td colspan="3" align="center" width="100%">
+            <input type="submit" name="continue" value="<?php print_string('config_continue', 'podcaster'); ?>" />&nbsp;
+            <input type="submit" name="finish" value="<?php print_string('config_done', 'podcaster'); ?>" />
+          </td>
+      </tr>
+    </table>
+  </div>
+</form>
