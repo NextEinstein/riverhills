@@ -1997,4 +1997,33 @@ function page_print_lock_prerequisites($page) {
     format_page_lock::print_lock_prerequisites($page);
 }
 
+function page_print_site_page_structure_ul($pages = null) {
+    global $CFG;
+
+    $ulid = '';
+
+    if (empty($pages)) {
+        $pages = page_get_master_pages(SITEID);
+        $ulid = 'id="webpage-courses"';
+    }
+
+    if (empty($pages)) {
+        return '';
+    }
+
+    $baseurl = $CFG->wwwroot.'/index.php?page=';
+
+    $pagestring = '';
+    foreach ($pages as $page) {
+        $pagestring .=  '<li>';
+        $pagestring .= '<a href="'.$baseurl.$page->id.'">'. $page->nameone . '</a>';
+        if (!empty($page->children)) {
+            $pagestring .= page_print_site_page_structure_ul($page->children);
+        }
+        $pagestring .= '</li>';
+    }
+
+    return "<ul $ulid>". $pagestring . '</ul>';
+
+}
 ?>
