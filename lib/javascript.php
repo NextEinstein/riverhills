@@ -33,7 +33,7 @@
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.hotkeys.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.tree.js"></script>
-
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.prettyPhoto.js"></script>
 
 <script type="text/javascript" defer="defer">
 //<![CDATA[
