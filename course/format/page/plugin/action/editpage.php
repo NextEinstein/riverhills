@@ -63,7 +63,7 @@ class format_page_action_editpage extends format_page_action {
             $page->courseid        = $data->id;
             $page->display         = $data->publish | $data->dispmenu | $data->disptheme;
             $page->prefleftwidth   = $data->prefleftwidth;
-            $page->prefcenterwidth = $data->prefcenterwidth;
+            //$page->prefcenterwidth = $data->prefcenterwidth;
             $page->prefrightwidth  = $data->prefrightwidth;
             $page->template        = $data->template;
             $page->showbuttons     = $data->showbuttons;

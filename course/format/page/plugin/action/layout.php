@@ -42,9 +42,13 @@ class format_page_action_layout extends format_page_action {
             echo '</tr></td>';
         } else {
             echo '<tr>';
-            page_print_position($pageblocks, BLOCK_POS_LEFT, $this->page->prefleftwidth);
-            page_print_position($pageblocks, BLOCK_POS_CENTER, $this->page->prefcenterwidth);
-            page_print_position($pageblocks, BLOCK_POS_RIGHT, $this->page->prefrightwidth);
+            if (blocks_have_content($pageblocks, BLOCK_POS_LEFT)) {
+                page_print_position($pageblocks, BLOCK_POS_LEFT, $this->page->prefleftwidth);
+            }
+            page_print_position($pageblocks, BLOCK_POS_CENTER, '100%');
+            if (blocks_have_content($pageblocks, BLOCK_POS_RIGHT)) {
+                page_print_position($pageblocks, BLOCK_POS_RIGHT, $this->page->prefrightwidth);
+            }
             echo '</tr>';
         }
 

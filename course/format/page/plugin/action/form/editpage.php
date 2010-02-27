@@ -63,9 +63,9 @@ class format_page_editpage_form extends moodleform {
         //$mform->addRule('prefleftwidth', null, 'alphanumeric', null, 'client');
         $mform->setHelpButton('prefleftwidth', array('prefwidth', get_string('preferredleftcolumnwidth', 'format_page'), 'format_page'));
 
-        $mform->addElement('text', 'prefcenterwidth', get_string('preferredcentercolumnwidth', 'format_page'), array('size'=>'5'));
-        $mform->setType('prefcenterwidth', PARAM_TEXT);
-        $mform->setDefault('prefcenterwidth', '400');
+        //$mform->addElement('text', 'prefcenterwidth', get_string('preferredcentercolumnwidth', 'format_page'), array('size'=>'5'));
+        //$mform->setType('prefcenterwidth', PARAM_TEXT);
+        //$mform->setDefault('prefcenterwidth', '400');
         //$mform->addRule('prefcenterwidth', null, 'alphanumeric', null, 'client');
         $mform->setHelpButton('prefcenterwidth', array('prefwidth', get_string('preferredcentercolumnwidth', 'format_page'), 'format_page'));
 
