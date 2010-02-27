@@ -1,0 +1,78 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+#page {
+    border-top: 2px solid #320000;
+}
+
+.navbar {
+    background-color: #320000;
+    border: 0px;
+    height: 24px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-bottom: 3px solid #ccc;
+}
+
+#header, #header-home {
+    height: 93px;
+    background-color: #fff;
+}
+
+.headertable .headertitle {
+    width: 100%;
+    background-image: url(pix/banner_words.jpg);
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+
+#webpage-courses {
+    border-bottom: transparent;
+
+}
+
+#webpage-courses a {
+    font-size: 12px;
+}
+#webpage-courses li a {
+    line-height: 12px;
+}
+
+.headerefca {
+    padding-right: 20px;
+    vertical-align: top;
+}
+
+/** dropdown menu ***/
+
+#webpage-courses ul { width: 130px; }
+#webpage-courses ul ul { left: 131px; }
+
+/* Everything else is theming */
+
+#webpage-courses { margin-top: 0px; float: left}
+#webpage-courses *:hover { background-color: none; }
+#webpage-courses a { border-right: none; width: 90px; font-size: 12px; padding-left: 6px;padding-right: 6px;padding-top: 6px; height: 18px; line-height: 1; color: #fff; font-weight: bold;}
+  #webpage-courses li.hover a { background-color: #5E5A5A; }
+  #webpage-courses ul { top: 25px; width: 90px}
+    #webpage-courses ul li a { background-color: #5E5A5A;}
+      #webpage-courses ul a.hover { background-color: #ccc; height: 30px;}
+   #webpage-courses ul a { border-bottom: 1px solid white; border-right: none; opacity: 0.95; filter: alpha(opacity=90); }
+
+
+#webpage-courses {
+    margin-left: 50px;
+    border-bottom: none;
+}
+
+#layout-table.format-page {
+    width: 100%;
+}
+
+#layout-table.format-page .block_html .content {
+    border: none;
+}
