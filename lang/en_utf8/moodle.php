@@ -1715,4 +1715,9 @@ $string['authenticationplugins'] = 'Authentication Plugins';
 $string['chooseauthmethod'] = 'Choose authentication plugin';
 $string['nocourses'] = 'No courses';
 $string['requestedcourses'] = 'Requested courses';
+
+$string['zipcode'] = 'Zipcode';
+$string['f1householdid'] = 'F1 Household ID';
+$string['f1individualid'] = 'F1 Individual ID';
+$string['f1integration'] = 'Fellowship One Integration';
 ?>

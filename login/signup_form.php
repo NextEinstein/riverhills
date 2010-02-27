@@ -51,8 +51,15 @@ class login_signup_form extends moodleform {
         $mform->addRule('lastname', get_string('missinglastname'), 'required', null, 'server');
 
         $mform->addElement('text', 'city', get_string('city'), 'maxlength="20" size="20"');
+        
         $mform->setType('city', PARAM_TEXT);
         $mform->addRule('city', get_string('missingcity'), 'required', null, 'server');
+
+        $mform->addElement('text', 'state', get_string('state'), 'maxlength="2" size="2"');
+        $mform->setType('state', PARAM_TEXT);
+
+        $mform->addElement('text', 'zip', get_string('zipcode'), 'maxlength="15" size="15"');
+        $mform->setType('zip', PARAM_ALPHAEXT);
 
         $country = get_list_of_countries();
         $default_country[''] = get_string('selectacountry');

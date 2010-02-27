@@ -197,6 +197,11 @@ function useredit_shared_definition(&$mform) {
     $mform->setType('city', PARAM_MULTILANG);
     $mform->addRule('city', $strrequired, 'required', null, 'client');
 
+    $mform->addElement('text', 'state', get_string('state'), 'maxlength="2" size="2"');
+    $mform->setType('state', PARAM_TEXT);
+
+    $mform->addElement('text', 'zip', get_string('zipcode'), 'maxlength="15" size="15"');
+    $mform->setType('zip', PARAM_ALPHAEXT);
 
     $choices = get_list_of_countries();
     $choices= array(''=>get_string('selectacountry').'...') + $choices;
