@@ -4808,3 +4808,203 @@ wikiadminactions {
     #webpage-courses ul li { float: none; }
     #webpage-courses ul ul { top: 0; }
     
+
+/**
+ * extra-html
+ */
+
+div#extra-html .userpicture {
+    height: 100px;
+    width: 100px;
+}
+
+span.nowrap {
+    white-space: nowrap;
+}
+
+div#extra-html {
+    padding: 5px;
+    width: 800px;
+    background-image: url("images/ui/ui-bg_fine-grain_10_eceadf_60x60.png");
+}
+div#extra-html div.sermon-header {
+    width: 100%;
+    background-color: #320000;
+    color: #ffe;
+}
+
+div#extra-html div.sermon-info .speaker-name,
+div#extra-html div.sermon-info .speaker-pic {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+div#extra-html div.sermon-header .series-name {
+    font-size: xx-large;
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div#extra-html div.sermon-info .speaker{
+    width: 115px;
+    min-height: 150px;
+    padding: 15px;
+    float: left;
+}
+
+div#extra-html div.sermon-info .sermon-text {
+    display: inline;
+    float: left;
+    width: 400px;
+    padding: 15px;
+    min-height: 150px;
+}
+
+div#extra-html div.sermon-info .sermon-text .sermon-title {
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    display: block;
+}
+
+div#extra-html div.sermon-info .sermon-text .sermon-place {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+div#extra-html div.sermon-info .sermon-text .sermon-download-links {
+    border-bottom: 1px solid darkgray;
+    display: block;
+    padding-top: 50px;
+}
+
+
+div#extra-html div.sermon-info .sermon-text .link{
+    display: block;
+    width: 100%;
+    font-size: small;
+}
+
+div#extra-html div#datedelivered-picker{
+    margin-left: 0;
+    margin-top: 20px;
+    width: 190px;
+    float: left;
+}
+
+div#extra-html #audioplayer_1 {
+    width: 800px;
+}
+
+
+/**
+ * json sermon list tree
+ */
+
+#json_sermonlist_tree li.sermon a ins{
+    background-image: url(<?php echo $CFG->pixpath; ?>/cust/mp3.png);
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+    
+}
+
+#json_sermonlist_tree li.sermon a {
+    height: 22px;
+    width: 22px;
+}
+
+#json_sermonlist_tree li.open ul {
+    width: 700px;
+}
+
+#json_sermonlist_tree li.series.open {
+    background-image: url(images/fade-right.png);
+    background-repeat: repeat-y;
+    background-position: left;
+}
+
+/* Overlays */
+.ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+table#sermondetails-table tr td:first-child .fitemtitle {
+    display: none;
+}
+
+
+table#sermondetails-table > tbody > tr > td:last-child {
+    padding-top: 30px;
+    width: 100%;
+}
+
+table#sermondetails-table > tbody > tr > td {
+    vertical-align: top;
+    width: 250px;
+}
+
+table#sermondetails-table tr td:last-child .fitem .fitemtitle {
+    text-align: left;
+    width: 100px;
+}
+
+span.sermon-delivery-title {
+    white-space: nowrap;
+}
+
+fieldset#modstandardelshdr {
+    display: none;
+}
+
+span.searchsermontxt {
+    white-space: nowrap;
+}
+
+div#partitioner {
+    background-color: #ffe;
+    padding-bottom: 12px;
+    border: 1px solid #B83400;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.mform fieldset {
+    padding-right: 20px;
+}
+
+#datedelivered-picker .ui-datepicker-year {
+    font-size: 12px;
+    width: 70px
+}
+
+div.ui-datepicker{ font-size:12px; }
+
+div#partitioner { font-size: 12px;}
+
+.block_sermons .content {
+    height: 400px;
+}
+
+.block_sermons .content #json_sermonlist_tree {
+    height: 400px;
+    overflow: auto;
+    width: 800px;
+}
+
+.ui-dialog-titlebar span {
+    text-align: center;
+    width: 100%;
+}
+
+.ui-dialog div.sermon-header {
+    display: none;
+}
+
+div.block_sermons div.content {
+    background-color: #ddd;
+    border-color: #555;
+}

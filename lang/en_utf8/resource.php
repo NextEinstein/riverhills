@@ -136,4 +136,34 @@ $string['warningblockingdelete'] = 'Warning: Delete operation is blocked by exis
 $string['warningdisabledrename'] = 'Warning: The automatic renaming of references in resources is disabled. Please update affected resources manually if needed. Administrator can also enable automatic renaming in global Resource configuration.';
 $string['websearchdefault'] = 'Websearch default';
 
+$string['sermonmp3'] = 'Sermon Mp3';
+$string['sermontext'] = 'Sermon Text';
+$string['sermonlesson'] = 'Sermon Lesson';
+$string['sermonddeliverydate'] = 'Sermon Delivery Date';
+$string['seriesname'] = 'Series Name';
+$string['biblebook'] = 'Book';
+$string['biblechapter'] = 'Beginning Chapter';
+$string['guestspeakername'] = 'Guest Speaker';
+$string['guestspeaker'] = 'Guest Speaker';
+$string['resourcetypesermon'] = 'Sermon Resources';
+$string['sermondetails'] = 'Sermon Details';
+$string['searchablesermontext'] = 'Searchable Sermon Text';
+$string['or'] = 'OR';
+$string['speakerbyid'] = 'Speaker';
+$string['series'] = 'Series';
+$string['newseriesname'] = 'New Series';
+$string['selectpreviousseries'] = 'Select previous series...';
+$string['selectfromexistinguser'] = 'Select from existing';
+$string['sermonplace'] = 'From: $a->bookname Chapter: $a->beginchapter';
+$string['downloadlinks'] = 'Download Links';
+$string['sermonmp3link'] = 'Sermon Mp3';
+$string['sermontextlink'] = 'Sermon Text';
+$string['sermonlessonlink'] = 'Sermon Lesson';
+$string['sermons'] = 'Sermons';
+
+$string['sortby'] = 'Find sermons by...';
+$string['sortby:series'] = 'Series Name';
+$string['sortby:date'] = 'Delivery Date';
+
+$string['sermonleaf'] = '$a->name ($a->datedelivered)';
 ?>

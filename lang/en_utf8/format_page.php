@@ -140,4 +140,5 @@ $string['resource:wikipage'] = 'Wiki Page';
 $string['pageformatonfrontpage'] = 'Show page format on front page';
 $string['pageformatonfrontpagedesc'] = 'This will enable the page format on the front page.';
 
+$string['resource:sermon'] = 'Sermon';
 ?>
