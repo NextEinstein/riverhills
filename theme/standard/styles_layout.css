@@ -5001,15 +5001,19 @@ div.ui-datepicker{ font-size:12px; }
 div#partitioner { font-size: 12px;}
 
 .block_sermons .content {
-    height: 400px;
+
 }
 
 .block_sermons .content #json_sermonlist_tree {
     height: 400px;
-    overflow: auto;
+    overflow: hidden;
     width: 800px;
 }
 
+.ui-slider-vertical {
+    height: 380px;
+    float: left;
+}
 .ui-dialog-titlebar span {
     text-align: center;
     width: 100%;
@@ -5022,4 +5026,22 @@ div#partitioner { font-size: 12px;}
 div.block_sermons div.content {
     background-color: #ddd;
     border-color: #555;
+    padding: 0;
+}
+
+#more-sermons {
+    text-align: center;
+    background-color: #eee;
+}
+
+#more-sermons:hover {
+    background-color: #baa;
+}
+#more-sermons.top {
+    margin-bottom: 5px;
+}
+#more-sermons.bottom {
+    margin-top: 5px;
+    -moz-border-radius-bottomleft: 20px;
+    -moz-border-radius-bottomright: 20px;
 }
