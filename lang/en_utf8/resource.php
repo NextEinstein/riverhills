@@ -165,5 +165,8 @@ $string['sortby'] = 'Find sermons by...';
 $string['sortby:series'] = 'Series Name';
 $string['sortby:date'] = 'Delivery Date';
 
+$string['moresermonstop'] = '&#9650; Scroll Up &#9650;';
+$string['moresermonsbottom'] = '&#9660; Scroll Down &#9660;';
+
 $string['sermonleaf'] = '$a->name ($a->datedelivered)';
 ?>

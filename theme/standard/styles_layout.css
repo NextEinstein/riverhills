@@ -4996,7 +4996,7 @@ div#partitioner {
     width: 70px
 }
 
-div.ui-datepicker{ font-size:12px; }
+div.ui-datepicker, div.ui-datepicker.ui-widget{ font-size:12px; }
 
 div#partitioner { font-size: 12px;}
 
