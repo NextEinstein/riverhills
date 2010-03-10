@@ -32,7 +32,7 @@ class block_sermons extends block_base {
             $child = new stdClass();
 
             $child->attributes = new stdClass();
-            $child->attributes->id = $sorttype .'-';
+            $child->attributes->id = $sorttype .'~';
 
             $child->data = get_string('sortby:'.$sorttype, 'resource');
             $child->state = "closed";
@@ -45,7 +45,7 @@ class block_sermons extends block_base {
            jQuery(document).ready(function () {
 
             function parse_id(htmlid) {
-                var result = /^(.*)-(.*)$/i.exec(htmlid);
+                var result = /^(.*)~(.*)$/i.exec(htmlid);
 
                 if (result == null) {
                     return false;
@@ -93,62 +93,70 @@ class block_sermons extends block_base {
                                       '?id=' + jQuery(node).attr('id');
                     },
                     onselect : function (node, tree_obj) {
-                        jQuery.ajax({
-                            type: 'POST',
-                            url: '{$CFG->wwwroot}/mod/resource/view.php',
-                            data: 'id=' + jQuery(node).attr('id'),
-                            success: function(html){
-                                jQuery('div#sermon_block_sermon_player').html(html);
-                                var dialog = jQuery('div#sermon_block_sermon_player').dialog({autoOpen: false, height: 320, width: 850, modal: true});
-                                dialog.dialog('option', 'title', jQuery(node).parent().parent().attr('id').replace(/^(.*)-/i,''));
-                                dialog.dialog('open');
-                            }
-                        });
+                    	parsedid = parse_id(jQuery(node).attr('id'));
+                    	id = parsedid[1];
+                    	if (id > 0) {
+                    		sermonname = parsedid[2];
+                        	jQuery.ajax({
+                            	type: 'POST',
+	                            url: '{$CFG->wwwroot}/mod/resource/view.php',
+    	                        data: 'id=' + jQuery(node).attr('id'),
+        	                    success: function(html){
+        	                    	jQuery('div#sermon_block_sermon_player').hide();
+            	                    jQuery('div#sermon_block_sermon_player').html(html);
+                	                var dialog = jQuery('div#sermon_block_sermon_player').dialog({autoOpen: false, height: 320, width: 850, modal: true});
+                    	            dialog.dialog('option', 'title', sermonname);
+                        	        dialog.dialog('open');
+                        	        jQuery('div#sermon_block_sermon_player').show();
+                            	}
+                        	});
+                        } else {
+                        	return false;
+                        }
                     }
                 }
             });
         });";
 
-        $this->content->text .= '<script type="text/javascript">
+$this->content->text .= '<script type="text/javascript">
                                     jQuery(document).ready(function () { 
                                         var scrolling = null;
  
-                                        function scroll_up() {
+                                        function scroll(direction, persistent) {
+
                                             var d = document.getElementById("json_sermonlist_tree");
 
-                                            d.scrollTop = d.scrollTop - 25;
+                                            if (direction > 0) {
+                                            	d.scrollTop = d.scrollTop - 25;
+                                            } else if (direction < 0) {
+                                            	d.scrollTop = d.scrollTop + 25;
+                                            }
 
-                                            scrolling = window.setTimeout(function() {
-                                                scroll_up();
-                                            }, 100);
-                                        }
-
-                                        function scroll_down() {
-                                            var d = document.getElementById("json_sermonlist_tree");
-
-                                            d.scrollTop = d.scrollTop + 25;
-
-                                            scrolling = window.setTimeout(function() {
-                                                scroll_down();
-                                            }, 100);
+                                            if (persistent) {
+                                            	scrolling = window.setTimeout(function() {
+                                                	scroll(direction, persistent);
+                                            	}, 100);
+											}
                                         }
 
                                         function stop_scroll() {
                                             window.clearTimeout(scrolling);
                                         }
 
-                                        jQuery("#more-sermons.bottom").mouseover(function() {scroll_down()});
-                                        jQuery("#more-sermons.bottom").mouseout(function() {stop_scroll()});
+                                        jQuery("#more-sermons-bottom").mouseover(function() {scroll(-1, true)});
+                                        jQuery("#more-sermons-bottom").mouseout(function() {stop_scroll()});
 
-                                        jQuery("#more-sermons.top").mouseover(function() {scroll_up()});
-                                        jQuery("#more-sermons.top").mouseout(function() {stop_scroll()});
-
+                                        jQuery("#more-sermons-top").mouseover(function() {scroll(1, true)});
+                                        jQuery("#more-sermons-top").mouseout(function() {stop_scroll()});
+                                        
+                                        jQuery("#json_sermonlist_tree").bind("mousewheel",function(event, delta) { scroll(delta, false); return false; }); 
+                                        
                                     });
                                 </script>';
-        $this->content->text .= '<div id="more-sermons" class="top">'.get_string('moresermonstop', 'resource').'</div>';
+        $this->content->text .= '<div id="more-sermons-top" class="top">'.get_string('moresermonstop', 'resource').'</div>';
         $this->content->text .= '<script type="text/javascript">'.$jstree.'</script>';
         $this->content->text .= '<div id="json_sermonlist_tree"></div>';
-        $this->content->text .= '<div id="more-sermons" class="bottom">'.get_string('moresermonsbottom', 'resource').'</div>';
+        $this->content->text .= '<div id="more-sermons-bottom" class="bottom">'.get_string('moresermonsbottom', 'resource').'</div>';
 
         $this->content->footer = '';
         

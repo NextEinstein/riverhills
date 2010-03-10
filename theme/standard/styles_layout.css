@@ -5007,7 +5007,8 @@ div#partitioner { font-size: 12px;}
 .block_sermons .content #json_sermonlist_tree {
     height: 400px;
     overflow: hidden;
-    width: 800px;
+	padding-top: 5px;
+	border: 1px solid #baa;
 }
 
 .ui-slider-vertical {
@@ -5025,23 +5026,28 @@ div#partitioner { font-size: 12px;}
 
 div.block_sermons div.content {
     background-color: #ddd;
-    border-color: #555;
+	margin: 0;
+    border: 0;
     padding: 0;
 }
 
-#more-sermons {
+#more-sermons-top, #more-sermons-bottom {
     text-align: center;
     background-color: #eee;
+	border: 1px solid #baa;
 }
 
-#more-sermons:hover {
+#more-sermons-top:hover,
+#more-sermons-bottom:hover {
     background-color: #baa;
 }
-#more-sermons.top {
-    margin-bottom: 5px;
-}
-#more-sermons.bottom {
-    margin-top: 5px;
+
+#more-sermons-bottom {
     -moz-border-radius-bottomleft: 20px;
     -moz-border-radius-bottomright: 20px;
+	border-top: none;
+}
+
+#more-sermons-top {
+	border-bottom: none;
 }

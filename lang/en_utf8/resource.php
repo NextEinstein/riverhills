@@ -164,6 +164,12 @@ $string['sermons'] = 'Sermons';
 $string['sortby'] = 'Find sermons by...';
 $string['sortby:series'] = 'Series Name';
 $string['sortby:date'] = 'Delivery Date';
+$string['sortby:alphabetical'] = 'Alphabetical';
+
+$string['currentyear'] = 'Current Year';
+$string['previousyear'] = 'Previous Year';
+$string['previousfiveyears'] = 'Previous 5 Years';
+$string['olderthanfive'] = 'Older than 5 Years';
 
 $string['moresermonstop'] = '&#9650; Scroll Up &#9650;';
 $string['moresermonsbottom'] = '&#9660; Scroll Down &#9660;';

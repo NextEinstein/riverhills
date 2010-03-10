@@ -1,5 +1,4 @@
 <?php 
-//include_once('../../../config.php');
 
 function sermon_series_get_nodes() {
     global $CFG, $COURSE;
@@ -17,7 +16,7 @@ function sermon_series_get_nodes() {
     while (($seriesname = rs_fetch_next_record($seriesnames)) !== false) {
         $seriesobject = new stdClass();
         $seriesobject->data = $seriesname->seriesname;
-        $seriesobject->attributes = array('class' => 'series', 'id' => 'series-'.preg_replace('/\'/', '&#39;',$seriesname->seriesname));
+        $seriesobject->attributes = array('class' => 'series', 'id' => 'series~'.sermon_block_make_name_safe_for_id($seriesname->seriesname));
         $seriesobject->state = 'closed';
 
         $seriesobjects[] = $seriesobject;
@@ -64,7 +63,7 @@ function sermon_series_get_one_node($seriesname) {
         $sermonnode = new stdClass();
 
         $sermonnode->attributes = new stdClass();
-        $sermonnode->attributes->id = $sermon->cmid;
+        $sermonnode->attributes->id = $sermon->cmid . '~'. sermon_block_make_name_safe_for_id($sermon->seriesname);
         $sermonnode->attributes->class = 'leaf sermon';
 
         if (!empty($sermon->reference)) {
