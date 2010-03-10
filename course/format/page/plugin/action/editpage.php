@@ -119,7 +119,7 @@ class format_page_action_editpage extends format_page_action {
                 $toform       = $page;
                 $toform->page = $page->id;
             } else if ($template = get_record('format_page', 'template', 1, 'courseid', $COURSE->id, '', '', 
-                                              'prefleftwidth, prefcenterwidth, prefrightwidth, showbuttons, display')) {
+                                              'prefleftwidth, prefrightwidth, showbuttons, display')) {
                 $toform = $template;
             }
 
