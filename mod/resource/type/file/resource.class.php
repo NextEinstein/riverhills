@@ -192,7 +192,7 @@ class resource_file extends resource_base {
     *
     * @param    CFG     global object
     */
-    function display($extrahtml = '') {
+    function display() {
         global $CFG, $THEME, $USER;
 
     /// Set up generic stuff first, including checking for access
@@ -516,12 +516,7 @@ class resource_file extends resource_base {
             update_module_button($cm->id, $course->id, $this->strresource), navmenu($course, $cm, "self"));
 
             }
-
-            //this was added with the sermon type so that we could extend but still have some input
-            if (!empty($extrahtml)) {
-                echo '<div id="outer-resource"><div id="extra-html" class="ui-corner-all">'.$extrahtml.'</div>';
-            }
-
+            
             if ($resourcetype == "image") {
                 echo '<div class="resourcecontent resourceimg">';
                 echo "<img title=\"".strip_tags(format_string($resource->name,true))."\" class=\"resourceimage\" src=\"$fullurl\" alt=\"\" />";
@@ -540,41 +535,32 @@ class resource_file extends resource_base {
                 $id = 'filter_mp3_'.time(); //we need something unique because it might be stored in text cache
                 $cleanurl = addslashes_js($fullurl);
 
-                $artist = '';
-                if (!empty($resource->guestspeakername)) {
-                    $artist = "artists: \"{$resource->guestspeakername}\"";
-                } else if (!empty($resource->speakerid)) {
-                    $user = get_record('user', 'id', $resource->speakerid);
-                    if (!empty($user)) {
-                        $artist = "artists: \"{$user->firstname} {$user->lastname}\"";
-                    }
-                }
 
-                $titles = '';
-                if (!empty($resource->seriesname)) {
-                    $titles = $resource->seriesname. ': ';
-                }
-
-                $titles .= $resource->name;
                 // If we have Javascript, use UFO to embed the MP3 player, otherwise depend on plugins
 
-                echo '<div class="newresourcecontent">';
-                echo '<script type="text/javascript" src="'.$CFG->httpswwwroot.'/lib/audio-player.js"></script>';
-                echo '<script type="text/javascript">
-                        AudioPlayer.setup("'.$CFG->httpswwwroot.'/lib/player.swf", {  
-                            width: 600
-                        });  
-                      </script>';
-                echo '<p id="audioplayer_1">Alternative content</p>  
-                      <script type="text/javascript">  
-                        AudioPlayer.embed("audioplayer_1", {
-                                                                soundFile: "'.$fullurl.'",
-                                                                transparentpagebg: "yes",
-                                                                titles: "'.$titles.'",
-                                                                '.$artist.'
-                                                            });
-                      </script>';
-               echo '</div>';
+                echo '<div class="resourcecontent resourcemp3">';
+
+                echo '<span class="mediaplugin mediaplugin_mp3" id="'.$id.'"></span>'.
+                     '<script type="text/javascript">'."\n".
+                     '//<![CDATA['."\n".
+                       'var FO = { movie:"'.$CFG->wwwroot.'/lib/mp3player/mp3player.swf?src='.$cleanurl.'",'."\n".
+                         'width:"600", height:"70", majorversion:"6", build:"40", flashvars:"'.$c.'", quality: "high" };'."\n".
+                       'UFO.create(FO, "'.$id.'");'."\n".
+                     '//]]>'."\n".
+                     '</script>'."\n";
+
+                echo '<noscript>';
+
+                echo "<object type=\"audio/mpeg\" data=\"$fullurl\" width=\"600\" height=\"70\">";
+                echo "<param name=\"src\" value=\"$fullurl\" />";
+                echo '<param name="quality" value="high" />';
+                echo '<param name="autoplay" value="true" />';
+                echo '<param name="autostart" value="true" />';
+                echo '</object>';
+                echo '<p><a href="' . $fullurl . '">' . $fullurl . '</a></p>';
+
+                echo '</noscript>';
+                echo '</div>';
 
             } else if ($resourcetype == "flv") {
                 $id = 'filter_flv_'.time(); //we need something unique because it might be stored in text cache
@@ -713,10 +699,6 @@ class resource_file extends resource_base {
 
             if (trim($resource->summary)) {
                 print_simple_box(format_text($resource->summary, FORMAT_MOODLE, $formatoptions, $course->id), "center");
-            }
-
-            if (!empty($extrahtml)) {
-                echo '</div>';
             }
 
             if ($inpopup) {

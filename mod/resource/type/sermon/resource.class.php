@@ -84,6 +84,7 @@ function display() {
     global $CFG, $COURSE;
 
     require_once($CFG->libdir.'/biblelib.php');
+	require_once($CFG->libdir.'/filelib.php');
 
     $resource = $this->resource;
 
@@ -156,41 +157,40 @@ function display() {
     $fullurl = get_file_url($COURSE->id.'/'.$resource->reference);
     $cleanurl = addslashes_js($fullurl);
 
-                $artist = '';
-                if (!empty($resource->guestspeakername)) {
-                    $artist = "artists: \"{$resource->guestspeakername}\"";
-                } else if (!empty($resource->speakerid)) {
-                    $user = get_record('user', 'id', $resource->speakerid);
-                    if (!empty($user)) {
-                        $artist = "artists: \"{$user->firstname} {$user->lastname}\"";
-                    }
-                }
+	$artist = '';
+	if (!empty($resource->guestspeakername)) {
+		$artist = "artists: \"{$resource->guestspeakername}\"";
+	} else if (!empty($resource->speakerid)) {
+		$user = get_record('user', 'id', $resource->speakerid);
+		if (!empty($user)) {
+			$artist = "artists: \"{$user->firstname} {$user->lastname}\"";
+		}
+	}
 
     $titles = '';
-                if (!empty($resource->seriesname)) {
-                    $titles = $resource->seriesname. ': ';
-                }
+	if (!empty($resource->seriesname)) {
+		$titles = $resource->seriesname. ': ';
+	}
 
-                $titles .= $resource->name;
-                // If we have Javascript, use UFO to embed the MP3 player, otherwise depend on plugins
+	$titles .= $resource->name;
 
-                echo '<div class="newresourcecontent">';
-                echo '<script type="text/javascript" src="'.$CFG->httpswwwroot.'/lib/audio-player.js"></script>';
-                echo '<script type="text/javascript">
-                        AudioPlayer.setup("'.$CFG->httpswwwroot.'/lib/player.swf", {  
-                            width: 600
-                        });  
-                      </script>';
-                echo '<p id="audioplayer_1">Alternative content</p>  
-                      <script type="text/javascript">  
-                        AudioPlayer.embed("audioplayer_1", {
-                                                                soundFile: "'.$fullurl.'",
-                                                                transparentpagebg: "yes",
-                                                                titles: "'.$titles.'",
-                                                                '.$artist.'
-                                                            });
-                      </script>';
-               echo '</div>';
+	echo '<div class="newresourcecontent">';
+	echo '<script type="text/javascript" src="'.$CFG->httpswwwroot.'/lib/audio-player.js"></script>';
+	echo '<script type="text/javascript">
+			AudioPlayer.setup("'.$CFG->httpswwwroot.'/lib/player.swf", {  
+				width: 600
+			});  
+		  </script>';
+	echo '<p id="audioplayer_1">Alternative content</p>  
+			<script type="text/javascript">  
+				AudioPlayer.embed("audioplayer_1", {
+					soundFile: "'.$fullurl.'",
+					transparentpagebg: "yes",
+					titles: "'.$titles.'",
+					'.$artist.'
+				});
+			</script>';
+	echo '</div>';
 
 }
 
