@@ -37,7 +37,46 @@
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.thickbox.min.js"></script>
 <script type="text/javascript">
-jQuery(document).ready(function () { jQuery("#webpage-courses").droppy({speed : 100});});
+
+function linkIsImage(link) {
+    return /(.*?)\.(jpg|jpeg|png|gif)$/.test(link);
+}
+
+jQuery(document).ready(function () {
+    jQuery("#webpage-courses").droppy({speed : 100});
+    jQuery('.my-message-box').click(function () {
+        var linkelement = jQuery(this);
+        var dialogbox = null;
+
+        if (linkIsImage(linkelement.attr('href'))) {
+            dialogbox = jQuery('<div style="text-align: center"><img src="'+linkelement.attr('href')+'"></div>')
+                .dialog({
+                    modal: true,
+                    autoOpen: false,
+                    title: linkelement.attr('title'),
+                    width: 575,
+                    height: 400
+                });
+        } else {
+            var displayregion = '#page #content';
+            if (jQuery(linkelement.attr('rel').length > 0) {
+                displayregion = linkelement.attr('rel');
+            }
+            dialogbox = jQuery('<div></div>')
+                .load(linkelement.attr('href') + ' body ' + displayregion)
+                .dialog({
+                    modal: true,
+                    autoOpen: false,
+                    title: linkelement.attr('title'),
+                    width: 575,
+                    height: 400
+            });
+        }
+        dialogbox.dialog('open');
+
+        return false;
+    });
+});
 </script>
 
 
@@ -106,33 +145,33 @@ function inserttext(text) {
 } ?>
 
 function getElementsByClassName(oElm, strTagName, oClassNames){
-	var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
-	var arrReturnElements = new Array();
-	var arrRegExpClassNames = new Array();
-	if(typeof oClassNames == "object"){
-		for(var i=0; i<oClassNames.length; i++){
-			arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames[i].replace(/\-/g, "\\-") + "(\\s|$)"));
-		}
-	}
-	else{
-		arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames.replace(/\-/g, "\\-") + "(\\s|$)"));
-	}
-	var oElement;
-	var bMatchesAll;
-	for(var j=0; j<arrElements.length; j++){
-		oElement = arrElements[j];
-		bMatchesAll = true;
-		for(var k=0; k<arrRegExpClassNames.length; k++){
-			if(!arrRegExpClassNames[k].test(oElement.className)){
-				bMatchesAll = false;
-				break;
-			}
-		}
-		if(bMatchesAll){
-			arrReturnElements.push(oElement);
-		}
-	}
-	return (arrReturnElements)
+        var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
+        var arrReturnElements = new Array();
+        var arrRegExpClassNames = new Array();
+        if(typeof oClassNames == "object"){
+                for(var i=0; i<oClassNames.length; i++){
+                        arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames[i].replace(/\-/g, "\\-") + "(\\s|$)"));
+                }
+        }
+        else{
+                arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames.replace(/\-/g, "\\-") + "(\\s|$)"));
+        }
+        var oElement;
+        var bMatchesAll;
+        for(var j=0; j<arrElements.length; j++){
+                oElement = arrElements[j];
+                bMatchesAll = true;
+                for(var k=0; k<arrRegExpClassNames.length; k++){
+                        if(!arrRegExpClassNames[k].test(oElement.className)){
+                                bMatchesAll = false;
+                                break;
+                        }
+                }
+                if(bMatchesAll){
+                        arrReturnElements.push(oElement);
+                }
+        }
+        return (arrReturnElements)
 }
 //]]>
 </script>
