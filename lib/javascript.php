@@ -36,6 +36,8 @@
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.prettyPhoto.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.thickbox.min.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/scripturizer.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/esvpopup.js"></script>
 <script type="text/javascript">
 
 function linkIsImage(link) {
@@ -59,7 +61,7 @@ jQuery(document).ready(function () {
                 });
         } else {
             var displayregion = '#page #content';
-            if (jQuery(linkelement.attr('rel').length > 0) {
+            if (jQuery(linkelement.attr('rel'))) {
                 displayregion = linkelement.attr('rel');
             }
             dialogbox = jQuery('<div></div>')
