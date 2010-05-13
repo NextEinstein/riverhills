@@ -2004,7 +2004,7 @@ function page_print_site_page_structure_ul($pages = null) {
 
     if (empty($pages)) {
         $pages = page_get_master_pages(SITEID);
-        $ulid = 'id="webpage-courses"';
+        $ulid = 'id="jsddm"';
     }
 
     if (empty($pages)) {
