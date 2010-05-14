@@ -60,6 +60,7 @@ class format_page_action_editpage extends format_page_action {
             $page                  = new stdClass;
             $page->nameone         = $data->nameone;
             $page->nametwo         = $data->nametwo;
+            $page->redirect	   = $data->redirect;
             $page->courseid        = $data->id;
             $page->display         = $data->publish | $data->dispmenu | $data->disptheme;
             $page->prefleftwidth   = $data->prefleftwidth;

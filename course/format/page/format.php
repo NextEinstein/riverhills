@@ -73,6 +73,10 @@
             error(get_string('nopageswithcontent', 'format_page'));
         }
     }
+/// Check if page wants to redirect
+    if (!empty($page->redirect)) {
+        redirect($page->redirect, '', 0);
+    }
 
 /// There are a couple processes that need some help via the session... take care of those.
     $action = page_handle_session_hacks($course->id, $action);

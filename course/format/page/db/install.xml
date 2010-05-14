@@ -10,6 +10,7 @@
         <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id from course table" PREVIOUS="id" NEXT="nameone"/>
         <FIELD NAME="nameone" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="this is the primary page name and used in the menu" PREVIOUS="courseid" NEXT="nametwo"/>
         <FIELD NAME="nametwo" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="This is the secondary page name and used in the tabs" PREVIOUS="nameone" NEXT="display"/>
+		<FIELD NAME="redirect" Type="char" LENGTH="256" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="URL to which page should be redirected"/>
         <FIELD NAME="display" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="bitmask used to determine the display properties of the page" PREVIOUS="nametwo" NEXT="prefleftwidth"/>
         <FIELD NAME="prefleftwidth" TYPE="char" LENGTH="8" NOTNULL="false" DEFAULT="200" SEQUENCE="false" ENUM="false" COMMENT="the preferred width for the left column" PREVIOUS="display" NEXT="prefcenterwidth"/>
         <FIELD NAME="prefcenterwidth" TYPE="char" LENGTH="8" NOTNULL="false" DEFAULT="400" SEQUENCE="false" ENUM="false" COMMENT="the preferred width for the center column" PREVIOUS="prefleftwidth" NEXT="prefrightwidth"/>

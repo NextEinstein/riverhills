@@ -37,6 +37,10 @@ class format_page_editpage_form extends moodleform {
         $mform->setType('nametwo', PARAM_TEXT);
         $mform->setHelpButton('nametwo', array('nametwo', get_string('pagenametwo', 'format_page'), 'format_page'));
 
+        $mform->addElement('text', 'redirect', get_string('redirect', 'format_page'), array('size'=>'80'));
+        $mform->setType('redirect', PARAM_TEXT);
+        $mform->setHelpButton('redirect', array('redirect', get_string('redirect', 'format_page'), 'format_page'));
+
         $mform->addElement('selectyesno', 'publish', get_string('publish', 'format_page'));
         $mform->setDefault('publish', 0);
         $mform->setHelpButton('publish', array('publish', get_string('publish', 'format_page'), 'format_page'));
