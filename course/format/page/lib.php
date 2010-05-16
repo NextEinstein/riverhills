@@ -2003,7 +2003,7 @@ function page_print_site_page_structure_ul($pages = null) {
     $ulid = '';
 
     if (empty($pages)) {
-        $pages = page_get_master_pages(SITEID);
+        $pages = page_get_master_pages(SITEID, 0, DISP_THEME);
         $ulid = 'id="jsddm"';
     }
 
