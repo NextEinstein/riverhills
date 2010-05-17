@@ -1155,20 +1155,47 @@ function page_get_master_pages($courseid, $limit=0, $display=DISP_PUBLISH) {
     if (!$allpages = page_get_all_pages($courseid)) {
         return false;
     }
-    $pages = array();
-    foreach ($allpages as $page) {
-        if (!empty($limit) and count($pages) == $limit) {
-            break;
-        }
-        if (($page->display & $display) == $display) {
-            $pages[] = $page;
-        }
-    }
+
+    $pages = !empty($limit) ? array_slice($allpages, $limit - 1) : $allpages;
+
+    array_walk($pages, 'page_null_page_not_matching_display', $display);
+    $pages = array_filter($pages, 'page_unset_null_page');
 
     if (empty($pages)) {
         return false;
     }
     return $pages;
+}
+
+function page_unset_null_page(&$page) {
+    if (is_null($page)) {
+        unset($page);
+        return;
+    }
+
+    if (is_array($page->children)) {
+        $page->children = array_filter($page->children, 'page_unset_null_page');
+    }
+
+    return $page;
+}
+
+/**
+ * This function is used to recursively filter out all the pages that don't match the display  
+ * 
+ * @param $display
+ * @return unknown_type
+ */
+function page_null_page_not_matching_display(&$page, $ignore, $display) {
+
+    if (($page->display & $display) != $display) {
+        $page = null;
+        return;
+    }
+
+    if (is_array($page->children)) {
+        array_walk($page->children, 'page_null_page_not_matching_display', $display);
+    }
 }
 
 /**
