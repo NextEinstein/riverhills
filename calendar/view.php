@@ -379,16 +379,7 @@ function calendar_show_month_detailed($m, $y, $courses, $groups, $users, $course
     calendar_events_by_day($events, $m, $y, $eventsbyday, $durationbyday, $typesbyday, $courses);
 
     $text = '';
-    if(!isguest() && !empty($USER->id) && calendar_user_can_add_event()) {
-        $text.= '<div class="buttons"><form action="'.CALENDAR_URL.'event.php" method="get">';
-        $text.= '<div>';
-        $text.= '<input type="hidden" name="action" value="new" />';
-        $text.= '<input type="hidden" name="course" value="'.$courseid.'" />';
-        $text.= '<input type="hidden" name="cal_m" value="'.$m.'" />';
-        $text.= '<input type="hidden" name="cal_y" value="'.$y.'" />';
-        $text.= '<input type="submit" value="'.get_string('newevent', 'calendar').'" />';
-        $text.= '</div></form></div>';
-    }
+
 
     $text .= '<label for="cal_course_flt_jump">'.
                get_string('detailedmonthview', 'calendar').
@@ -419,7 +410,7 @@ function calendar_show_month_detailed($m, $y, $courses, $groups, $users, $course
 
     // Paddding (the first week may have blank days in the beginning)
     for($i = $display->minwday; $i < $startwday; ++$i) {
-        echo '<td class="nottoday">&nbsp;</td>'."\n";
+        echo '<td class="nottoday blank">&nbsp;</td>'."\n";
     }
 
     // Now display all the calendar
@@ -511,7 +502,7 @@ function calendar_show_month_detailed($m, $y, $courses, $groups, $users, $course
 
     // Paddding (the last week may have blank days at the end)
     for($i = $dayweek; $i <= $display->maxwday; ++$i) {
-        echo '<td class="nottoday">&nbsp;</td>';
+        echo '<td class="nottoday blank">&nbsp;</td>';
     }
     echo "</tr>\n"; // Last row ends
 
@@ -566,6 +557,20 @@ function calendar_show_month_detailed($m, $y, $courses, $groups, $users, $course
 	     } 	 
 	  	 
 	     echo '</table></div>';
+
+    $text2 = '';
+    if(!isguest() && !empty($USER->id) && calendar_user_can_add_event()) {
+        $text2 .= '<div class="buttons"><form action="'.CALENDAR_URL.'event.php" method="get">';
+        $text2 .= '<div>';
+        $text2 .= '<input type="hidden" name="action" value="new" />';
+        $text2 .= '<input type="hidden" name="course" value="'.$courseid.'" />';
+        $text2 .= '<input type="hidden" name="cal_m" value="'.$m.'" />';
+        $text2 .= '<input type="hidden" name="cal_y" value="'.$y.'" />';
+        $text2 .= '<input type="submit" value="'.get_string('newevent', 'calendar').'" />';
+        $text2 .= '</div></form></div>';
+    }
+
+    echo '<div class="event">'.$text2.'</div>';
 }
 
 function calendar_show_upcoming_events($courses, $groups, $users, $futuredays, $maxevents, $courseid) {
