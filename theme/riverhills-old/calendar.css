@@ -1,5 +1,5 @@
 table#calendar {
-    border: 1px solid #300;
+    border: transparent;
 }
 
 table#calendar table.calendarmonth {
