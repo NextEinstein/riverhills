@@ -130,16 +130,16 @@ function display() {
     $extrahtml[] =     '<span class="links">';
     $extrahtml[] =          '<span class="link nowrap">
                                 <span class="picture">'.print_file_picture($CFG->pixpath.'/cust/doc.png', 0, $height='22px', $width='22px', $CFG->wwwroot.'/file.php/'.$resource->course.'/'.$resource->reference, true).'</span>
-                                <span class="link-name"><a href="'.$CFG->wwwroot.'/file.php/'.$resource->reference.'">'.get_string('sermonmp3link', 'resource', $resource).'</a></span>
+                                <span class="link-name"><a href="'.$CFG->wwwroot.'/file.php/'.$resource->course.'/'.$resource->reference.'">'.get_string('sermonmp3link', 'resource', $resource).'</a></span>
                             </span>';
-    if (!empty($resource->referencesermonlink)) {
+    if (!empty($resource->referencesermontext)) {
         $extrahtml[] =      '<span class="link nowrap">
                                 <span class="picture">'.print_file_picture($CFG->pixpath.'/cust/mp3.png', 0, $height='22px', $width='22px', $CFG->wwwroot.'/file.php/'.$resource->course.'/'.$resource->referencesermontext, true).'</span>
-                                <span class="link-name"><a href="'.$CFG->wwwroot.'/file.php/'.$resource->referencesermontext.'">'.get_string('sermontextlink', 'resource', $resource).'</a></span>
+                                <span class="link-name"><a href="'.$CFG->wwwroot.'/file.php/'.$resource->course.'/'.$resource->referencesermontext.'">'.get_string('sermontextlink', 'resource', $resource).'</a></span>
                             </span>';
     }
 
-    if (!empty($resource->sermonlesson)) {
+    if (!empty($resource->referencelesson)) {
         $extrahtml[] =      '<span class="link nowrap">
                                 <span class="picture">'.print_file_picture($CFG->pixpath.'/cust/doc.png', 0, $height='22', $width='22', $CFG->wwwroot.'/file.php/'.$resource->course.'/'.$resource->referencesermonlesson, true).'</span>
                                 <span class="link-name"><a href="'.$CFG->wwwroot.'/file.php/'.$resource->course.'/'.$resource->referencesermonlesson.'">'.get_string('sermonlessonlink', 'resource', $resource).'</a></span>
