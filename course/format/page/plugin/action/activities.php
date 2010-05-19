@@ -82,7 +82,7 @@ class format_page_action_activities extends format_page_action {
                             if (strpos($strtype, '[') !== false) {
                                 $strtype = get_string($module.':'.$instance->type, 'format_page');
                             }
-                            print "<li><p><strong>$strtype</strong></p>\n<ul>\n";
+                            print "<li><div class=\"plus-minus\"><p><span class=\"no-space\"><strong>$strtype</strong></span></p></div>\n<ul>\n";
                             $lasttype = $instance->type;
                         }
                         if (!empty($modinfo->cms[$instance->cmid]->icon)) {

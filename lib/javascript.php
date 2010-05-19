@@ -74,6 +74,14 @@ function linkIsImage(link) {
 }
 
 jQuery(document).ready(function () {
+	jQuery('ul.activity-list div.plus-minus').click().toggle(function () {
+		jQuery(this).parent().children('ul').toggle(300);
+		jQuery(this).css({'background-image' : 'url(pix/t/switch_minus.gif)'});
+	},
+	function () {
+		jQuery(this).parent().children('ul').toggle(300);
+		jQuery(this).css({'background-image' : 'url(pix/t/switch_plus.gif)'});
+	});
     jQuery("#webpage-courses").droppy({speed : 100});
     jQuery('.my-message-box').click(function () {
         var linkelement = jQuery(this);

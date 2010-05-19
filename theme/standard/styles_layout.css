@@ -1776,7 +1776,25 @@ border-width:0px;
 /***
  *** Course
  ***/
+ul.activity-list li ul {
+    display: none;
+}
 
+ul.activity-list div.plus-minus {
+    width: 11px;
+    background-image: url(../../pix/t/switch_plus.gif);
+    background-repeat: no-repeat;
+    background-position: left 3px;
+    padding-left: 17px;
+}
+
+ul.activity-list li p{
+    width: auto;
+}
+
+span.no-space {
+    white-space: nowrap;
+}
 .activitydate, .activityhead {
   text-align:center;
 }
