@@ -13,7 +13,7 @@ $THEME->sheets = array('styles', 'calendar');
 ////////////////////////////////////////////////////////////////////////////////
 
 
-$THEME->standardsheets = true;  
+$THEME->standardsheets = array('styles_layout', 'styles_color', 'styles_fonts', 'dropdown');  
 
 /// This variable can be set to an array containing
 /// filenames from the *STANDARD* theme.  If the 
