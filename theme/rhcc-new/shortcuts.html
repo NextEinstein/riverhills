@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>-->
+<script>
+
+$(document).ready(function() {	
+
+	//select all the a tag with name equal to modal
+	$('a[name=modal]').click(function(e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		
+		//Get the A tag
+		var id = $(this).attr('href');
+	
+		//Get the screen height and width
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+	
+		//Set heigth and width to mask to fill up the whole screen
+		$('#mask').css({'width':maskWidth,'height':maskHeight});
+		
+		//transition effect		
+		$('#mask').fadeIn(1000);	
+		$('#mask').fadeTo("slow",0.8);	
+	
+		//Get the window height and width
+		var winH = $(window).height();
+		var winW = $(window).width();
+              
+		//Set the popup window to center
+		$(id).css('top',  winH/2-$(id).height()/2);
+		$(id).css('left', winW/2-$(id).width()/2);
+	
+		//transition effect
+		$(id).fadeIn(2000); 
+	
+	});
+	
+	//if close button is clicked
+	$('.window .close').click(function (e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		
+		$('#mask').hide();
+		$('.window').hide();
+	});		
+	
+	//if mask is clicked
+	$('#mask').click(function () {
+		$(this).hide();
+		$('.window').hide();
+	});			
+	
+});
+
+
+var isCtrl = false;
+var isShift = false;
+$(document).keyup(function (e) {
+if(e.which == 17) isCtrl=false;
+if(e.which == 16) isShift=false;
+}).keydown(function (e) {
+    if(e.which == 17) isCtrl=true;
+    if(e.which == 16) isShift=true;
+
+    //Ctrl+Shift+K is pressed
+    if(e.which == 75 && isCtrl == true && isShift == true) {
+	$('#shortcut').click();
+ 	return false;
+    }
+
+    if(e.which == 27) {
+	$('#closeit').click();
+ 	return false;
+    }
+});
+
+
+</script>
+<style>
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+  
+#boxes .window {
+  position:absolute;
+  left:0;
+  top:0;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes #dialog {
+  width:550px; 
+  height:300px;
+  padding:10px;
+  background-color:#ffffff;
+  border: 10px solid #ccc;
+}
+
+#closeit{
+  float: right;
+}
+
+#shortcut{
+  font-size: 0px;
+}
+</style>
+</head>
+<body>
+<?php
+//require_once("../../config.php");
+?>
+
+<ul>
+<li><a href="#dialog" name="modal" id="shortcut">Keyboard Shortcuts</a></li>
+</ul>
+
+<div id="boxes">
+
+<div id="dialog" class="window">
+<a href="#" id="closeit" class="close"/>(x)</a>
+<h3>Admin Shortcut keys</h3>
+<table width=100%>
+<tr>
+<td><b>Ctrl+Shift+K</b> : Shortcut Details</td>
+<td><b>Esc</b> : <a href="<?php echo $CFG->wwwroot;?>">Return to Moodle</a></td>
+</tr>
+<tr>
+<td><b>Ctrl+Shift+B</b> : <a href="<?php echo $CFG->wwwroot;?>/admin/blocks.php">Manage Blocks</a></td>
+<td><b>Ctrl+Shift+M</b> : <a href="<?php echo $CFG->wwwroot;?>/admin/modules.php">Manage Activities</a></td>
+</tr>
+<tr>
+<td><b>Ctrl+Shift+F</b> : <a href="<?php echo $CFG->wwwroot;?>/admin/settings.php?section=managefilters">Manage Filters</a></td>
+<td><b>Ctrl+Shift+A</b> : <a href="<?php echo $CFG->wwwroot;?>/admin/settings.php?section=manageauths">Manage Authentication</a></td>
+</tr>
+<tr>
+<td><b>Ctrl+Shift+S</b> : <a href="<?php echo $CFG->wwwroot;?>/calendar/">Schedule calendar</a></td>
+<td><b>Ctrl+Shift+C</b> : <a href="<?php echo $CFG->wwwroot;?>/course/index.php?categoryedit=on">Add/Edit Courses</a></td>
+</tr>
+<tr>
+<td><b>Ctrl+Shift+E</b> : Edit Mode toggle</td>
+<td><b>Ctrl+Shift+M</b> : <a href="<?php echo $CFG->wwwroot;?>/admin/">Notifications</a></td>
+</tr>
+<tr>
+<td><b>Ctrl+Shift+L</b> : <a href="<?php echo $CFG->wwwroot;?>/course/report/log/indexlive.php?id=1">Live Logs</a></td>
+<td><b>Ctrl+Shift+U</b> : <a href="<?php echo $CFG->wwwroot;?>/admin/user.php">Browse Users</a></td>
+</tr>
+<tr>
+<td><b>Ctrl+Shift+H</b> : <a href="<?php echo $CFG->wwwroot;?>">Moodle Homepage</a></td>
+<td><b>Ctrl+Shift+D</b> : <a href="<?php echo $CFG->wwwroot;?>/login/logout.php?sesskey=<?php echo $USER->sesskey;?>">Logout</td>
+</tr>
+</table>
+
+</div>
+
+  <div id="mask"></div>
+</div>
+
+
+
+</body>
+</html>

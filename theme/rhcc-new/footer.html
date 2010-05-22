@@ -1,0 +1,54 @@
+<?php
+    include_once($CFG->dirroot.'/course/format/page/lib.php');
+
+    print_container_end(); // content container
+    echo '<p />';
+    print_container_start(false, '', 'footer');
+
+
+    //echo $loggedinas;
+
+    $masterpages = page_get_master_pages(SITEID, 0, DISP_THEME);
+
+    if (!empty($masterpages)) {
+        $baseurl = $CFG->wwwroot.'/index.php?page=';
+
+        $links = array();
+        foreach ($masterpages as $masterpage) {
+            $links[] = "<a href=\"{$baseurl}{$masterpage->id}\"><span class=\"menu-title\">{$masterpage->nameone}</span></a>";
+        }
+    }
+
+    $strlinks = implode(' | ', $links);
+
+    if (!empty($strlinks)) {
+        echo '<div class="footer-links">'.$strlinks.'</div>';
+    }
+
+    if (!empty($performanceinfo)) {
+        echo $performanceinfo;
+    }
+
+    if (debugging()) { ?>
+        <div class="validators"><ul>
+          <li><a href="http://validator.w3.org/check?verbose=1&amp;ss=1&amp;uri=<?php echo urlencode(qualified_me()) ?>">Validate HTML</a></li>
+          <li><a href="http://www.contentquality.com/mynewtester/cynthia.exe?rptmode=-1&amp;url1=<?php echo urlencode(qualified_me()) ?>">Section 508 Check</a></li>
+          <li><a href="http://www.contentquality.com/mynewtester/cynthia.exe?rptmode=0&amp;warnp2n3e=1&amp;url1=<?php echo urlencode(qualified_me()) ?>">WCAG 1 (2,3) Check</a></li>
+        </ul></div>
+<?php }
+
+    print_container_end();
+?>
+
+<?php if ($home || $heading) { ?>
+		</div>
+	</div>
+</div>
+<?php if(isloggedin()){include ('moodlebar/moodle_bar.html');} ?>
+<?php } ?>
+<?php
+include('shortcuts.html');
+?>
+
+</body>
+</html>
