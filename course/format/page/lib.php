@@ -2024,14 +2024,11 @@ function page_print_lock_prerequisites($page) {
     format_page_lock::print_lock_prerequisites($page);
 }
 
-function page_print_site_page_structure_ul($pages = null) {
+function page_print_site_page_structure_ul($pages = null, $ulid = '') {
     global $CFG;
-
-    $ulid = '';
 
     if (empty($pages)) {
         $pages = page_get_master_pages(SITEID, 0, DISP_THEME);
-        $ulid = 'id="jsddm"';
     }
 
     if (empty($pages)) {
@@ -2042,15 +2039,16 @@ function page_print_site_page_structure_ul($pages = null) {
 
     $pagestring = '';
     foreach ($pages as $page) {
-        $pagestring .=  '<li>';
-        $pagestring .= '<a href="'.$baseurl.$page->id.'">'. $page->nameone . '</a>';
+        $pagestring .= !empty($page->children) ? '<li class="havechild">' : '<li>';
+        $pagestring .= "<a href=\"{$baseurl}{$page->id}\"><span class=\"menu-title\">{$page->nameone}</span></a>";
+
         if (!empty($page->children)) {
             $pagestring .= page_print_site_page_structure_ul($page->children);
         }
         $pagestring .= '</li>';
     }
 
-    return "<ul $ulid>". $pagestring . '</ul>';
+    return "<ul id=\"{$ulid}\" class=\"clearfix\">{$pagestring}</ul>";
 
 }
 ?>
