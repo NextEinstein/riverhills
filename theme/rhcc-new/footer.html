@@ -2,7 +2,7 @@
     include_once($CFG->dirroot.'/course/format/page/lib.php');
 
     print_container_end(); // content container
-    echo '<p />';
+    print_container_start(false, '', 'footer-wrapper');
     print_container_start(false, '', 'footer');
 
 
@@ -17,8 +17,11 @@
         foreach ($masterpages as $masterpage) {
             $links[] = "<a href=\"{$baseurl}{$masterpage->id}\"><span class=\"menu-title\">{$masterpage->nameone}</span></a>";
         }
-
-        $links[] = "<a href=\"{$CFG->wwwroot}/login\"><span class=\"menu-title\">".get_string('login')."</span></a>";
+        if (!isloggedin()) {
+            $links[] = "<a href=\"{$CFG->wwwroot}/login\"><span class=\"menu-title\">".get_string('login')."</span></a>";
+        } else {
+            $links[] = "<a href=\"{$CFG->wwwroot}/login/logout.php?sesskey=".sesskey()."\"><span class=\"menu-title\">".get_string('logout')."</span></a>";
+        }
     }
 
     $strlinks = implode(' | ', $links);
@@ -39,6 +42,7 @@
         </ul></div>
 <?php }
 
+    print_container_end();
     print_container_end();
 ?>
 
