@@ -2048,7 +2048,7 @@ function page_print_site_page_structure_ul($pages = null, $ulid = '') {
         $pagestring .= '</li>';
     }
 
-    return "<ul id=\"{$ulid}\" class=\"clearfix\">{$pagestring}</ul>";
+    return "<ul id=\"{$ulid}\" class=\"{$ulid}\">{$pagestring}</ul>";
 
 }
 ?>
