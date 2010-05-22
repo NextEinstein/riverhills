@@ -48,7 +48,7 @@ background: transparent;  /*background: ;*/
 }
 a:link,a:visited,
 .tabrow1 a:link span {
-  color: #592831;
+  color: #2A3A5B;
 }
 
 a:hover,a:active,
@@ -135,6 +135,7 @@ td.header-profile-menu {
 
 .headermenu {
   color: #592831;
+  padding-right: 10px;
 }
 
 .headermenu a {
@@ -304,7 +305,7 @@ h2.headingblock {
 .results th {
   border-bottom:2px solid #292929;
   padding:2px 4px;
-  background:#5C2933;
+  background:#fff;
 }
 
 
@@ -374,7 +375,7 @@ h2.headingblock {
 #mod-assignment-index .r1 .cell,
 .mod-forum .generaltable .r1 .cell,
 .forumheaderlist .r1 {
-  background:#FFDBE1;
+  background: #b6b6b6;
 }
 
 /* User */
@@ -388,7 +389,7 @@ body#course-user .section {
 }
 .userinfobox .content {
   border:2px solid #FFFFFF;
-  background:#FFDBE1;
+  background:#b6b6b6;
 }
 
 #user-grade th {
