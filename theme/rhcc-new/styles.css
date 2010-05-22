@@ -153,7 +153,8 @@ td.header-profile-menu {
 .sideblock {
 }
 
-.sideblock .header {
+#left-column .sideblock .header,
+#right-column .sideblock .header {
   border-color:#2A3A5B;
   background: #eee;
   background-image: url(images/gradients/sideblock-header.png);
@@ -171,7 +172,8 @@ color: #333;  font-size: 0.95em;
   padding: 4px 4px 0;
 }
 
-.sideblock .content {
+#left-column .sideblock .content,
+#right-column .sideblock .content {
   background:#eee;
   border-color: #2A3A5B;
   border-top: none;
