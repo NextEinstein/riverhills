@@ -7,6 +7,10 @@ body {
     border-top: 2px solid #320000;
 }
 
+#content {
+    padding-top: 5px;
+}
+
 .navbar {
     background-color: #320000;
     border: 0px;
