@@ -17,6 +17,8 @@
         foreach ($masterpages as $masterpage) {
             $links[] = "<a href=\"{$baseurl}{$masterpage->id}\"><span class=\"menu-title\">{$masterpage->nameone}</span></a>";
         }
+
+        $links[] = "<a href=\"{$CFG->wwwroot}/login\"><span class=\"menu-title\">".get_string('login')."</span></a>";
     }
 
     $strlinks = implode(' | ', $links);
