@@ -56,3 +56,5 @@ form.mform textarea {
 form.mform .fcheckbox input {
   margin-left: -3px;
 }
+
+ul.dropdown ul li                   { display: inline; width: 100%; } 

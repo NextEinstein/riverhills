@@ -36,6 +36,7 @@
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.prettyPhoto.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.thickbox.min.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.dropdownPlain.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/scripturizer.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/esvpopup.js"></script>
 <script type="text/javascript">
