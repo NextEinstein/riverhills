@@ -40,14 +40,14 @@
     print_container_end();
 ?>
 
-<?php if ($home || $heading) { ?>
+<?php if (($home || $heading) && false) { ?>
 		</div>
 	</div>
 </div>
 <?php if(isloggedin()){include ('moodlebar/moodle_bar.html');} ?>
 <?php } ?>
 <?php
-include('shortcuts.html');
+//include('shortcuts.html');
 ?>
 
 </body>
