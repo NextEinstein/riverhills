@@ -2040,7 +2040,8 @@ function page_print_site_page_structure_ul($pages = null, $ulid = '') {
     $pagestring = '';
     foreach ($pages as $page) {
         $pagestring .= !empty($page->children) ? '<li class="havechild">' : '<li>';
-        $pagestring .= "<a href=\"{$baseurl}{$page->id}\"><span class=\"menu-title\">{$page->nameone}</span></a>";
+        $pageurl = !empty($page->redirect) ? $page->redirect : $baseurl.$page->id;
+        $pagestring .= "<a href=\"{$pageurl}\"><span class=\"menu-title\">{$page->nameone}</span></a>";
 
         if (!empty($page->children)) {
             $pagestring .= page_print_site_page_structure_ul($page->children);
