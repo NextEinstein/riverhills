@@ -1,7 +1,15 @@
 <?php
     include_once($CFG->dirroot.'/course/format/page/lib.php');
 
-    print_container_end(); // content container
+    // this is ugly but flex page doesn't close a div and it
+    // wasn't printed with print_container. Until I find it I need
+    // to hack it closed here
+    global $COURSE;
+    if ($COURSE->format == 'page') {
+        echo '</div>';
+    }
+
+    print_container_end_all(); // content container
     print_container_start(false, '', 'footer-wrapper');
     print_container_start(false, '', 'footer');
 

@@ -1,4 +1,4 @@
-ul.dropdown *, ul.dropdown          { margin: 0; padding: 0; }
+ul.dropdown *, ul.dropdown          { margin: 0; padding: 0; z-index: 1000}
 ul.dropdown                         { margin-left: 30px;}
 
 body                                { font: 14px Helvetica, Sans-Serif; } 
@@ -11,10 +11,10 @@ p                                   { margin: 15px 0; }
     LEVEL ONE
 */
 ul.dropdown                         { position: relative; height: 30px}
-ul.dropdown li                      { font-weight: bold; float: left; zoom: 1; background: #2A3A5B; }
+ul.dropdown li                      { float: left; zoom: 1; background: #2A3A5B; padding-left: 20px; padding-right: 20px}
 ul.dropdown a:hover                 { color: #000; }
 ul.dropdown a:active                { color: #ffa500; }
-ul.dropdown li a                    { display: block; padding: 4px 8px; border-right: 1px solid #333;
+ul.dropdown li a                    { display: block; padding: 4px 8px; border-right: none;
                                       color: #eee; }
 ul.dropdown li:last-child a         { border-right: none; } /* Doesn't work in IE */
 ul.dropdown li.hover,

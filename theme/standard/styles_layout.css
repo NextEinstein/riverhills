@@ -50,6 +50,9 @@ h6.main {
   margin-top: 8px;
 }
 
+#content #layout-table.format-page {
+    width: 100%;
+}
 #layout-table #left-column,
 #layout-table #middle-column,
 #layout-table #right-column

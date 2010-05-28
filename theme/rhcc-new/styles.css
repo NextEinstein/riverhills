@@ -18,7 +18,7 @@
 body {
   background: #ccc;
   background-image: url(images/backgrounds/cross_hatch.gif);
-  margin: 1%;
+  margin: .5%;
   padding: 0;
 }
 
@@ -32,6 +32,13 @@ body, td, th, li, p {
   background: transparent;
 }
 
+div#content div.categorypicker {
+    display: none;
+}
+
+body.editing div#content div.categorypicker {
+    display: block;
+}
 #wrapper {
 background: transparent;  /*background: ;*/
   padding: 5px;
@@ -41,11 +48,13 @@ background: transparent;  /*background: ;*/
   /*background: ;*/
   padding: 5px;
 }
-#page #content {
+
+#content {
     background-color: #fff;
     border-left: 1px solid #2A3A5B;
     border-right: 1px solid #2A3A5B;
 }
+
 a:link,a:visited,
 .tabrow1 a:link span {
   color: #2A3A5B;
@@ -97,14 +106,26 @@ table.header-table td.headermenu table td.header-profilename {
     padding-top: 8px;
 }
 
-span.rhcc-name {
+div.rhcc-name {
     font-size: 32px;
     color: #444;
-    white-space: nowrap;
     font-family: Verdana;
+    line-height: 1.2em;
 }
 
-span.rhcc-name span.letter {
+div.rhcc-name {
+    width: 350px;
+}
+
+div.rhcc-name .river.hills {
+    white-space: nowrap;
+}
+
+div.rhcc-name .community.church {
+    white-space: nowrap;
+}
+
+div.rhcc-name span.letter {
     font-size: 38px;
     color: #2a3a5b;
 }
@@ -144,8 +165,42 @@ td.header-profile-menu {
 
 /* Navbar */
 
-.navbar {
+div.navbar {
+    background-color: #fff;
+    border-bottom: none;
+    border-left: 1px solid #2A3A5B;
+    border-right: 1px solid #2A3A5B;
+    font-size: 12px;
+}
+
+.navbutton .singlebutton,
+.navbutton form div,
+.navbutton form {
+    display: inline;
+}
+
+#menubox .navbar2 {
   border: none;
+  padding: 0;
+  margin: 0;
+}
+
+td.dropdown-cell {
+    width: 100%;
+}
+
+.navbar2 table {
+    width: 100%;
+}
+
+#menubox td.navbutton-cell div.navbutton {
+    padding-right: 6px;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.navbutton span {
+    white-space: nowrap;
 }
 
 /* Sideblocks */
@@ -159,8 +214,6 @@ td.header-profile-menu {
   background: #eee;
   background-image: url(images/gradients/sideblock-header.png);
   background-repeat: repeat-x;
-  height: 22px;
-
 }
 
 .sideblock .title {
@@ -706,10 +759,14 @@ table.header-table td.headermenu table td {
 .header-profileoptions {
   text-align:right;
   margin-right: 5px;
-  color: #B59CA0;
+  color: #2A3A5B;
   white-space: nowrap;
   font-size: 18px;
   margin-top: -10px;
+}
+
+#course-category .generalbox > p:first-child {
+    display: none;
 }
 
 .header-profileoptions ul li { 
@@ -758,5 +815,45 @@ background: rgb(255, 255, 255);background: rgba(255, 255, 255, 0.1);border:none}
 	border:1px solid #FF3333;
 	font-weight:bold;
 	color:#CF4D4D;
+}
+
+
+/* page module forum stuff */
+
+.block_page_module table.forumpost {
+    margin-left: 5%;
+    width: 95%;
+}
+
+.block_page_module table.forumpost div.subject {
+    font-size: 12px;
+}
+
+.block_page_module table.forumpost div.author {
+    font-size: 9px;
+}
+
+.block_page_module table.forumpost img.userpicture {
+    width: 35px;
+    height: 35px;
+}
+
+.block_page_module table.forumpost tr td.topic {
+    background-image: url(<?php echo $CFG->pixpath ?>/t/arrow_down_large.png);
+    background-position: 98% center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.block_page_module table.forumpost tr.content-row {
+    display: none;
+}
+
+div.mod-forum.sideblock div.singlebutton {
+    display: none;
+}
+
+body.editing div.mod-forum.sideblock div.singlebutton {
+    display: block;
 }
 

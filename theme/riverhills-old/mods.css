@@ -80,3 +80,42 @@ body {
 #layout-table.format-page .block_html .content {
     border: none;
 }
+
+/* page module forum stuff */
+
+.block_page_module table.forumpost {
+    margin-left: 5%;
+    width: 95%;
+}
+
+.block_page_module table.forumpost div.subject {
+    font-size: 12px;
+}
+
+.block_page_module table.forumpost div.author {
+    font-size: 9px;
+}
+
+.block_page_module table.forumpost img.userpicture {
+    width: 35px;
+    height: 35px;
+}
+
+.block_page_module table.forumpost tr td.topic {
+    background-image: url(<?php echo $CFG->pixpath ?>/t/arrow_down_large.png);
+    background-position: 98% center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.block_page_module table.forumpost tr.content-row {
+    display: none;
+}
+
+div.mod-forum.sideblock div.singlebutton {
+    display: none;
+}
+
+body.editing div.mod-forum.sideblock div.singlebutton {
+    display: block;
+}

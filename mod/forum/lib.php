@@ -2709,7 +2709,7 @@ function forum_make_mail_post($course, $forum, $discussion, $post, $userfrom, $u
 
     $output .= '</td></tr>';
 
-    $output .= '<tr><td class="left side" valign="top">';
+    $output .= '<tr class="content-row"><td class="left side" valign="top">';
 
     if (isset($userfrom->groups)) {
         $groups = $userfrom->groups[$forum->id];
@@ -2841,7 +2841,7 @@ function forum_print_post($post, $discussion, $forum, &$cm, $course, $ownpost=fa
         print_string('forumauthorhidden','forum');
         echo '</div></td></tr>';
 
-        echo '<tr><td class="left side">';
+        echo '<tr class="content-row"><td class="left side">';
         echo '&nbsp;';
 
         // Actual content
@@ -2917,7 +2917,7 @@ function forum_print_post($post, $discussion, $forum, &$cm, $course, $ownpost=fa
     print_string('bynameondate', 'forum', $by);
     echo '</div></td></tr>';
 
-    echo '<tr><td class="left side">';
+    echo '<tr class="content-row"><td class="left side">';
     if (isset($cm->cache->usersgroups)) {
         $groups = array();
         if (isset($cm->cache->usersgroups[$post->userid])) {

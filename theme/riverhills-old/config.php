@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-$THEME->sheets = array('mods', 'calendar', 'cssmenu');
+$THEME->sheets = array('mods', 'calendar', 'cssmenu', 'dropdown');
 
 /// This variable is an array containing the names of all the 
 /// stylesheet files you want included in this theme, and in what order
@@ -14,7 +14,7 @@ $THEME->sheets = array('mods', 'calendar', 'cssmenu');
 
 $THEME->customcorners = false;
 
-$THEME->standardsheets = array('styles_layout','styles_fonts','styles_color','styles_moz');
+$THEME->standardsheets = array('styles_layout','styles_fonts','styles_color','styles_moz', 'dropdown');
 
 /// This variable can be set to an array containing
 /// filenames from the *STANDARD* theme.  If the 

@@ -41,11 +41,15 @@ function clearDefaultandCSS(el) {
             <table border="0" class="header-table">
               <tr>
                 <td class="rhcc-logo"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/images/rhcc/banner_left.jpg" /></td>
-                <td class="rhcc-name"><span class="rhcc-name">
-                    <span class="letter">R</span>iver 
-                    <span class="letter">H</span>ills 
-                    <span class="letter">C</span>ommunity
-                    <span class="letter">C</span>hurch
+                <td class="rhcc-name"><div class="rhcc-name">
+		    <span class="river hills">
+                      <span class="letter">R</span>iver
+                      <span class="letter">H</span>ills
+		    </span>
+		    <span class="community church">
+                      <span class="letter">C</span>ommunity
+                      <span class="letter">C</span>hurch
+		    </span>
                   </span>
                 </td>
                 <td class="headermenu">
@@ -85,10 +89,10 @@ function clearDefaultandCSS(el) {
       <?php } ?>
 
 <?php //Accessibility: breadcrumb trail/navbar now a DIV, not a table.
-      if ($navigation && false) { // This is the navigation bar with breadcrumbs and i don't think we want it anywhere yet  ?>
+    global $COURSE;
+      if ($navigation && $COURSE->id != SITEID) { // This is the navigation bar with breadcrumbs and i don't think we want it anywhere yet  ?>
     <div class="navbar clearfix">
         <div class="breadcrumb"><?php print_navigation($navigation); ?></div>
-        <div class="navbutton"><?php echo $button; ?></div>
     </div>
 <?php } else if ($heading) { // If no navigation, but a heading, then print a line
 ?>
