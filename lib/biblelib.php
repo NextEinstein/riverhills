@@ -1,4 +1,94 @@
-<?php 
+<?php
+    function _callback_to_hide_unwanted_tags($element) {
+        if ($element->tag=='div' && !empty($element->class) && ($element->class == 'footnotes' || $element->class == 'crossrefs')) {
+            $element->outertext = '';
+        }
+
+        if ($element->tag=='sup' && !empty($element->class) && ($element->class == 'xref' || $element->class == 'footnote')) {
+            $element->outertext = '';
+        }
+
+        if ($element->tag=='a' || 
+            $element->tag == 'h1' || 
+            $element->tag == 'h2' ||
+            $element->tag == 'h3' ||
+            $element->tag == 'h4' ||
+            $element->tag == 'h5') {
+            $element->outertext = '';
+            return;
+        }
+    }
+
+    function lookup_bible_verse($versionid, $startbookid, $startchapter, $startverse, $endbookid, $endchapter, $endverse) {
+        include_once('simple_html_dom.php');
+
+        $biblebookmap = biblebooks_array();
+
+        $startbook = $biblebookmap[$startbookid];
+        $endbook = $biblebookmap[$endbookid];
+
+        $version = get_field('memorization_version', 'name', 'id', $versionid);
+
+        $version = $version === false ? 'ESV' : $version;
+
+        $html = file_get_html("http://www.biblegateway.com/passage/?search={$startbook}%20{$startchapter}:{$startverse}%20-%20{$endbook}%20{$endchapter}:{$endverse}&version={$version}");
+
+        if (empty($html)) {
+            return false;
+        }
+
+        $html->set_callback('_callback_to_hide_unwanted_tags');
+
+        $verse = $html->find('div[class=result-text-style-normal]', -1);
+
+        if (empty($verse)) {
+            return false;
+        }
+
+        return $verse->innertext;
+    }
+
+    function bible_gateway_available_versions() {
+        include_once('simple_html_dom.php');
+
+        $html = file_get_html("http://www.biblegateway.com");
+
+        if (empty($html)) {
+            return false;
+        }
+
+        $select = $html->find('select[name=qs_version]', -1);
+
+        if (empty($select)) {
+            return false;
+        }
+
+
+        $versionnames = array();
+
+        $currentlang = '';
+
+        $options = $select->children;
+
+        foreach ($options as $option) {
+            if ($option->class == 'lang') {
+                $currentlang = $option->value;
+                continue;
+            }
+
+            // for some reason the english language section is deliniated by NIV not EN
+            if ($currentlang != 'NIV') {
+                continue;
+            }
+
+            $versionname = str_replace('&nbsp;', '', $option->innertext);
+
+            $versionnames[$option->value] = $versionname; 
+        }
+
+        return $versionnames;
+    }
+
     function biblebooks_array($testament=null){
         $oldtestament = array(  0 => 'Other',
                                 1 => 'Genesis', 
@@ -78,4 +168,3 @@
             return $oldtestament;
         }
     }
-?>

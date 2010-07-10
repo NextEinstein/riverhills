@@ -6,14 +6,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-$THEME->sheets = array('styles_layout', 'styles_fonts', 'styles_color', 'dropdown');
+$THEME->sheets = array('styles_layout', 'styles_fonts', 'styles_color', 'dropdown', 'mods', 'jqueryui');
 
 /// This variable is an array containing the names of all the 
 /// stylesheet files you want included in this theme, and in what order
 ////////////////////////////////////////////////////////////////////////////////
 
 
-$THEME->standardsheets = true;  
+$THEME->standardsheets = array('styles_layout', 'styles_fonts', 'styles_color', 'dropdown', 'mods', 'jqueryui');
 
 /// This variable can be set to an array containing
 /// filenames from the *STANDARD* theme.  If the 

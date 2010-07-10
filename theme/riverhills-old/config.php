@@ -14,7 +14,7 @@ $THEME->sheets = array('mods', 'calendar', 'cssmenu', 'dropdown');
 
 $THEME->customcorners = false;
 
-$THEME->standardsheets = array('styles_layout','styles_fonts','styles_color','styles_moz', 'dropdown');
+$THEME->standardsheets = array('styles_layout','styles_fonts','styles_color','styles_moz', 'dropdown', 'mods', 'jqueryui');
 
 /// This variable can be set to an array containing
 /// filenames from the *STANDARD* theme.  If the 
