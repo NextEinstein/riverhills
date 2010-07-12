@@ -88,7 +88,7 @@ $THEME->courseformatsheets = true;
 /// their own default styles.
 
 
-$THEME->metainclude = false;
+$THEME->metainclude = true;
 
 /// When this is enabled (or not set!) then Moodle will try 
 /// to include a file meta.php from this theme into the 

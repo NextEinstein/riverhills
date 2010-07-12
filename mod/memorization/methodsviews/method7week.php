@@ -2,6 +2,7 @@
 global $CFG;
 
 require_once($CFG->libdir.'/biblelib.php');
+require_once($CFG->dirroot.'/mod/memorization/locallib.php');
 
 define('MEMORIZATION_COMPLETE', 161);
 
@@ -56,7 +57,7 @@ function memorization_print_view_method7week($userid) {
     }
 
     /// Prints out tabs
-    $page = new moodle_url('view.php', array('id' => required_param('id', PARAM_INT), 'userid' => $userid));
+    $page = new moodle_url('view.php', array('userid' => $userid));
 
     $toprow = array();
     $toprow[] = new tabobject('day', $page->out(false, array('currenttab' => 'day')),
@@ -93,13 +94,7 @@ function memorization_print_view_method7week($userid) {
 
         // add the verse reference
         $versecell = '<span class="verse-cell"><a class="thickbox" href="ajaxversedisplay.php?verseid='.$verse->id.'&userid='.$userid.'&sesskey='.sesskey().'"> <img class="hint-icon" src="'.$CFG->wwwroot.'/mod/memorization/pix/bulb.png"/></a>';
-        if ($verse->startbookid == $verse->endbookid && $verse->startchapter == $verse->endchapter) {
-            $versecell .= "{$biblebooks[$verse->startbookid]} <span class=\"break-scripturizer\">{$verse->startchapter}:{$verse->startverse}-{$verse->endverse}</span>";
-        } elseif ($verse->startbookid == $verse->endbookid) {
-            $versecell .= "{$biblebooks[$verse->startbookid]} <span class=\"break-scripturizer\">{$verse->startchapter}:{$verse->startverse} - {$verse->endchapter}:{$verse->endverse}</span>";
-        } else {
-            $versecell .= "{$biblebooks[$verse->startbookid]} <span class=\"break-scripturizer\">{$verse->startchapter}:{$verse->startverse} - {$biblebooks[$verse->startbookid]} {$verse->endchapter}:{$verse->endverse}</span>";
-        }
+        $versecell .= _get_verse_text($verse);
         $versecell .= '</span>';
 
         $row[] = $versecell;
@@ -159,7 +154,7 @@ function memorization_print_view_method7week($userid) {
         $movecell .= $currenttab != 'week'  ? '<span class="week" ><a href="'.$page->out(false, array('currenttab' => 'week')) .'" class="move-verse-link" id="move-verse-'.$verse->id.'-'.MEMORIZATION_VERSE_WEEK_LOWER.'">'.get_string('moveweek', 'memorization').'</a></span>'    : '';
         $movecell .= $currenttab != 'month' ? '<span class="month"><a href="'.$page->out(false, array('currenttab' => 'month')).'" class="move-verse-link" id="move-verse-'.$verse->id.'-'.MEMORIZATION_VERSE_MONTH_LOWER.'">'.get_string('movemonth', 'memorization').'</a></span>'  : '';
         $movecell .= $currenttab != 'year'  ? '<span class="life" ><a href="'.$page->out(false, array('currenttab' => 'life')) .'" class="move-verse-link" id="move-verse-'.$verse->id.'-'.MEMORIZATION_VERSE_LIFE_LOWER.'">'.get_string('movelife', 'memorization').'</a></span>'    : '';
-        $deleteurl = new moodle_url('deleteverse.php', array('userid' => $userid, 'verseid' => $verse->id, 'currenttab' => $currenttab, 'modid' => required_param('id', PARAM_INT)));
+        $deleteurl = new moodle_url('deleteverse.php', array('userid' => $userid, 'verseid' => $verse->id, 'currenttab' => $currenttab));
         $movecell .= "<span class=\"delete\"><a href=\"{$deleteurl->out_action()}\"><img src=\"{$CFG->pixpath}/i/cross_red_big.gif\" /></a></span>";
         $movecell .= '</span>';
 
@@ -174,7 +169,7 @@ function memorization_print_view_method7week($userid) {
 
 
     if ($currenttab == 'day') {
-        _memorization_print_new_verse_box();
+        memorization_print_new_verse_box();
     }
 
     echo '<script type="text/javascript">
@@ -195,7 +190,7 @@ function memorization_print_view_method7week($userid) {
                 function update_verse_in_database_and_progressbar(verseid, newrepetition) {
                     jQuery.ajax({
                        type: "POST",
-                       url: "updateverserepetition.php",
+                       url: "ajaxupdateverserepetition.php",
                        data: "sesskey='.sesskey().'&userid='.$userid.'&verseid="+verseid+"&newrepetition="+newrepetition,
                        success: function(msg){
                          jQuery("#progressbar-"+verseid).progressbar({ value : ((newrepetition / '.MEMORIZATION_COMPLETE.') * 100) });
@@ -275,66 +270,138 @@ function memorization_print_view_method7week($userid) {
     return true;
 }
 
-function _memorization_print_new_verse_box() {
-    print_box_start('add-verse-box generalbox box');
-    print_heading(get_string('newverse', 'memorization'));
+function memorization_print_view_method7week_mobile($userid) {
+    global $CFG;
 
-    $biblebooks = biblebooks_array();
+    $verseconditions = array();
+    $verseconditions['day'] = "(repetitions >= '".MEMORIZATION_VERSE_DAY_LOWER."' 
+                               AND repetitions < '".MEMORIZATION_VERSE_DAY_UPPER."' 
+                               AND timemodified < '".strtotime('midnight')."')";
 
-    // create the book selector
-    $biblebookoptions = '';
-    foreach ($biblebooks as $booknumber => $bookofbible) {
-        if ($booknumber == 0) {
-            continue;
+    $verseconditions['week'] = "(repetitions >= '".MEMORIZATION_VERSE_WEEK_LOWER."' 
+                                AND repetitions < '".MEMORIZATION_VERSE_WEEK_UPPER."' 
+                                AND timemodified < '".strtotime('last monday midnight')."')";
+
+    $verseconditions['month'] = "(repetitions >= '".MEMORIZATION_VERSE_MONTH_LOWER."' 
+                                 AND repetitions < '".MEMORIZATION_VERSE_MONTH_UPPER."' 
+                                 AND timemodified < '".strtotime('first day of this month midnight')."')";
+
+    $verseconditions['quarterly'] = "(repetitions >= '".MEMORIZATION_VERSE_LIFE_LOWER."' 
+                                     AND repetitions < '".MEMORIZATION_VERSE_LIFE_UPPER."' 
+                                     AND timemodified < '".strtotime('midnight 3 months ago')."')";
+
+    $verseconditionsstring = '(' . implode(' OR ', $verseconditions) . ')';
+
+    $versesrs = get_recordset_select('memorization_verse', "userid = '{$userid}' AND {$verseconditionsstring}", 'repetitions ASC');
+
+    print_box_start('day-verses mobilebox');
+    while (($verse = rs_fetch_next_record($versesrs)) !== false) {
+        switch (true) {
+            case $verse->repetitions >= MEMORIZATION_VERSE_LIFE_LOWER :
+                if (!isset($tabprinted[MEMORIZATION_VERSE_LIFE_LOWER])) {
+                    print_box(get_string('quarterlyverses', 'memorization'), 'quarter-verse-title generalbox mobilebox');
+                    $tabprinted[MEMORIZATION_VERSE_MONTH_LOWER] = true;
+                }
+                break;
+            case $verse->repetitions >= MEMORIZATION_VERSE_MONTH_LOWER :
+                if (!isset($tabprinted[MEMORIZATION_VERSE_MONTH_LOWER])) {
+                    print_box(get_string('monthverses', 'memorization'), 'month-verse-title generalbox mobilebox');
+                    $tabprinted[MEMORIZATION_VERSE_MONTH_LOWER] = true;
+                }
+                break;
+            case $verse->repetitions >= MEMORIZATION_VERSE_WEEK_LOWER :
+                if (!isset($tabprinted[MEMORIZATION_VERSE_WEEK_LOWER])) {
+                    print_box(get_string('weekverses', 'memorization'), 'week-verse-title generalbox mobilebox');
+                    $tabprinted[MEMORIZATION_VERSE_WEEK_LOWER] = true;
+                }
+                break;
+            case $verse->repetitions >= MEMORIZATION_VERSE_DAY_LOWER :
+                if (!isset($tabprinted[MEMORIZATION_VERSE_DAY_LOWER])) {
+                    $url = new moodle_url('addverse.php', array('userid' => $userid));
+                    print_box(get_string('dayverses', 'memorization').'<div class="add-verse"><a href="'.$url->out_action().'"><img src="'.$CFG->wwwroot.'/mod/memorization/pix/new.png" /></a></div>', 'day-verse-title generalbox mobilebox');
+                    $tabprinted[MEMORIZATION_VERSE_DAY_LOWER] = true;
+                }
+                break;
         }
 
-        $biblebookoptions .= '<option value="'.$booknumber.'">'.$bookofbible.'</option>';
+        $completion = !empty($verse->repetitions) ? 100 - ($verse->repetitions / MEMORIZATION_COMPLETE * 100) : 100;
+        echo '<table class="memorization-verse" id="memorization-verse-'.$verse->id.'">
+                <tr>
+                   <td class="hint"><a class="my-message-box" x="350" y="500" href="ajaxversedisplay.php?verseid='.$verse->id.'&userid='.$userid.'&sesskey='.sesskey().'"><img src="'.$CFG->wwwroot.'/mod/memorization/pix/bulb.png" /></a></td>
+                   <td class="verse">
+                        '._get_verse_text($verse).'
+                        <div class="progress" style="right: '.$completion.'%;">&nbsp;</div>
+                   </td>
+                   <td class="check" id="'.$verse->id . '-' . ($verse->repetitions +1) .'"> <img src="'.$CFG->pixpath.'/i/tick_green_big.gif" /></td>
+                 </tr>
+              </table>';
     }
-
-    $startbookid = '<select name="startbookid">'.$biblebookoptions.'</select>';
-    $endbookid = '<select name="endbookid">'.$biblebookoptions.'</select>';
-
-    // create the chapter inputs
-    $startchapter = '<input type="text" name="startchapter" size="5" />';
-    $endchapter = '<input type="text" name="endchapter" size="5"/>';
-
-    // create the verse inputs
-    $startverse = '<input type="text" name="startverse" size="5"/>';
-    $endverse = '<input type="text" name="endverse" size="5"/>';
-
-    // create the version chooser
-    $versions = get_records('memorization_version');
-
-    if (!empty($versions)) {
-        $versionselect = '<select name="versionid">';
-        foreach ($versions as $versionid => $version) {
-            $versionselect .= '<option value="'.$versionid.'">'.$version->value.'</option>';
-        }
-        $versionselect .= '</select>';
-    }
-
-    $currenturl = new moodle_url(qualified_me());
-
-    echo '<form method="POST" action="addverse.php?'.$currenturl->get_query_string().'">
-          <input type="hidden" name="sesskey" value="'.sesskey().'">
-          <table>
-            <tr>
-              <td>'.get_string('fromverse', 'memorization').'</td>
-              <td>'.$startbookid .' '. $startchapter. ':'. $startverse.'</td>
-            </tr>
-
-            <tr>
-              <td>'.get_string('toverse', 'memorization').'</td>
-              <td>'.$endbookid .' '. $endchapter. ':'. $endverse.'</td>
-            </tr>
-
-            <tr>
-              <td>'.get_string('version', 'memorization'). '</td>
-              <td>'.$versionselect.'</td>
-            </tr>
-          </table>
-          <input type="submit">
-          </form>';
-
     print_box_end();
+
+    echo '<script type="text/javascript">
+            jQuery(document).ready(function () {
+                function parse_verse_id_from_repetion_box(elementid) {
+                    return elementid.replace(/\-[0-9]*$/, "");
+                }
+
+                function parse_repetition(elementid) {
+                    return elementid.replace(/[0-9]+?\-/, "");
+                }
+
+                function parse_verse_id_from_move_to_link(elementid) {
+                    firststrip = elementid.replace(/move\-verse\-/, "");
+                    return firststrip.replace(/\-[0-9]*$/, "");
+                }
+
+                function parse_repetition_value_from_move_to_link(elementid) {
+                    return elementid.replace(/.*\-/, "");
+                }
+
+                function update_verse_in_database(verseid, newrepetition) {
+                    jQuery.ajax({
+                       type: "POST",
+                       url: "ajaxupdateverserepetition.php",
+                       data: "sesskey='.sesskey().'&userid='.$userid.'&verseid="+verseid+"&newrepetition="+newrepetition,
+                     });
+                }
+
+                jQuery("td.check").click(function () {
+                    newrepetition = parse_repetition(jQuery(this).attr("id"));
+                    verseid = parse_verse_id_from_repetion_box(jQuery(this).attr("id"));
+                    update_verse_in_database(verseid, newrepetition);
+                    jQuery("table#memorization-verse-"+verseid).fadeOut(800);
+                });
+            });
+          </script>';
+
+    return true;
+}
+
+function _get_verse_text($verserecord) {
+    global $CFG;
+
+    include_once($CFG->libdir.'/biblelib.php');
+
+    static $books = false;
+
+    if ($books === false) {
+        $biblebooks = biblebooks_array();
+    }
+ 
+    $versetxt = "{$biblebooks[$verserecord->startbookid]} <span class=\"break-scripturizer\">{$verserecord->startchapter}:{$verserecord->startverse}</span>";
+
+    if (empty($verserecord->endchapter) || empty($verserecord->endverse)) {
+        return $versetxt;
+    }
+
+    // if verse is in same book same chapter we want it to print like Genesis 1:5-8
+    if ($verserecord->startbookid == $verserecord->endbookid && $verserecord->endchapter == $verserecord->startchapter) {
+        $versetxt .= "-{$verserecord->endverse}";
+    } elseif ($verserecord->startbookid == $verserecord->endbookid) { // spans chapters so print like Genesis 1:5 - 2:10
+        $versetxt .= " - {$verserecord->endchapter}:{$verserecord->endverse}";
+    } else {                                                                                 // only other option is like Genesis 1:5 - Exodus 1:8
+        $versetxt .= " - {$biblebooks[$verserecord->endbookid]} <span class=\"break-scripturizer\">{$verserecord->endchapter}:{$verserecord->endverse}</span>";
+    }
+
+    return $versetxt;
 }

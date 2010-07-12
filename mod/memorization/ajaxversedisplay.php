@@ -16,7 +16,7 @@ if (!$verseid || !$userid) {
 $verse = get_field('memorization_verse', 'text', 'userid', $userid, 'id', $verseid);
 
 if (!empty($verse)) {
-    echo $verse;
+    echo '<html><body><div id="page"><div id="content">'.$verse.'</div></div></body></html>';
 } else {
-    echo get_string('oopsnoverse', 'memorization');
+    echo '<html><body><div id="page"><div id="content">'.get_string('oopsnoverse', 'memorization').'</div></div></body></html>';
 }

@@ -18,4 +18,9 @@ if (!set_field('memorization_verse', 'repetitions', $newrepetition, 'id', $verse
     exit; 
 }
 
+if (!set_field('memorization_verse', 'timemodified', time(), 'id', $verseid, 'userid', $userid)) {
+    header("HTTP/1.0 500 Internal Server Error");
+    exit; 
+}
+
 header("HTTP/1.0 200 OK");

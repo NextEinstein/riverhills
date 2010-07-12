@@ -1,15 +1,8 @@
-<?php 
-    global $CFG;
-
-    if ($CFG->mobiledevice && file_exists($CFG->dirroot.'/theme/'.current_theme().'/header-mobile.html')) {
-        include_once('header-mobile.html'); 
-        return;
-    }
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html<?php echo $direction ?>>
 <head>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+
 <script type="text/javascript" src="<?php echo $CFG->wwwroot.'/theme/'.current_theme().'/js/hotkeys.min.js';?>"></script>
 <script>
 var hotkeyconfig = "<?php echo $CFG->wwwroot; ?>";
@@ -43,43 +36,20 @@ function clearDefaultandCSS(el) {
       if (($home || $heading) && !isguest()) {  // This is what gets printed on the home page only
 ?>
 
-<div id="background">
-    <div id="wrapper">
-        <div id="page">
-        <?php print_container_start(true, '', 'header-home'); ?>
-            <table border="0" class="header-table">
-              <tr>
-                <td class="rhcc-logo"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/images/rhcc/banner_left.jpg" /></td>
-                <td class="rhcc-name"><div class="rhcc-name">
-		    <span class="river hills">
-                      <span class="letter">R</span>iver
-                      <span class="letter">H</span>ills
-		    </span>
-		    <span class="community church">
-                      <span class="letter">C</span>ommunity
-                      <span class="letter">C</span>hurch
-		    </span>
-                </td>
-                <td class="headermenu">
-                  <?php include('profileblock.php');   ?>
-                </td>
-              </tr>
-            </table>
-      <?php print_container_end(); ?>
-
-
-
-<div id="menubox" style="clear both"><?php include 'menu.php';?></div>
-
-        <!--<div class="top_menu"><?php  //include('topmenu.php');   ?></div>-->      
+<div id="page">
+  <table border="0" class="header-table">
+    <tr>
+      <td class="rhcc-name">
+        <span class="river">River</span>
+        <span class="hills">Hills</span>
+      </td>
+    </tr>
+  </table>
 
 
 <?php } else if (($home || $heading) && isguest()) {  // we don't want guests seeing the profile block
 ?>
-<div id="background">
-    <div id="wrapper">
         <div id="page">
-        <?php print_container_start(true, '', 'header'); ?>
         <table border="0" class="header-table">
               <tr>
                 <td class="rhcc-logo"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/images/rhcc/banner_left.jpg" /></td>
@@ -92,8 +62,6 @@ function clearDefaultandCSS(el) {
                 </td>
               </tr>
             </table>
-        <?php print_container_end(); ?>
-<div id="menubox" style="clear both"><?php include 'menu.php';?></div>
       <?php } ?>
 
 <?php //Accessibility: breadcrumb trail/navbar now a DIV, not a table.

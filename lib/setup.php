@@ -779,6 +779,10 @@ global $HTTPSPAGEREQUIRED;
         }
     }
 
+/// detect if this is a mobile browser
+    require_once($CFG->libdir.'/mobilebrowser.php');
+    $CFG->mobiledevice = mobile_device_detect();
+
 /// note: we can not block non utf-8 installatrions here, because empty mysql database
 /// might be converted to utf-8 in admin/index.php during installation
 ?>

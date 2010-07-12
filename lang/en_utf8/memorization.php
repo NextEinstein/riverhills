@@ -37,3 +37,10 @@ $string['movelife'] = 'L';
 
 $string['hint'] = 'Hint';
 $string['oopsnoverse'] = 'Oops, I couldn\'t find your verse.';
+
+$string['dayverses'] = 'Verses today';
+$string['weekverses'] = 'Verses this week';
+$string['monthverses'] = 'Verses this month';
+$string['quarterverses'] = 'Verses this quarter';
+
+$string['memorizationtitle'] = 'Verse Memorization';

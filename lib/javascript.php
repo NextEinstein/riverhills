@@ -98,18 +98,34 @@ jQuery(document).ready(function () {
                     height: 400
                 });
         } else {
-            var displayregion = '#page #content';
             if (jQuery(linkelement.attr('rel'))) {
                 displayregion = linkelement.attr('rel');
             }
+            mywidth = 575;
+            if (jQuery(linkelement).attr('x')) {
+                mywidth = jQuery(linkelement).attr('x');
+                if (mywidth.search(/\%/) != -1) {       // this is a work in progress
+                    mywidth = window.innerWidth * mywidth.replace(/\%/, '') / 100;
+                    console.log(mywidth);
+                }
+            }
+            mywidth = 400;
+            if (jQuery(linkelement).attr('y')) {
+                myheight = jQuery(linkelement).attr('x');
+                if (myheight.search(/\%/) != -1) {  // this is a work in progress
+                    myheight = window.innerHeight * myheight.replace(/\%/, '') / 100;
+                    console.log(myheight);
+                }
+            }
+
             dialogbox = jQuery('<div></div>')
-                .load(linkelement.attr('href') + ' body ' + displayregion)
+                .load(linkelement.attr('href') + ' #content')
                 .dialog({
                     modal: true,
                     autoOpen: false,
                     title: linkelement.attr('title'),
-                    width: 575,
-                    height: 400
+                    width: mywidth,
+                    height: myheight
             });
         }
         dialogbox.dialog('open');
