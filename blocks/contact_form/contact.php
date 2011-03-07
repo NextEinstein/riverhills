@@ -9,7 +9,7 @@
     $cid = optional_param('cid', 0, PARAM_INT); // course ID
     $bid = optional_param('bid', 0, PARAM_INT); // block  ID
     $rcp = optional_param('rcp', 0, PARAM_INT); // was receipt requested?
-    
+
     // if you are reloading the page without resending right parameters,
     // stop here your work and redirect to the home page.
     if ($cid == 0)
@@ -59,9 +59,13 @@
         //this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
         //or on the first display of the form.
         //put data you want to fill out in the form into array $toform here then :
-        echo '<br /><div class="box generalbox boxaligncenter boxwidthnormal">';
-        print_string('welcome_info', 'block_contact_form');
-        echo '</div>';
+        $welcomestring = get_string('welcome_info', 'block_contact_form');
+        if (!empty($CFG->block_contact_form_welcome)) {
+            $welcomestring = $CFG->block_contact_form_welcome;
+        }
+        echo '<br /><div class="box generalbox boxaligncenter boxwidthnormal contactwelcome"><div class="inside">';
+        echo $welcomestring;
+        echo '</div></div>';
         $mform->display();
     }
 /// Finish the page

@@ -5,4 +5,7 @@ $settings->add(new admin_setting_configtext('block_contact_form_subject_prefix',
 
 $settings->add(new admin_setting_configcheckbox('block_contact_form_receipt', get_string('receipt', 'block_contact_form'),
                    get_string('receipt_info', 'block_contact_form'), 0));
+
+$settings->add(new admin_setting_configtextarea('block_contact_form_welcome', get_string('welcomemsg', 'block_contact_form'),
+                   get_string('configwelcomemsg', 'block_contact_form'), get_string('welcome_info', 'block_contact_form')));
 ?>

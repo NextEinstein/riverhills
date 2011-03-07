@@ -44,3 +44,6 @@ $string['titleandlinkifblank'] = 'If no text is specified then this will be \"'.
 $string['use_global_receipt'] = 'Use global block settings';
 $string['usercanceled'] = 'Action was canceled.<br />Not any message was sent.';
 $string['welcome_info'] = 'We are interested in hearing your questions or concerns. Please use to following form to send a message.';
+$string['welcomemsg'] = 'Welcome Message';
+$string['configwelcomemsg'] = 'This will display at the top of each contact form after the user selects the contact button.';
+$string['summary'] = 'Summary';
