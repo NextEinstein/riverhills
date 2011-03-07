@@ -72,7 +72,7 @@ $STD_FIELDS = array('id', 'firstname', 'lastname', 'username', 'email',
         'mnethostid', 'institution', 'department', 'idnumber', 'skype', 
         'msn', 'aim', 'yahoo', 'icq', 'phone1', 'phone2', 'address', 
         'url', 'description', 'oldusername', 'emailstop', 'deleted',  
-        'password');
+        'password', 'f1householdid', 'f1householdpos', 'f1individualid', 'f1status', 'gender');
 
 $PRF_FIELDS = array();
 

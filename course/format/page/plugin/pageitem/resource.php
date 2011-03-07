@@ -37,6 +37,19 @@ class format_page_pageitem_resource extends format_page_pageitem {
         $resourceobj = new $resclass($block->cm->id);
 
         switch($resource->type) {
+            case 'file':
+                if (strpos($resourceobj->resource->reference, $CFG->wwwroot) !== false) {
+                    ob_start();
+                    $file = str_replace($CFG->wwwroot, $CFG->dirroot, $resourceobj->resource->reference);
+                    if (file_exists($file)) {
+                        include_once($file);
+                    }
+                    $output = ob_get_contents();
+                    ob_end_clean();
+
+                    $block->content->text = $output;
+                    break;
+                }
             case 'directory':
                 ob_start(); 
                 $resourceobj->display(false);

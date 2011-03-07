@@ -73,13 +73,14 @@
             error(get_string('nopageswithcontent', 'format_page'));
         }
     }
-/// Check if page wants to redirect
-    if (!empty($page->redirect)) {
-        redirect($page->redirect, '', 0);
-    }
 
 /// There are a couple processes that need some help via the session... take care of those.
     $action = page_handle_session_hacks($course->id, $action);
+
+/// Check if page wants to redirect
+    if (!empty($page->redirect) && empty($action)) {
+        redirect($page->redirect, '', 0);
+    }
 
 /// Override PAGE_COURSE_VIEW class mapping
     page_import_types('course/format/page');

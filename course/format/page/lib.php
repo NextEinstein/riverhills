@@ -1131,7 +1131,7 @@ function page_get_children($pageid, $structure = 'flat', $courseid = NULL) {
                     $pageid = $allpages[$pageid]->parent;
                 }
                 // Dig down through the parents to get the children
-                $children = page_get_all_pages($courseid, 'nested');
+                $children = page_get_all_pages($courseid, 'nested', true);
                 foreach ($parentids as $pageid) {
                     $children = $children[$pageid]->children;
                 }
@@ -2025,7 +2025,7 @@ function page_print_lock_prerequisites($page) {
 }
 
 function page_print_site_page_structure_ul($pages = null, $ulid = '') {
-    global $CFG;
+    global $CFG, $PAGE;
 
     if (empty($pages)) {
         $pages = page_get_master_pages(SITEID, 0, DISP_THEME);
@@ -2037,8 +2037,17 @@ function page_print_site_page_structure_ul($pages = null, $ulid = '') {
 
     $baseurl = $CFG->wwwroot.'/index.php?page=';
 
+    static $canviewnonpublishedpages = null;
+    if (is_null($canviewnonpublishedpages)) {
+        $canviewnonpublishedpages = has_capability('format/page:managepages', get_system_context()); // this is a recursive function so cache this heavy op
+    }
+
     $pagestring = '';
     foreach ($pages as $page) {
+        if (!($page->display & DISP_PUBLISH) && !$canviewnonpublishedpages) {
+            continue;  // this page isn't published and the user doesn't have the ability to see it
+        }
+
         $pagestring .= !empty($page->children) ? '<li class="havechild">' : '<li>';
         $pageurl = !empty($page->redirect) ? $page->redirect : $baseurl.$page->id;
         $pagestring .= "<a href=\"{$pageurl}\"><span class=\"menu-title\">{$page->nameone}</span></a>";

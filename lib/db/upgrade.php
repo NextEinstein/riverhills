@@ -3337,6 +3337,20 @@ function xmldb_main_upgrade($oldversion=0) {
         upgrade_main_savepoint($result, 2007101571.04);
     }
 
+    if ($result && $oldversion < 2007101571.06) {
+
+    /// Define field gender to be added to user
+        $table = new XMLDBTable('user');
+        $field = new XMLDBField('gender');
+        $field->setAttributes(XMLDB_TYPE_CHAR, '2', null, null, null, null, null, '', 'email');
+
+    /// Launch add field gender
+        $result = $result && add_field($table, $field);
+
+    /// Main savepoint reached
+        upgrade_main_savepoint($result, 2007101571.06);
+    }
+
     return $result;
 }
 

@@ -52,7 +52,8 @@ class format_page_action_manage extends format_page_action {
                     // Only master pages get this one
                     $theme = $this->manage_showhide($page, DISP_THEME);
                 } else {
-                    $theme = '';
+                    //$theme = '';
+                    $theme = $this->manage_showhide($page, DISP_THEME);
                 }
                 $menu    = $this->manage_showhide($page, DISP_MENU);
                 $publish = $this->manage_showhide($page, DISP_PUBLISH);

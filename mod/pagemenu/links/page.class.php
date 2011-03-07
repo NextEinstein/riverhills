@@ -32,8 +32,10 @@ class mod_pagemenu_link_page extends mod_pagemenu_link {
     public function edit_form_add(&$mform) {
         global $COURSE;
 
-        $pages = array();
-        if ($pages = page_get_all_pages($COURSE->id)) {
+        // for some reason the nested pages don't work on site id
+        $pages = $COURSE->id == SITEID ? page_get_all_pages($COURSE->id, 'flat') : page_get_all_pages($COURSE->id);
+
+        if ($pages) {
             $options = array(0 => get_string('choose', 'pagemenu'));
             $options += $this->build_select_menu($pages);
 
@@ -202,7 +204,7 @@ class mod_pagemenu_link_page extends mod_pagemenu_link {
      * Helper method to clean up code
      *
      * Determines if the current page is active,
-     * meaning it should display its children if 
+     * meaning it should display its children if
      * it has any.
      *
      * @param int $pageid Page ID
@@ -300,7 +302,7 @@ class mod_pagemenu_link_page extends mod_pagemenu_link {
     public function is_enabled() {
         global $COURSE, $CFG;
 
-        return ($COURSE->format == 'page');
+        return ($COURSE->format == 'page' || $COURSE->id == SITEID);
     }
 
     /**
