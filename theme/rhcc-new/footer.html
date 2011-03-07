@@ -18,10 +18,10 @@
 
     $masterpages = page_get_master_pages(SITEID, 0, DISP_THEME);
 
+    $links = array();
     if (!empty($masterpages)) {
         $baseurl = $CFG->wwwroot.'/index.php?page=';
 
-        $links = array();
         foreach ($masterpages as $masterpage) {
             $links[] = "<a href=\"{$baseurl}{$masterpage->id}\"><span class=\"menu-title\">{$masterpage->nameone}</span></a>";
         }
