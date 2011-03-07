@@ -1,0 +1,81 @@
+<?php
+    $usehtmleditor = can_use_html_editor();
+
+    $vars = array('title', 'center', 'zoom', 'markers', 'width', 'height', 'markerbubbles');
+    foreach ($vars as $varname) {
+        $$varname = isset($this->config->{$varname}) ? $this->config->{$varname} : '';
+    }
+?>
+
+<table cellspacing="0" id="block_google_map_table">
+
+<!-- Map Title -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('configtitle', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px"><input type="center" name="title" size="30" value="<?php echo $title ?>" /></td>
+</tr>
+
+<!-- Map Center -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('mapcenter', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px"><input type="center" name="center" size="30" value="<?php echo $center ?>" /></td>
+</tr>
+
+<!-- Map zoom -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('mapzoom', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px"><select name="zoom">
+        <?php 
+            for($x=1;$x<=20;$x++) {
+
+                $selected = $zoom == $x || ( empty($zoom) && $x==9 ) ? ' SELECTED="selected" ' : ' ';
+                echo "<option value=\"{$x}\" {$selected}>{$x}</option>";
+            }
+        ?>
+        </select>
+    </td>
+</tr>
+
+<!-- Map dimensions -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('dimensions', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px">
+        <?php print_string('width', 'block_google_map');?><br /><input type="text" size="10" name="width" value="<?php echo $width;?>" /><?php print_string('px', 'block_google_map'); ?><br />
+        <?php print_string('height', 'block_google_map');?><br /><input type="text" size="10" name="height" value="<?php echo $height;?>" /><?php print_string('px', 'block_google_map'); ?>
+</tr>
+
+<!-- Map Markers -->
+<tr valign="top">
+<?php
+    for($x=0; $x<=4 || $x<count($markers); $x++) {
+        echo "<tr valing=\"top\">";
+
+        if (empty($x)) {
+            echo "<td valign=\"top\" style=\"padding:2px; padding-left: 9px; padding-right: 9px;\" align=\"right\">".get_string('markerlocations', 'block_google_map').":</td>";
+        } else {
+            echo '<td style=\"padding:2px; padding-left: 9px; padding-right: 9px;\">&nbsp;</td>';
+        }
+
+        $marker = !empty($markers[$x]) ? $markers[$x] : '';
+        $markerbubble = !empty($markerbubbles[$x]) ? $markerbubbles[$x] : '';
+
+        echo "<td style=\"padding:2px; padding-left: 9px; padding-right: 9px;\"> <input type=\"text\" size=\"70\" name=\"markers[]\" value=\"{$marker}\" /> </br>";  
+        print_textarea($usehtmleditor, 15, 70, 0, 0, 'markerbubbles[]', $markerbubble);
+        echo "</td></tr>";
+    }
+?>
+</tr>
+<tr>
+    <td style="padding:2px; padding-left: 9px; padding-right: 9px;">&nbsp;</td>
+    <td style="padding:9px; padding-top: 2px;"> <a href="#" id="add-marker-link"><?php print_string('addmarkerlink', 'block_google_map'); ?></a></td>
+</tr>
+
+<tr>
+    <td colspan="3" align="center">
+    <input type="submit" value="<?php print_string('savechanges') ?>" /></td>
+</tr>
+</table>
+<?php if ($usehtmleditor) {
+          use_html_editor(); 
+      }
+?>
