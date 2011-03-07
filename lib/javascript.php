@@ -18,18 +18,9 @@
 ?>
 <!--<style type="text/css">/*<![CDATA[*/ body{behavior:url(<?php echo $CFG->httpswwwroot ?>/lib/csshover.htc);} /*]]>*/</style>-->
 
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/javascript-static.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/javascript-mod.php"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/overlib/overlib.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/overlib/overlib_cssstyle.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/cookies.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/ufo.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/dropdown.js"></script>
-
 <!-- jquery files  -->
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-ui-1.8.2.custom.min.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.droppy.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.hotkeys.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.tree.js"></script>
@@ -39,6 +30,16 @@
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.dropdownPlain.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/scripturizer.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/esvpopup.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/javascript-static.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/javascript-mod.php"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/overlib/overlib.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/overlib/overlib_cssstyle.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/cookies.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/ufo.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/dropdown.js"></script>
+
 <script type="text/javascript">
 
 /** the following is for the jsddm version of drop down menu **/
@@ -83,7 +84,6 @@ jQuery(document).ready(function () {
 		jQuery(this).parent().children('ul').toggle(300);
 		jQuery(this).css({'background-image' : 'url(pix/t/switch_plus.gif)'});
 	});
-    jQuery("#webpage-courses").droppy({speed : 100});
     jQuery('.my-message-box').click(function () {
         var linkelement = jQuery(this);
         var dialogbox = null;
