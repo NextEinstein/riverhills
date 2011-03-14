@@ -5,31 +5,36 @@
     foreach ($vars as $varname) {
         $$varname = isset($this->config->{$varname}) ? $this->config->{$varname} : '';
     }
+
+    define('BLOCK_GOOGLE_MAP_POLYGON_COUNT', 6);
 ?>
 
-<table cellspacing="0" id="block_google_map_table">
+<div syle="display: none" id="dialog"></div>
+
+<table cellspacing="0" id="block_google_map_table" border="0">
 
 <!-- Map Title -->
 <tr valign="top">
     <td align="right" style="padding: 9px"><?php print_string('configtitle', 'block_google_map'); ?>:</td>
-    <td style="padding: 9px"><input type="center" name="title" size="30" value="<?php echo $title ?>" /></td>
+    <td style="padding: 9px"><input id="maptitle" name="title" size="30" value="<?php echo $title ?>" /></td>
 </tr>
 
 <!-- Map Center -->
 <tr valign="top">
     <td align="right" style="padding: 9px"><?php print_string('mapcenter', 'block_google_map'); ?>:</td>
-    <td style="padding: 9px"><input type="center" name="center" size="30" value="<?php echo $center ?>" /></td>
+    <td style="padding: 9px"><input id="center" type="center" name="center" size="30" value="<?php echo $center ?>" /></td>
 </tr>
 
 <!-- Map zoom -->
 <tr valign="top">
     <td align="right" style="padding: 9px"><?php print_string('mapzoom', 'block_google_map'); ?>:</td>
-    <td style="padding: 9px"><select name="zoom">
+    <td style="padding: 9px"><select name="zoom" id="zoom">
         <?php 
             for($x=1;$x<=20;$x++) {
 
                 $selected = $zoom == $x || ( empty($zoom) && $x==9 ) ? ' SELECTED="selected" ' : ' ';
-                echo "<option value=\"{$x}\" {$selected}>{$x}</option>";
+                $zoomaspercent = $x / 20 * 100;
+                echo "<option value=\"{$x}\" {$selected}>{$zoomaspercent}%</option>";
             }
         ?>
         </select>
@@ -44,26 +49,75 @@
         <?php print_string('height', 'block_google_map');?><br /><input type="text" size="10" name="height" value="<?php echo $height;?>" /><?php print_string('px', 'block_google_map'); ?>
 </tr>
 
+<!-- Polygon -->
+<tr valign="top">
+    <?php $opacityoptions = range(.1,1,.1); ?>
+
+    <td align="right" style="padding-right: 9px"><?php print_string('poly', 'block_google_map'); ?>:</td>
+    <td>
+        <table border="0" cellpadding="5">
+        <tr>
+            <th><?php print_string('polyhex', 'block_google_map'); ?></th>
+            <th style="text-align: center"><?php print_string('polyfillopacity', 'block_google_map'); ?></th>
+            <th style="text-align: center"><?php print_string('polylineopacity', 'block_google_map'); ?></th>
+            <th style="text-align: center"><?php print_string('selectpoints', 'block_google_map'); ?></th>
+        </tr>
+        <!-- existing polygons -->
+        <?php
+            if (!empty($this->config->polyhex)) {
+                foreach ($this->config->polyhex as $idx => $polyhex) {
+                    $lnop = !empty($this->config->polylineopacity[$idx]) ? $this->config->polylineopacity[$idx] : 0;
+                    $fillop = !empty($this->config->polyfillopacity[$idx]) ? $this->config->polyfillopacity[$idx] : 0;
+                    $polypoints = !empty($this->config->polypoints[$idx]) ? $this->config->polypoints[$idx] : false;
+
+                    if (empty($polypoints)) {
+                        continue;
+                    }
+
+                    echo '
+                    <tr>
+                        <td style="text-align: center"><input type="color" name="polyhex[]"  data-hex="true" value="'.$polyhex.'"/></td>
+                        <td style="text-align: center"><select name="polyfillopacity[]">';
+                            foreach ($opacityoptions as $op) {
+                                $selected = (string)$op == (string)$fillop ? ' SELECTED="selected" ' : '';
+                                echo "<option {$selected} value=\"{$op}\">{$op}</option>";
+                            }
+                    echo '
+                        </select></td>
+                        <td style="text-align: center"><select name="polylineopacity[]">';
+                            foreach ($opacityoptions as $op) {
+                                $selected = (string)$op == (string)$lnop ? ' SELECTED="selected" ' : '';
+                                echo "<option {$selected} value=\"{$op}\">{$op}</option>";
+                            }
+                    echo '
+                        </select></td>
+                        <td style="text-align: center">
+                            <a href="#" class="select-poly-points"><img src="'.$CFG->pixpath.'/t/edit.gif" /></a>
+                            <a href="#" class="delete-poly-points"><img src="'.$CFG->pixpath.'/t/delete.gif" /></a>
+                            <input type="hidden" name="polypoints[]" value="'.$polypoints.'"/>
+                        </td>
+                    </tr>';
+                }
+            }
+        ?>
+        <tr>
+            <td style="text-align: center"><input type="color" name="polyhex[]" data-hex="true" /></td>
+            <td style="text-align: center"><select name="polyfillopacity[]"><?php foreach ($opacityoptions as $op) echo "<option value=\"{$op}\">{$op}</option>"; ?></select></td>
+            <td style="text-align: center"><select name="polylineopacity[]"><?php foreach ($opacityoptions as $op) echo "<option value=\"{$op}\">{$op}</option>"; ?></select></td>
+            <td style="text-align: center"><a href="#" class="select-poly-points"><img src="<?php echo $CFG->pixpath; ?>/t/edit.gif" /></a><input type="hidden" name="polypoints[]" /></td>
+        </tr>
+        </table>
+</tr>
+
+<tr><td colspan="2">&nbsp;</td></tr>
 <!-- Map Markers -->
 <tr valign="top">
-<?php
-    for($x=0; $x<=4 || $x<count($markers); $x++) {
-        echo "<tr valing=\"top\">";
-
-        if (empty($x)) {
-            echo "<td valign=\"top\" style=\"padding:2px; padding-left: 9px; padding-right: 9px;\" align=\"right\">".get_string('markerlocations', 'block_google_map').":</td>";
-        } else {
-            echo '<td style=\"padding:2px; padding-left: 9px; padding-right: 9px;\">&nbsp;</td>';
-        }
-
-        $marker = !empty($markers[$x]) ? $markers[$x] : '';
-        $markerbubble = !empty($markerbubbles[$x]) ? $markerbubbles[$x] : '';
-
-        echo "<td style=\"padding:2px; padding-left: 9px; padding-right: 9px;\"> <input type=\"text\" size=\"70\" name=\"markers[]\" value=\"{$marker}\" /> </br>";  
-        print_textarea($usehtmleditor, 15, 70, 0, 0, 'markerbubbles[]', $markerbubble);
-        echo "</td></tr>";
-    }
-?>
+    <td><?php print_string('markerlocation', 'block_google_map');?></td>
+    <td><input type="text" name="markerlocation[]" /></td>
+</tr>
+<tr valign="top">
+    <td><?php print_string('markerhtml', 'block_google_map');?></td>
+    <td><?php print_textarea($usehtmleditor, 15, 70, 0, 0, 'markerhtml[]'); ?></td>
 </tr>
 <tr>
     <td style="padding:2px; padding-left: 9px; padding-right: 9px;">&nbsp;</td>

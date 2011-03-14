@@ -20,16 +20,9 @@
 
 <!-- jquery files  -->
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-1.5.1.min.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-ui-1.8.2.custom.min.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.cookie.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.hotkeys.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.tree.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.prettyPhoto.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-ui-1.8.10.custom.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.thickbox.min.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.dropdownPlain.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/scripturizer.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/esvpopup.js"></script>
+<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/mColorPicker.min.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/javascript-static.js"></script>
@@ -38,7 +31,6 @@
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/overlib/overlib_cssstyle.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/cookies.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/ufo.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/dropdown.js"></script>
 
 <script type="text/javascript">
 

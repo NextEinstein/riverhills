@@ -7,9 +7,18 @@ $string['configtitle'] = 'Map Title';
 $string['googlemap'] = 'Google Map';
 $string['mapcenter'] = 'Map center';
 $string['mapzoom'] = 'Map zoom';
-$string['markerlocations'] = 'Marker locations';
+
+$string['markerlocation'] = 'Marker address';
+$string['markerhtml'] = 'Marker popup content';
+
 $string['addmarkerlink'] = 'Add another marker';
 $string['dimensions'] = 'Dimensions';
 $string['width'] = 'Width';
 $string['height'] = 'Height';
 $string['px'] = 'px';
+$string['poly'] = 'New Region';
+$string['polyhex'] = 'Color';
+$string['polyfillopacity'] = 'Fill opacity';
+$string['polylineopacity'] = 'Line opacity';
+$string['selectpoints'] = 'Select region points';
+

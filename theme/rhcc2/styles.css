@@ -49,7 +49,7 @@ div.navbutton .singlebutton {display: inline;}
 .pagenav a {display:block; padding:7px 10px; color:#ebe7de; -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px; font-weight:bold;}
 .pagenav li {-moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px;}
 .pagenav a:hover {background: #6a3b14 url('images/buttonback.jpg') repeat-x center; text-decoration:none; border:1px solid #6a3b14; padding:6px 9px;}
-#dropmenu {margin:0; padding:0; list-style-type:none; list-style-position:outside; position:relative; line-height:1.5em; z-index:300;  font-weight:bold;}
+#dropmenu {margin:0; padding:0; list-style-type:none; list-style-position:outside; position:relative; line-height:1.5em; z-index:9999;  font-weight:bold;}
 #dropmenu li {float:left; position:relative; margin:0 5px 0 0; font-size:12px; font-family:verdana,sans-serif; text-transform: uppercase;}
 #dropmenu li ul {margin:0; padding:0; list-style-type:none; list-style-position:outside; line-height:1.5em; z-index:300;  position:absolute; display:none; width:200px; top:29px; left:0; background: #6a3b14; border:10px solid #6a3b14;  -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px;}
 #dropmenu li ul a {-moz-border-radius:0px;-webkit-border-radius: 0px; border-radius: 0px; font-size:10px; width:180px; height:auto; float:left; margin:0; border-top:1px solid #834e23; border-bottom:1px solid #532f11;}
@@ -141,7 +141,7 @@ span.skip-block-to,div.ft{display: none;}
 #left-column div.sideblock .header h2{padding:10px 15px; font-size: 14px; background:  url('images/post_top.jpg') repeat-x; border:1px solid #dad8c3; border-bottom:1px solid #9c9a88; border-top:1px solid #DDDCC8;}
 div.sideblock .header {position: relative;}
 div.sideblock .header .commands {position: absolute; right: 9px; top: 9px;}
-
+div.sideblock #series { width: 200px; }
 
 #sidebar ul,#sidebar ul ol {margin:0;padding:0;}
 #sidebar ul li {list-style-type:none;list-style-image:none;}
@@ -257,7 +257,8 @@ div#content {
 }
 #layout-table.format-page #middle-column div.sideblock,
 body.blocks-contact_form #content,
-body.user #content, div.block-config form {
+body.user #content, div.block-config form,
+div.heightcontainer {
     border:1px solid #edecd8;
     background-color: #dddcc8;
     background-image:  url('images/post_top.jpg');
@@ -404,3 +405,4 @@ table.pageeditingtable {
 table.pageeditingtable .c0 {
     width: 100%;
 }
+

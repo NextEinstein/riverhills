@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-$THEME->sheets = array('styles', 'calendar');
+$THEME->sheets = array('styles', 'calendar', 'jqueryui');
 
 /// This variable is an array containing the names of all the 
 /// stylesheet files you want included in this theme, and in what order

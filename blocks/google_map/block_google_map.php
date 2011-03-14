@@ -38,8 +38,8 @@ class block_google_map extends block_base {
         $uniqueid = 'google-map-'.$this->instance->id;
 
         $settings = new stdClass();
-        $settings->mapcenter = $this->config->center;
-        $settings->zoom = $this->config->zoom;
+        $settings->mapcenter = !empty($this->config->center) ? $this->config->center : 0;
+        $settings->zoom = !empty($this->config->zoom) ? $this->config->zoom : 9;
         $settings->mapCanvasId = $uniqueid;
 
         $markersarray = array();
@@ -53,9 +53,25 @@ class block_google_map extends block_base {
         }
         $settings->markers = $markersarray;
 
+        if (!empty($this->config->polypoints)) {
+            $settings->polygons = array();
+            foreach ($this->config->polypoints as $key => $latlng) {
+                $polygon = new stdClass();
+                $polygon->latlng =          !empty($this->config->polypoints[$key])         ? $this->config->polypoints[$key]       : '';
+                $polygon->hex =             !empty($this->config->polyhex[$key])            ? $this->config->polyhex[$key]          : '';
+                $polygon->fillopacity =     !empty($this->config->polyfillopacity[$key])    ? $this->config->polyfillopacity[$key]  : 0;
+                $polygon->strokeopacity =   !empty($this->config->polylineopacity[$key])    ? $this->config->polylineopacity[$key]  : 0;
+
+                $settings->polygons[] = (array)$polygon;
+            }
+        }
+
         $settings = json_encode($settings);
 
-        $content = "<div class=\"google-map\" id=\"{$uniqueid}\" style=\"width: {$this->config->width}px; height: {$this->config->height}px;\"></div>";
+        $width = !empty($this->config->width) ? $this->config->width : 200;
+        $height = !empty($this->config->height) ? $this->config->height: 200;
+
+        $content = "<div class=\"google-map\" id=\"{$uniqueid}\" style=\"width: {$width}px; height: {$height}px;\"></div>";
         $content .= "<script type=\"text/javascript\">
                         jQuery(document).ready(function () {
                             googlemap.initialize({$settings});
