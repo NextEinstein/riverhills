@@ -19,113 +19,15 @@
 <!--<style type="text/css">/*<![CDATA[*/ body{behavior:url(<?php echo $CFG->httpswwwroot ?>/lib/csshover.htc);} /*]]>*/</style>-->
 
 <!-- jquery files  -->
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-1.5.1.min.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery-ui-1.8.10.custom.min.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/jquery.thickbox.min.js"></script>
-<script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/mColorPicker.min.js"></script>
+<!--
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/javascript-static.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/javascript-mod.php"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/overlib/overlib.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/overlib/overlib_cssstyle.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/cookies.js"></script>
 <script type="text/javascript" src="<?php echo $CFG->httpswwwroot ?>/lib/ufo.js"></script>
-
-<script type="text/javascript">
-
-/** the following is for the jsddm version of drop down menu **/
-var timeout    = 500;
-var closetimer = 0;
-var ddmenuitem = 0;
-
-function jsddm_open()
-{  jsddm_canceltimer();
-   jsddm_close();
-   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
-
-function jsddm_close()
-{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
-
-function jsddm_timer()
-{  closetimer = window.setTimeout(jsddm_close, timeout);}
-
-function jsddm_canceltimer()
-{  if(closetimer)
-   {  window.clearTimeout(closetimer);
-      closetimer = null;}}
-
-$(document).ready(function()
-{  $('#jsddm > li').bind('mouseover', jsddm_open)
-   $('#jsddm > li').bind('mouseout',  jsddm_timer)});
-
-document.onclick = jsddm_close;
-/** End jsddm version of drop down **/
-
-
-function linkIsImage(link) {
-    return /(.*?)\.(jpg|jpeg|png|gif)$/.test(link);
-}
-
-jQuery(document).ready(function () {
-	jQuery('ul.activity-list div.plus-minus').click().toggle(function () {
-		jQuery(this).parent().children('ul').toggle(300);
-		jQuery(this).css({'background-image' : 'url(pix/t/switch_minus.gif)'});
-	},
-	function () {
-		jQuery(this).parent().children('ul').toggle(300);
-		jQuery(this).css({'background-image' : 'url(pix/t/switch_plus.gif)'});
-	});
-    jQuery('.my-message-box').click(function () {
-        var linkelement = jQuery(this);
-        var dialogbox = null;
-
-        if (linkIsImage(linkelement.attr('href'))) {
-            dialogbox = jQuery('<div style="text-align: center"><img src="'+linkelement.attr('href')+'"></div>')
-                .dialog({
-                    modal: true,
-                    autoOpen: false,
-                    title: linkelement.attr('title'),
-                    width: 575,
-                    height: 400
-                });
-        } else {
-            if (jQuery(linkelement.attr('rel'))) {
-                displayregion = linkelement.attr('rel');
-            }
-            mywidth = 575;
-            if (jQuery(linkelement).attr('x')) {
-                mywidth = jQuery(linkelement).attr('x');
-                if (mywidth.search(/\%/) != -1) {       // this is a work in progress
-                    mywidth = window.innerWidth * mywidth.replace(/\%/, '') / 100;
-                    console.log(mywidth);
-                }
-            }
-            mywidth = 400;
-            if (jQuery(linkelement).attr('y')) {
-                myheight = jQuery(linkelement).attr('x');
-                if (myheight.search(/\%/) != -1) {  // this is a work in progress
-                    myheight = window.innerHeight * myheight.replace(/\%/, '') / 100;
-                    console.log(myheight);
-                }
-            }
-
-            dialogbox = jQuery('<div></div>')
-                .load(linkelement.attr('href') + ' #content')
-                .dialog({
-                    modal: true,
-                    autoOpen: false,
-                    title: linkelement.attr('title'),
-                    width: mywidth,
-                    height: myheight
-            });
-        }
-        dialogbox.dialog('open');
-
-        return false;
-    });
-});
-</script>
+-->
 
 
 <script type="text/javascript" defer="defer">

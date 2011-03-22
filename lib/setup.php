@@ -1,4 +1,10 @@
 <?php
+
+global $nosetup;
+
+if ($nosetup) {
+    return;
+}
 /**
  * setup.php - Sets up sessions, connects to databases and so on
  *
@@ -783,6 +789,8 @@ global $HTTPSPAGEREQUIRED;
     require_once($CFG->libdir.'/mobilebrowser.php');
     $CFG->mobiledevice = mobile_device_detect();
 
+    $nothing = 'nothing';
+    events_trigger('after-setup', $nothing);
 /// note: we can not block non utf-8 installatrions here, because empty mysql database
 /// might be converted to utf-8 in admin/index.php during installation
 ?>
