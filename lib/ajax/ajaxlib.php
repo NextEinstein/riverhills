@@ -69,8 +69,14 @@ function ajax_get_lib($libname) {
         $libpath = $libname;
     }
 
-    $testpath = str_replace($wwwroot, $CFG->dirroot, $libpath);
-    if (!file_exists($testpath)) {
+    // query strings break file_exists so remove it
+    $url = new moodle_url($libpath);
+    $modifiedlibpath = $url->out(true);
+
+    $testpath = str_replace($wwwroot, $CFG->dirroot, $modifiedlibpath);
+    if (stripos($libpath, $CFG->wwwroot) === false && stripos($libpath, $CFG->dirroot) === false) {
+        // offsite so just link it
+    } elseif (!file_exists($testpath)) {
         error('require_js: '.$libpath.' - file not found.');
     }
 

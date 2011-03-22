@@ -1,4 +1,10 @@
 <?php
+
+global $nosetup;
+
+if ($nosetup) {
+    return;
+}
 /**
  * setup.php - Sets up sessions, connects to databases and so on
  *
@@ -778,6 +784,8 @@ global $HTTPSPAGEREQUIRED;
         }
     }
 
+    $nothing = 'nothing';
+    events_trigger('after-setup', $nothing);
 /// note: we can not block non utf-8 installatrions here, because empty mysql database
 /// might be converted to utf-8 in admin/index.php during installation
 ?>

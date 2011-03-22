@@ -7,6 +7,9 @@
 
     include('../config.php');
 
+    $nothing = 'nothing';
+    events_trigger('starting-javascript-mod', $nothing);
+
     $output = "// Javascript from Moodle modules\n";
 
     if ($mods = get_list_of_plugins('mod')) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/memorization/db" VERSION="2010070400" COMMENT="XMLDB file for Moodle mod/memorization"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="mo_cache_versions" COMMENT="table of ">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="source"/>
+            <FIELD NAME="source" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="version" />
+            <FIELD NAME="version" TYPE="char" LENGTH="64" NOTNULL="true" SEQUECE="false" ENUM="false" PREVIOUS="source" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+        </KEYS>
+        <INDEXES>
+            <INDEX NAME="source" UNIQUE="true" FIELDS="source"/>
+        </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

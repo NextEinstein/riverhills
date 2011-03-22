@@ -3220,11 +3220,13 @@ function style_sheet_setup($lastmodified=0, $lifetime=300, $themename='', $force
     // Fix for IE6 caching - we don't want the filemtime('styles.php'), instead use now.
     $lastmodified = time();
 
-    header('Last-Modified: ' . gmdate("D, d M Y H:i:s", $lastmodified) . ' GMT');
-    header('Expires: ' . gmdate("D, d M Y H:i:s", time() + $lifetime) . ' GMT');
-    header('Cache-Control: max-age='. $lifetime);
-    header('Pragma: ');
-    header('Content-type: text/css');  // Correct MIME type
+    if (!defined('MO_CRON')) {
+        header('Last-Modified: ' . gmdate("D, d M Y H:i:s", $lastmodified) . ' GMT');
+        header('Expires: ' . gmdate("D, d M Y H:i:s", time() + $lifetime) . ' GMT');
+        header('Cache-Control: max-age='. $lifetime);
+        header('Pragma: ');
+        header('Content-type: text/css');  // Correct MIME type
+    }
 
     $DEFAULT_SHEET_LIST = array('styles_layout', 'styles_fonts', 'styles_color');
 
@@ -3359,7 +3361,11 @@ function style_sheet_setup($lastmodified=0, $lifetime=300, $themename='', $force
             if (empty($CFG->CSSEdit) && empty($THEME->CSSEdit)) {
                 foreach ($files as $file) {
                     echo '/***** '.$file[1].' start *****/'."\n\n";
-                    @include_once($file[0].'/'.$file[1]);
+                    if (!defined('MO_CRON')) {
+                        @include_once($file[0].'/'.$file[1]);
+                    } else {
+                        @include($file[0].'/'.$file[1]);
+                    }
                     echo '/***** '.$file[1].' end *****/'."\n\n";
                 }
             } else {
@@ -3368,7 +3374,11 @@ function style_sheet_setup($lastmodified=0, $lifetime=300, $themename='', $force
                     if (strstr($file[1], '.css') !== FALSE) {
                         echo '@import url("'.$CFG->themewww.'/'.$file[1].'");'."\n\n";
                     } else {
-                        @include_once($file[0].'/'.$file[1]);
+                        if (!defined('MO_CRON')) {
+                            @include_once($file[0].'/'.$file[1]);
+                        } else {
+                            @include($file[0].'/'.$file[1]);
+                        }
                     }
                     echo '/* @end */'."\n\n";
                 }
@@ -3472,6 +3482,9 @@ function theme_setup($theme = '', $params=NULL) {
         $CFG->stylesheets[] = $CFG->themewww.'/standard/rtl.css'.$paramstring;
         $CFG->stylesheets[] = $CFG->themewww.'/'.$theme.'/rtl.css'.$paramstring;
     }
+
+    $nothing = 'nothing';
+    events_trigger('stylesheets_setup', $nothing);
 }
 
 
