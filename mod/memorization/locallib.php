@@ -10,7 +10,7 @@ function memorization_method_id_filename_mapping_array() {
     return $mapping;
 }
 
-function memorization_print_method_view($methodid, $userid) {
+function memorization_print_method_view($methodid, $userid, $cmid) {
     $methodsmapping = memorization_method_id_filename_mapping_array();
 
     if (empty($methodsmapping[$methodid])) {
@@ -31,10 +31,12 @@ function memorization_print_method_view($methodid, $userid) {
         return false;
     }
 
-    return $methodprintfunction($userid);
+    return $methodprintfunction($userid, $cmid);
 }
 
 function memorization_print_new_verse_box() {
+    global $CFG, $USER;
+
     print_box_start('add-verse-box generalbox box');
     print_heading(get_string('newverse', 'memorization'));
 
@@ -66,8 +68,12 @@ function memorization_print_new_verse_box() {
 
     if (!empty($versions)) {
         $versionselect = '<select name="versionid">';
+
+        $lastversionid = get_field_sql("SELECT versionid FROM {$CFG->prefix}memorization_verse WHERE userid={$USER->id} ORDER BY id DESC");
+
         foreach ($versions as $versionid => $version) {
-            $versionselect .= '<option value="'.$versionid.'">'.$version->value.'</option>';
+            $selected = $versionid == $lastversionid ? ' SELECTED="selected" ' : '';
+            $versionselect .= '<option '.$selected.' value="'.$versionid.'">'.$version->value.'</option>';
         }
         $versionselect .= '</select>';
     }

@@ -18,7 +18,7 @@ define('MEMORIZATION_VERSE_MONTH_UPPER', 161);
 define('MEMORIZATION_VERSE_LIFE_LOWER', MEMORIZATION_VERSE_MONTH_UPPER);
 define('MEMORIZATION_VERSE_LIFE_UPPER', 201);
 
-function memorization_print_view_method7week($userid) {
+function memorization_print_view_method7week($userid, $cmid) {
     global $CFG;
 
     $currenttab = optional_param('currenttab', 'day', PARAM_ALPHA);
@@ -57,7 +57,7 @@ function memorization_print_view_method7week($userid) {
     }
 
     /// Prints out tabs
-    $page = new moodle_url('view.php', array('userid' => $userid));
+    $page = new moodle_url('view.php', array('userid' => $userid, 'id' => $cmid));
 
     $toprow = array();
     $toprow[] = new tabobject('day', $page->out(false, array('currenttab' => 'day')),
@@ -93,7 +93,7 @@ function memorization_print_view_method7week($userid) {
         $row = array();
 
         // add the verse reference
-        $versecell = '<span class="verse-cell"><a class="thickbox" href="ajaxversedisplay.php?verseid='.$verse->id.'&userid='.$userid.'&sesskey='.sesskey().'"> <img class="hint-icon" src="'.$CFG->wwwroot.'/mod/memorization/pix/bulb.png"/></a>';
+        $versecell = '<span class="verse-cell"><a title="'.htmlspecialchars(_get_verse_text($verse)).'" class="my-message-box" href="ajaxversedisplay.php?verseid='.$verse->id.'&userid='.$userid.'&sesskey='.sesskey().'"> <img class="hint-icon" src="'.$CFG->wwwroot.'/mod/memorization/pix/bulb.png"/></a>';
         $versecell .= _get_verse_text($verse);
         $versecell .= '</span>';
 
@@ -125,15 +125,24 @@ function memorization_print_view_method7week($userid) {
 
             $checked = $x <= $verse->repetitions ? ' checked="checked" ' : '';
 
-            // add 7 and 14 boxes wrappers
-            $checkboxcell .= $counter % 14 == 1 ? '<div class="box-14-wrapper">' : '';
-            $checkboxcell .= $counter % 7 == 1 ? '<div class="box-7-wrapper">' : '';
+            // add some wrappers for styling purposes
+            if ($currenttab == 'month') {
+                $checkboxcell .= $counter % 12 == 1 ? '<div class="box-12-wrapper">' : '';
+                $checkboxcell .= $counter % 6 == 1 ? '<div class="box-6-wrapper">' : '';
+            } else {
+                $checkboxcell .= $counter % 14 == 1 ? '<div class="box-14-wrapper">' : '';
+                $checkboxcell .= $counter % 7 == 1 ? '<div class="box-7-wrapper">' : '';
+            }
 
             $checkboxcell .= '<input '.$checked.' type="checkbox" class="'.$class.' repetition-box" id="'.$verse->id.'-'.$x.'" value="'.$x.'">';
 
-            // end 14 box wrapper
-            $checkboxcell .= $counter % 7 == 0 ? '</div>' : '';
-            $checkboxcell .= $counter % 14 == 0 ? '</div>' : '';
+            if ($currenttab == 'month') {
+                $checkboxcell .= $counter % 6 == 0 ? '</div>' : '';
+                $checkboxcell .= $counter % 12 == 0 ? '</div>' : '';
+            } else {
+                $checkboxcell .= $counter % 7 == 0 ? '</div>' : '';
+                $checkboxcell .= $counter % 14 == 0 ? '</div>' : '';
+            }
         }
 
         // catch any that didn't end with a end span
@@ -154,7 +163,7 @@ function memorization_print_view_method7week($userid) {
         $movecell .= $currenttab != 'week'  ? '<span class="week" ><a href="'.$page->out(false, array('currenttab' => 'week')) .'" class="move-verse-link" id="move-verse-'.$verse->id.'-'.MEMORIZATION_VERSE_WEEK_LOWER.'">'.get_string('moveweek', 'memorization').'</a></span>'    : '';
         $movecell .= $currenttab != 'month' ? '<span class="month"><a href="'.$page->out(false, array('currenttab' => 'month')).'" class="move-verse-link" id="move-verse-'.$verse->id.'-'.MEMORIZATION_VERSE_MONTH_LOWER.'">'.get_string('movemonth', 'memorization').'</a></span>'  : '';
         $movecell .= $currenttab != 'year'  ? '<span class="life" ><a href="'.$page->out(false, array('currenttab' => 'life')) .'" class="move-verse-link" id="move-verse-'.$verse->id.'-'.MEMORIZATION_VERSE_LIFE_LOWER.'">'.get_string('movelife', 'memorization').'</a></span>'    : '';
-        $deleteurl = new moodle_url('deleteverse.php', array('userid' => $userid, 'verseid' => $verse->id, 'currenttab' => $currenttab));
+        $deleteurl = new moodle_url('deleteverse.php', array('userid' => $userid, 'verseid' => $verse->id, 'currenttab' => $currenttab, 'id' => $cmid));
         $movecell .= "<span class=\"delete\"><a href=\"{$deleteurl->out_action()}\"><img src=\"{$CFG->pixpath}/i/cross_red_big.gif\" /></a></span>";
         $movecell .= '</span>';
 
@@ -193,7 +202,7 @@ function memorization_print_view_method7week($userid) {
                        url: "ajaxupdateverserepetition.php",
                        data: "sesskey='.sesskey().'&userid='.$userid.'&verseid="+verseid+"&newrepetition="+newrepetition,
                        success: function(msg){
-                         jQuery("#progressbar-"+verseid).progressbar({ value : ((newrepetition / '.MEMORIZATION_COMPLETE.') * 100) });
+                         $("#progressbar-"+verseid).progressBar(((newrepetition / '.MEMORIZATION_COMPLETE.') * 100), {showText: false, barImage: "images/progressbg_green.gif"});
                        }
                      });
                 }';
@@ -201,7 +210,7 @@ function memorization_print_view_method7week($userid) {
                 // this is for the last checkbox click
                 if (!empty($verseidprogressmap)) {
                     foreach ($verseidprogressmap as $verseid => $progress) {
-                        echo 'jQuery("#progressbar-'.$verseid.'").progressbar({ value:'.($progress+1).' });
+                        echo '$("#progressbar-'.$verseid.'").progressBar('.($progress+1).');
 
                         // this will fade the verse onto the next page when last checkbox clicked
                         jQuery("#'.$verseid.'-'.$repetitionsupper.'").change(function () {
@@ -387,7 +396,7 @@ function _get_verse_text($verserecord) {
     if ($books === false) {
         $biblebooks = biblebooks_array();
     }
- 
+
     $versetxt = "{$biblebooks[$verserecord->startbookid]} <span class=\"break-scripturizer\">{$verserecord->startchapter}:{$verserecord->startverse}</span>";
 
     if (empty($verserecord->endchapter) || empty($verserecord->endverse)) {

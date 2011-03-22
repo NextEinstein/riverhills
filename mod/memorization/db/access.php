@@ -31,6 +31,14 @@
 // For the core capabilities, the variable is $moodle_capabilities.
 
 
-$mod_memorization_capabilities = array();
+$mod_memorization_capabilities = array(
+    'mod/memorization:viewothersverses' => array(
 
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'legacy' => array(
+            'admin' => CAP_ALLOW
+        )
+    ),
+);
 ?>

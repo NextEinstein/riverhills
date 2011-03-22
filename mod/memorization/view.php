@@ -7,12 +7,23 @@ global $USER, $COURSE;
 
 $userid             = optional_param('userid', $USER->id, PARAM_INT);
 $printing           = optional_param('printing');
+$cmid               = optional_param('id', false, PARAM_INT);
 
 if (! $user = get_record('user', 'id', $userid)) {
     error('Could not find the correct user');
 }
 
-require_login($COURSE->id);
+$ctx = !empty($cmid) ? get_context_instance(CONTEXT_MODULE, $cmid) : false;
+
+if (empty($ctx)) {
+    error('There was a problem while trying to initiate this module. Please contact us to let us know about it so we can fix it.');
+}
+
+if ($USER->id != $userid && !has_capability('mod/memorization:viewothersverses', $ctx)) {
+    error('You do not have access to view someone elses memorization verses.');
+}
+
+require_login($COURSE);
 
 // Print headers
 $navlinks[] = array('name' => get_string('memorizationtitle', 'memorization'), 'link' => "view.php?", 'type' => 'activityinstance');
@@ -45,7 +56,7 @@ if ($userpref === false) {
     }
 }
 
-if (!memorization_print_method_view($userpref->methodid, $userid)) {
+if (!memorization_print_method_view($userpref->methodid, $userid, $cmid)) {
     error('There was an error while generating the view for the scripture memorization module. Please Contact the system administrator');
 }
 
