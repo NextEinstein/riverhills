@@ -8,12 +8,12 @@ Tags: church, doves, crosses, two columns, widgets
 */
 
 /* -----BODY, CONTAINER, and PAGE STUFF----- */
-html {background:  url('images/html_tile.jpg');}
+html {background-color: #271e0d;}
 body {font-family: 'Lucida Grande', 'Verdana', 'Arial', Sans-Serif;color:#261D0C; margin: 0;padding:0;}
 #headerContainer {background-repeat: repeat-x; background-position: top left; width:100%; height:156px;  margin: 0;padding:0;}
-#pageContainer {background:  url('images/tile.jpg'); margin: 0; padding: 0; width:100%;}
+#pageContainer {background-color: #c0bca1; margin: 0; padding: 0; width:100%;}
 #content {text-align:left;width:960px;margin:0 auto; padding:0;}
-#footerContainer {background:  url('images/footer_tile.jpg') repeat-x top; width:100%; height:133px; margin: 0;padding:0;}
+#footerContainer {background:  url('../../theme/rhcc2/images/footer_tile.jpg') repeat-x top; width:100%; height:133px; margin: 0;padding:0;}
 
 /* ----TOOL TIP STYLE----- */
 .itooltip{position:absolute; display:none;background:#fff; padding: 7px;font-size: 12px; letter-spacing: 0px; color: #000;-moz-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px;}
@@ -48,7 +48,7 @@ div.navbutton .singlebutton {display: inline;}
 #header .pagenav {padding-top:12px; height:30px;}
 .pagenav a {display:block; padding:7px 10px; color:#ebe7de; -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px; font-weight:bold;}
 .pagenav li {-moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px;}
-.pagenav a:hover {background: #6a3b14 url('images/buttonback.jpg') repeat-x center; text-decoration:none; border:1px solid #6a3b14; padding:6px 9px;}
+.pagenav a:hover {background: #6a3b14 url('../../theme/rhcc2/images/buttonback.jpg') repeat-x center; text-decoration:none; border:1px solid #6a3b14; padding:6px 9px;}
 #dropmenu {margin:0; padding:0; list-style-type:none; list-style-position:outside; position:relative; line-height:1.5em; z-index:9999;  font-weight:bold;}
 #dropmenu li {float:left; position:relative; margin:0 5px 0 0; font-size:12px; font-family:verdana,sans-serif; text-transform: uppercase;}
 #dropmenu li ul {margin:0; padding:0; list-style-type:none; list-style-position:outside; line-height:1.5em; z-index:300;  position:absolute; display:none; width:200px; top:29px; left:0; background: #6a3b14; border:10px solid #6a3b14;  -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px;}
@@ -58,7 +58,7 @@ div.navbutton .singlebutton {display: inline;}
 #dropmenu li ul li ul {top:-10px; left:200px; margin:0;}
 #dropmenu li:hover ul ul, #dropmenu li:hover ul ul ul, #dropmenu li:hover ul ul ul ul {display:none;}
 #dropmenu li:hover ul, #dropmenu li li:hover ul, #dropmenu li li li:hover ul, #dropmenu li li li li:hover ul {display:block;background: #6a3b14;}
-#header .pagenav .current_page_item a, #header .pagenav .current-cat a, #header .pagenav .current_page_parent a {background: #6a3b14 url('images/buttonback.jpg') repeat-x center; border:1px solid #6a3b14; padding:6px 9px;}
+#header .pagenav .current_page_item a, #header .pagenav .current-cat a, #header .pagenav .current_page_parent a {background: #6a3b14 url('../../theme/rhcc2/images/buttonback.jpg') repeat-x center; border:1px solid #6a3b14; padding:6px 9px;}
 #header .pagenav .current_page_item ul li a, #header .pagenav .current-cat ul li a, #header .pagenav .current_page_parent ul li a {background: #6a3b14; border-top:1px solid #834e23; border-bottom:1px solid #532f11;}
 #header .pagenav .current_page_item ul li a:hover, #header .pagenav .current-cat ul li a:hover, #header .pagenav .current_page_parent ul li a:hover {background: #46270e;}
 
@@ -86,7 +86,7 @@ span#nextBtn a:visited {
 	position: absolute;
 	font-size:12px;
 	padding:8px 15px;
-	background: #6a3b14 url('images/buttonback.jpg') repeat-x center;
+	background: #6a3b14 url('../../theme/rhcc2/images/buttonback.jpg') repeat-x center;
 	line-height:20px;
 	color:#fff;
 	font-weight:bold;
@@ -94,13 +94,13 @@ span#nextBtn a:visited {
 }
 span#prevBtn a {bottom:0px; left:0px; border-right:1px solid #89642D;}
 span#nextBtn a {bottom:0px; right:0px;  border-left:1px solid #89642D;}
-span#prevBtn a:hover, span#nextBtn a:hover {text-decoration: none; background: #6a3b14 url('images/buttonback.jpg') repeat-x top;}
-span#prevBtn a:active, span#nextBtn a:active {background: #6a3b14 url('images/buttonback.jpg') repeat-x bottom;}
+span#prevBtn a:hover, span#nextBtn a:hover {text-decoration: none; background: #6a3b14 url('../../theme/rhcc2/images/buttonback.jpg') repeat-x top;}
+span#prevBtn a:active, span#nextBtn a:active {background: #6a3b14 url('../../theme/rhcc2/images/buttonback.jpg') repeat-x bottom;}
 
 /* -----POST STUFF----- */
 .narrowcolumn {float:left; display:inline; width:650px; padding:0; font-size:1.2em; margin:0;}
-.post_container {margin:0 0 30px; background:  url('images/post_tile.jpg');border:1px solid #9c9a88;}
-.post {padding: 30px 42px; background:  url('images/post_top.jpg') repeat-x; border:1px solid #edecd8;}
+.post_container {margin:0 0 30px; background-color: #dddcc8; border:1px solid #9c9a88;}
+.post {padding: 30px 42px; background:  url('../../theme/rhcc2/images/post_top.jpg') repeat-x; border:1px solid #edecd8;}
 .postListing {margin-top:20px;}
 .post hr {display:block;}
 h2.pageTitle {font-size:2em;}
@@ -110,16 +110,16 @@ h2.pageTitle {font-size:2em;}
 .entry li.pagenav {list-style: none;}
 .entry ul li {padding-bottom: 10px;}
 small {font-family:Arial, Helvetica, Sans-Serif; font-size:.9em; line-height:1.5em;}
-.buttons a {font-size:10px; padding:5px 15px; background:  #6a3b14  url('images/buttonback.jpg') repeat-x center;  -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px; line-height:20px; color:#ebe7de; border:1px solid #522a0d;}
+.buttons a {font-size:10px; padding:5px 15px; background:  #6a3b14  url('../../theme/rhcc2/images/buttonback.jpg') repeat-x center;  -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px; line-height:20px; color:#ebe7de; border:1px solid #522a0d;}
 .buttons a:hover {background: #805425; color: #ebe7de; text-decoration: none;}
 .share span {margin-right: 15px;}
 .breadcrumb {text-transform:uppercase;}
-.calendarPost {background:  url(images/calendar.jpg) no-repeat top left; width: 50px; float:left; text-align: center; margin:0 8px 0 0; }
+.calendarPost {background:  url(../../theme/rhcc2/images/calendar.jpg) no-repeat top left; width: 50px; float:left; text-align: center; margin:0 8px 0 0; }
 .calendarPost .month {font-size: 10px; font-weight:bold; color:#fff; padding:4px 0 0;}
 .calendarPost .day {font-size: 14px; font-weight:bold; color:#000; padding:8px 5px;}
 blockquote {padding-left:20px;margin:15px 30px 0 10px;}
 blockquote cite {display:block;margin:5px 0 0;}
-.subStuff {margin:0; padding:0;line-height:1.7em;list-style:inside; list-style-image:url(images/bullet.jpg); }
+.subStuff {margin:0; padding:0;line-height:1.7em;list-style:inside; list-style-image:url(../../theme/rhcc2/images/bullet.jpg); }
 
 /* ------HOME PAGE POST STUFF--------- */
 .homePost {width:253px;}
@@ -129,7 +129,7 @@ blockquote cite {display:block;margin:5px 0 0;}
 
 /* -----SIDEBLOCK STUFF----- */
 #right-column div.sideblock,
-#left-column div.sideblock{font:1em 'Lucida Grande', Verdana, Arial, Sans-Serif; width: 250px; background:  url('images/post_tile.jpg'); border:1px solid #9c9a88; border-bottom: none; margin-bottom: 0px}
+#left-column div.sideblock{font:1em 'Lucida Grande', Verdana, Arial, Sans-Serif; width: 250px; background-color: #dddcc8; border:1px solid #9c9a88; border-bottom: none; margin-bottom: 0px}
 #right-column div.ft,
 span.skip-block-to,div.ft{display: none;}
 #right-column div.sideblock .header,
@@ -138,7 +138,7 @@ span.skip-block-to,div.ft{display: none;}
 #right-column div.sideblock .content,
 #left-column div.sideblock .content {display: none; padding:15px; padding-top: 8px; border-bottom:1px solid #a6a38c; background-color: transparent;}
 #right-column div.sideblock .header h2,
-#left-column div.sideblock .header h2{padding:10px 15px; font-size: 14px; background:  url('images/post_top.jpg') repeat-x; border:1px solid #dad8c3; border-bottom:1px solid #9c9a88; border-top:1px solid #DDDCC8;}
+#left-column div.sideblock .header h2{padding:10px 15px; font-size: 14px; background:  url('../../theme/rhcc2/images/post_top.jpg') repeat-x; border:1px solid #dad8c3; border-bottom:1px solid #9c9a88; border-top:1px solid #DDDCC8;}
 div.sideblock .header {position: relative;}
 div.sideblock .header .commands {position: absolute; right: 9px; top: 9px;}
 div.sideblock #series { width: 200px; }
@@ -149,7 +149,7 @@ div.sideblock #series { width: 200px; }
 ol li,#sidebar ul ol li {list-style:decimal outside;}
 #sidebar ul ul li,#sidebar ul ol li {margin:3px 0 0;padding:0;}
 #sidebar form {margin:0;}
-#sidebar ul li ul li, #sidebar ul li ol li {line-height:1.7em;list-style:inside; list-style-image:url(images/bullet.jpg); }
+#sidebar ul li ul li, #sidebar ul li ol li {line-height:1.7em;list-style:inside; list-style-image:url(../../theme/rhcc2/images/bullet.jpg); }
 #sidebar ul li ul li ul li, #sidebar ul li ol li ol li {margin-left:40px; font-size:11px; list-style:outside;}
 
 /* -----COMMENT STUFF----- */
@@ -163,7 +163,7 @@ ol li,#sidebar ul ol li {list-style:decimal outside;}
 #commentform input {width:170px;margin:5px 5px 1px 0; background:#fff; }
 #commentform input,#commentform textarea {padding: 5px; border:1px solid #a6a38c;}
 #commentform textarea {width:99%; background:#fff;}
-#commentform #submit {cursor:pointer; font-size:10px; padding:3px 0px; background:  #6a3b14  url('images/buttonback.jpg') repeat-x center;  -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px; line-height:20px; color:#ebe7de; border:1px solid #522a0d;}
+#commentform #submit {cursor:pointer; font-size:10px; padding:3px 0px; background:  #6a3b14  url('../../theme/rhcc2/images/buttonback.jpg') repeat-x center;  -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px; line-height:20px; color:#ebe7de; border:1px solid #522a0d;}
 #commentform #submit:hover {background:  #805425; color: #ebe7de; text-decoration: none;}
 .commentlist {text-align:justify;padding:0;}
 .nocomments {text-align:center;margin:0;padding:0;}
@@ -204,7 +204,7 @@ p.clear {height:1px; width:1px; margin:0; padding:0;}
 #wp-calendar td.pad:hover {background-color:#fff;}
 
 /* -----FOOTER STUFF----- */
-#footer {background:  url('images/footer.jpg') no-repeat top; width:960px; height:200px;  margin:0 auto; text-align:left; padding:0;}
+#footer {background:  url('../../theme/rhcc2/images/footer.jpg') no-repeat top; width:960px; height:200px;  margin:0 auto; text-align:left; padding:0;}
 #footer a {color:#615C50;}
 #footer #socialMedia {width:200px; float:right; padding:70px 0 0; text-align:right;}
 #footer #socialMedia a {padding-right:5px;}
@@ -261,7 +261,7 @@ body.user #content, div.block-config form,
 div.heightcontainer {
     border:1px solid #edecd8;
     background-color: #dddcc8;
-    background-image:  url('images/post_top.jpg');
+    background-image:  url('../../theme/rhcc2/images/post_top.jpg');
     background-repeat: repeat-x;
     margin-bottom: 0;
 }
@@ -292,7 +292,7 @@ div.contactwelcome div.inside {
     margin: 0px;
     padding: 15px;
     background-color: #dddcc8;
-    background-image:  url('images/post_top.jpg');
+    background-image:  url('../../theme/rhcc2/images/post_top.jpg');
     background-repeat: repeat-x;
 }
 
@@ -311,6 +311,10 @@ div.sideblock.hidden {
 div.tabtree ul, div.tabtree ul li, div.tabtree ul li a, div.tabtree ul li span,
 div.tabtree ul:hover, div.tabtree ul li:hover, div.tabtree ul li a:hover, div.tabtree ul li span:hover {
     background-image: none !important;
+}
+
+div.tabtree * {
+    background-image: none;
 }
 
 div.tabtree ul.tabrow0 > li {
@@ -372,7 +376,7 @@ input[type="submit"]:hover, input[type="button"]:hover {
 
 div.mod-pagemenu ul.menutree ul, div.special-bullet ul, ul.special-bullet {padding-left: 0px !important; line-height: 1.22em;}
 div.mod-pagemenu ul.menutree, div.special-bullet > ul, ul.special-bullet {padding: 0;}
-div.mod-pagemenu ul.menutree li, div.special-bullet ul li, ul.special-bullet li {display: block; padding: 0px !important; padding-left: 20px !important; background-image: url(images/bullet.jpg); background-repeat: no-repeat;}
+div.mod-pagemenu ul.menutree li, div.special-bullet ul li, ul.special-bullet li {display: block; padding: 0px !important; padding-left: 20px !important; background-image: url(../../theme/rhcc2/images/bullet.jpg); background-repeat: no-repeat;}
 div.special-bullet li, div.mod-pagemenu li a {color: #261D0C;}
 div.mod-pagemenu li.current > a {color: #1f3b46 !important; font-weight: bold;}
 div.mod-pagemenu img.active {display: none;}
