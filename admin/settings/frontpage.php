@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php // $Id: frontpage.php,v 1.8.2.5 2009/01/14 04:47:22 dongsheng Exp $
 
 // This file defines everything related to frontpage
 
@@ -58,6 +58,44 @@ if (get_site()) { //do not use during installation
             }
         }
         $temp->add(new admin_setting_configselect('defaultfrontpageroleid', get_string('frontpagedefaultrole', 'admin'), '', 0, $roleoptions));
+
+/// Michael start patch
+        if (!class_exists('admin_setting_special_pageformatonfrontpage')) {
+            /**
+             * This class modifies the site course's format value
+             * and thus enables the page format for front page
+             * in the theme, backup/restore, patches, etc
+             *
+             **/
+            class admin_setting_special_pageformatonfrontpage extends admin_setting_configcheckbox {
+                function admin_setting_special_pageformatonfrontpage() {
+                    parent::admin_setting_configcheckbox('pageformatonfrontpage', get_string('pageformatonfrontpage', 'format_page'), get_string('pageformatonfrontpagedesc', 'format_page'), 0);
+                }
+
+                function config_read($name) {
+                    $site = get_site();
+
+                    if ($site->format == 'page') {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+
+                function config_write($name, $value) {
+                    if ($value == 1) {
+                        $format = 'page';
+                    } else {
+                        $format = 'site';
+                    }
+                    if (set_field('course', 'format', $format, 'id', SITEID)) {
+                        return parent::config_write($name, $value);
+                    }
+                }
+            } // END class admin_setting_special_pageformatonfrontpage extends admin_setting_configcheckbox
+        }
+            $temp->add(new admin_setting_special_pageformatonfrontpage());
+/// End patch
 
         $ADMIN->add('frontpage', $temp);
 
