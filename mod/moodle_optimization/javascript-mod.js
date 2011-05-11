@@ -7,7 +7,7 @@ $expires = $yearsecs - 1000;
 
 $ifModifiedSince = isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) : 0;
 
-if ($ifModifiedSince && strtotime($ifModifiedSince) < time()) {
+if (false && $ifModifiedSince && strtotime($ifModifiedSince) < time()) {
     header($_SERVER["SERVER_PROTOCOL"].' 304 Not Modified');
     die; // stop processing
 }
@@ -28,17 +28,19 @@ include('../../config.php');
 
 $version = $_GET['version'];
 
-if (file_exists($CFG->dataroot.'/temp/'.MO_CACHED_FILES_BASE_DIR.'/'.$version.'.css')) {
+if (false && file_exists($CFG->dataroot.'/temp/'.MO_CACHED_FILES_BASE_DIR.'/'.$version.'.css')) {
     readfile($CFG->dataroot.'/temp/'.MO_CACHED_FILES_BASE_DIR.'/'.$version.'.css');
     exit;
 }
 
 $nosetup = false;
-include('../../config.php');
+include($CFG->dirroot.'/lib/setup.php');
 
 // Since for some reason we didn't have the cached file we need to generate it using the same
 // function that the cron uses to generate it
 define('MO_FORCE_JAVASCRIPT_MOD', true);
+
+include('lib.php');
 
 $justecho = true;
 moodle_optimization_run_javascript_mod_cron('nothing', $justecho);

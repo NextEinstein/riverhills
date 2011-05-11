@@ -12,7 +12,9 @@ function moodle_optimization_cron() {
 
     $versiontable = get_records('mo_cache_versions', '', '', '', 'source, version');
 
+    mtrace('Starting style sheets');
     moodle_optimization_run_stylesheet_cron($versiontable);
+    mtrace('Starting javascript files');
     moodle_optimization_run_javascript_mod_cron($versiontable);
     
 
@@ -80,19 +82,23 @@ function moodle_optimization_run_stylesheet_cron($versiontable) {
         }
 
     /// now that we've calculated all the style sheets lets generate and cache it if necessary
-        $generatedfile = '';
+        $stylesheetsparsed = array();
         foreach ($CFG->stylesheets as $stylesheet) {
             if (!file_exists($stylesheet)) {
                 mtrace('One of the style sheets could not be found.');
                 continue;
             }
-
             ob_start();
-            echo "\n\n\n/* Including filesheet {$stylesheet} */\n\n";
             include($stylesheet);
-            echo "\n /*done including stylesheet {$stylesheet} */\n\n";
-            $generatedfile .= ob_get_contents();
+            $stylesheetsparsed[$stylesheet] = ob_get_contents();
             ob_end_clean();
+        }
+
+        $generatedfile = '';
+        foreach ($stylesheetsparsed as $stylesheetname => $stylesheetcontents) {
+            $generatedfile .= "\n\n\n/* Including filesheet {$stylesheet} */\n\n";
+            $generatedfile .= $stylesheetcontents;
+            $generatedfile .= "\n /*done including stylesheet {$stylesheet} */\n\n";
         }
 
         $generatedfilehash = md5($generatedfile);
@@ -160,14 +166,38 @@ function moodle_optimization_run_javascript_mod_cron($versiontable, $justecho=fa
            "</script>";
     }
 
-    // finally ask all the modules now that we've added all the things that they may depend on
-    include($CFG->libdir.'/javascript-mod.php');
+    // finally get all modules and blocks
+    if ($mods = get_list_of_plugins('mod')) {
+        foreach ($mods as $mod) {
+            if (is_readable($CFG->dirroot.'/mod/'.$mod.'/javascript.php')) {
+                $modscss = file_get_contents($CFG->dirroot.'/mod/'.$mod.'/javascript.php');
+            }
+        }
+    }
+
+    if ($filters = get_list_of_plugins('filter')) {
+        foreach ($filters as $filter) {
+            if (is_readable($CFG->dirroot.'/filter/'.$filter.'/javascript.php')) {
+                echo file_get_contents($CFG->dirroot.'/filter/'.$filter.'/javascript.php');
+            }
+        }
+    }
+
+    if ($blocks = get_list_of_plugins('blocks')) {
+        foreach ($blocks as $block) {
+            if (is_readable($CFG->dirroot.'/blocks/'.$block.'/javascript.php')) {
+                echo file_get_contents($CFG->dirroot.'/blocks/'.$block.'/javascript.php');
+            }
+        }
+    }
 
     $generatedfile = ob_get_contents();
+
     ob_end_clean();
 
     if ($justecho) {
         echo $generatedfile;
+        exit;
     }
 
 /// Generate a version (hash) and store it

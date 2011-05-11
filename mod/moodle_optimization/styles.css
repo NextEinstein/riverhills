@@ -7,7 +7,7 @@ $expires = $yearsecs - 1000;
 
 $ifModifiedSince = isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) : 0;
 
-if ($ifModifiedSince && strtotime($ifModifiedSince) < time()) {
+if (false && $ifModifiedSince && strtotime($ifModifiedSince) < time()) {
     header($_SERVER["SERVER_PROTOCOL"].' 304 Not Modified');
     die; // stop processing
 }
@@ -34,4 +34,7 @@ if (file_exists($CFG->dataroot.'/temp/'.MO_CACHED_FILES_BASE_DIR.'/'.$version.'.
 }
 
 // Since for some reason we didn't have the cached file we need to generate it
+$nosetup = false;
+include($CFG->dirroot.'/lib/setup.php');
+
 include($CFG->themedir.'/'.current_theme().'/styles.php');

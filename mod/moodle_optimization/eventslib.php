@@ -45,12 +45,7 @@ function moodle_optimization_register_scripts($eventdata) {
 function moodle_optimization_exit_for_old_javascript_mod($eventdata) {
     global $CFG;
 
-    // exit when trying to read the old javascript-mod file since we have cached the results
-    // but only if we are not trying to cache the results (ie running the MO cron)
-    // Ideally you should just comment out the include reference in javascript.php
-    if (!defined('MO_CRON') && !define('MO_FORCE_JAVASCRIPT_MOD')) {
-        exit;
-    }
+    exit;
 
     return true;
 }
