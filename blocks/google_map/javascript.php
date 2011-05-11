@@ -87,7 +87,8 @@ jQuery(document).ready(function () {
             var initPolygonBuilder = function(receiver) {
                 google.maps.event.addListener(map, 'click', function(event) {
                     placeMarkerLatlng(event.latLng);
-                    jQuery(receiver).val(jQuery(receiver).val() + event.latLng.Ba + ',' + event.latLng.Da + ';');
+
+                    jQuery(receiver).val(jQuery(receiver).val() + event.latLng.Ia + ',' + event.latLng.Ja + ';');
                 });
             }
 
