@@ -1,0 +1,23 @@
+ <?php // $Id: block_html.php,v 1.2 2006/11/01 09:44:03 moodler Exp $ 
+       // block_html.php - created with Moodle 1.7 beta + (2006101003)
+
+
+$string['configcontent'] = 'Content';
+$string['configtitle'] = 'Map Title';
+$string['googlemap'] = 'Google Map';
+$string['mapcenter'] = 'Map center';
+$string['mapzoom'] = 'Map zoom';
+
+$string['markerlocation'] = 'Marker address';
+$string['markerhtml'] = 'Marker HTML';
+
+$string['addmarkerlink'] = 'Add another marker';
+$string['dimensions'] = 'Dimensions';
+$string['width'] = 'Width';
+$string['height'] = 'Height';
+$string['px'] = 'px';
+$string['poly'] = 'New Polygon';
+$string['polyhex'] = 'Hex Color';
+$string['polyfillopacity'] = 'Fill Opacity';
+$string['polylineopacity'] = 'Line Opacity';
+$string['polyhelp'] = 'Note: If you enter information for a new polygon, after saving the map you will be taken to an intermediate screen to click on the map and draw the polygon. The map will auto connect the last two points for you.';

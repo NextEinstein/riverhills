@@ -48,6 +48,14 @@ class user_editadvanced_form extends moodleform {
         /// shared fields
         useredit_shared_definition($mform);
 
+        $mform->addElement('header', 'f1integration', get_string('f1integration'));
+
+        $mform->addElement('text', 'f1householdid', get_string('f1householdid'));
+        $mform->setType('f1householdid', PARAM_INT);
+
+        $mform->addElement('text', 'f1individualid', get_string('f1individualid'));
+        $mform->setType('f1individualid', PARAM_INT);
+
         /// Next the customisable profile fields
         profile_definition($mform);
 

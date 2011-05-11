@@ -1,0 +1,72 @@
+<?php require_once($CFG->dirroot.'/course/format/page/lib.php'); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html<?php echo $direction ?>>
+<head>
+    <?php echo $meta ?>
+    <meta name="keywords" content="moodle, <?php echo $title ?> " />
+    <title><?php echo $title ?></title>
+    <link rel="shortcut icon" href="<?php echo $CFG->themewww .'/'. current_theme() ?>/favicon.jpg" />
+    <?php include("$CFG->javascript"); ?>
+	<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+sfHover = function() {
+	var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+	for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+			this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+	}
+}
+if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+//--><!]]></script>
+
+</head>
+
+<body<?php
+    echo " $bodytags";
+    if ($focus) {
+        echo " onload=\"setfocus()\"";
+    }
+    ?>>
+
+<div id="page">
+
+<?php //Accessibility: 'headermain' is now H1, see theme/standard/styles_layout.css: .headermain
+      if ($home) {  // This is what gets printed on the home page only
+?>
+    <?php print_container_start(true, '', 'header-home'); ?>
+        <table class="headertable">
+        <tr>
+        <td class="headermain"><a href="<? echo $CFG->wwwroot ?>"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/pix/banner_left.jpg" /></a></td>
+        <td class="headertitle"></td>
+        <td class="headerefca"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/pix/efca.png"></td>
+        </tr>
+        </table>
+    <?php print_container_end(); ?>
+<?php } else if ($heading) {  // This is what gets printed on any other page with a heading
+?>
+    <?php print_container_start(true, '', 'header'); ?>
+        <table class="headertable">
+        <tr>
+        <td class="headermain"><a href="<? echo $CFG->wwwroot ?>"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/pix/banner_left.jpg" /></a></td>
+        <td class="headertitle"><img src="<?php echo $CFG->themewww.'/'.current_theme().'/pix/banner_words.jpg';?>" /></td>
+        <td class="headerefca"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/pix/efca.png"></td>
+        </tr>
+        </table>
+    <?php print_container_end(); ?>
+<?php } ?>
+
+            <div class="navbar clearfix">
+                <?php 
+                echo '<div id="dropdown-menu">'.page_print_site_page_structure_ul(null, 'dropdown') . '</div>'; ?>
+                <div class="navbutton"><?php //echo $button; ?></div>
+            </div>
+            <?php
+            
+    ?>
+    <!-- END OF HEADER -->
+    <?php print_container_start(false, '', 'content'); ?>

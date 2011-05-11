@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/podcaster/db" VERSION="20070401" COMMENT="XMLDB file for Moodle mod/podcaster"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="podcaster" COMMENT="Podcasts" NEXT="podcaster_channel_element">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Course the podcaster activity belongs to" PREVIOUS="id" NEXT="ismeta" />
+        <FIELD NAME="ismeta" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Wether channel is a meta channel" PREVIOUS="course" NEXT="dirty" />
+        <FIELD NAME="dirty" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Wether rss has been verified after last modification" PREVIOUS="ismeta" NEXT="name" />
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="name field for moodle instances" PREVIOUS="dirty" NEXT="intro" />
+        <FIELD NAME="intro" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="General introduction of the podcaster activity" PREVIOUS="name" NEXT="introformat"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)" PREVIOUS="intro" NEXT="copyright"/>
+        <FIELD NAME="copyright" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Copyright information for channel" PREVIOUS="introformat" NEXT="managingeditor"/>
+        <FIELD NAME="managingeditor" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Person responsible for editorial content" PREVIOUS="copyright" NEXT="webmaster"/>
+        <FIELD NAME="webmaster" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Person responsible for technical issues relating to channel" PREVIOUS="managingeditor" NEXT="category"/>
+        <FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Category of channel" PREVIOUS="webmaster" NEXT="language"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Language of channel" PREVIOUS="category" NEXT="clouddomain"/>
+
+        <FIELD NAME="clouddomain" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="language" NEXT="cloudport"/>
+        <FIELD NAME="cloudport" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="clouddomain" NEXT="cloudpath"/>
+        <FIELD NAME="cloudpath" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="cloudport" NEXT="cloudregisterprocedure"/>
+        <FIELD NAME="cloudregisterprocedure" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="cloudpath" NEXT="cloudprotocol"/>
+        <FIELD NAME="cloudprotocol" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="cloudregisterprocedure" NEXT="ttl"/>
+
+        <FIELD NAME="ttl" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Time to live" PREVIOUS="cloudprotocol" NEXT="image" />
+
+        <FIELD NAME="image" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Channel image" PREVIOUS="ttl" NEXT="imageurl" />
+        <FIELD NAME="imageurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Image url" PREVIOUS="image" NEXT="imagetype" />
+        <FIELD NAME="imagetype" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Image type" PREVIOUS="imageurl" NEXT="imagelength" />
+        <FIELD NAME="imagelength" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Image length" PREVIOUS="imagetype" NEXT="imagewidth" />
+        <FIELD NAME="imagewidth" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Image width" PREVIOUS="imagelength" NEXT="imageheight" />
+        <FIELD NAME="imageheight" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Image height" PREVIOUS="imagewidth" NEXT="rating" />
+        
+        <FIELD NAME="rating" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Copyright information for channel" PREVIOUS="imageheight" NEXT="textinputtitle"/>
+        
+        <FIELD NAME="textinputtitle" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="rating" NEXT="textinputdescription" />
+        <FIELD NAME="textinputdescription" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="textinputtitle" NEXT="textinputname" />
+        <FIELD NAME="textinputname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="textinputdescription" NEXT="textinputlink" />
+        <FIELD NAME="textinputlink" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="textinputname" NEXT="skiphours" />
+        
+        <FIELD NAME="skiphours" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="textinputlink" NEXT="skipdays" />
+        <FIELD NAME="skipdays" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allow channel to register with a cloud" PREVIOUS="skiphours" NEXT="repository" />
+
+        <FIELD NAME="repository" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="repository id" PREVIOUS="skipdays" NEXT="format" />
+        <FIELD NAME="format" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="rss" SEQUENCE="false" ENUM="false" COMMENT="rss format" PREVIOUS="repository" NEXT="license" />
+        <FIELD NAME="license" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="rss format" PREVIOUS="format" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="time created (publication date)" PREVIOUS="license" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="last modification date" PREVIOUS="timecreated" NEXT="showpreview" />
+        <FIELD NAME="showpreview" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" ENUM="false" COMMENT="last modification date" PREVIOUS="timemodified" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="repository" UNIQUE="false" FIELDS="repository" NEXT="course" />
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course" PREVIOUS="repository" />
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="podcaster_channel_element" COMMENT="Podcast user defined elements" PREVIOUS="podcaster" NEXT="podcaster_item">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="channel"/>
+        <FIELD NAME="channel" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Podcast element belongs to" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Name of element" PREVIOUS="channel" NEXT="value"/>
+        <FIELD NAME="value" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Value of element" PREVIOUS="name" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="channel" UNIQUE="false" FIELDS="channel" NEXT="name" />
+        <INDEX NAME="name" UNIQUE="false" FIELDS="name" PREVIOUS="channel" />
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="podcaster_item" COMMENT="Podcast items" PREVIOUS="podcaster_channel_element" NEXT="podcaster_item_element">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="channel"/>
+        <FIELD NAME="channel" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Podcast the item belongs to" PREVIOUS="id" NEXT="scheduledtime"/>
+        <FIELD NAME="scheduledtime" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Time created (publication date)" PREVIOUS="channel" NEXT="title"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="The title of the item" PREVIOUS="scheduledtime" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="The item synopsis" PREVIOUS="title" NEXT="copyright"/>
+        <FIELD NAME="copyright" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Copyright information for channel" PREVIOUS="description" NEXT="author"/>
+        <FIELD NAME="author" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Email address of the author of the item" PREVIOUS="copyright" NEXT="category" />
+        <FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Includes the item in one or more categories" PREVIOUS="author" NEXT="comments" />
+        <FIELD NAME="comments" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="URL of a page for comments relating to the item" PREVIOUS="category" NEXT="enclosure" />
+        <FIELD NAME="enclosure" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Moodle file url" PREVIOUS="comments" NEXT="enclosureurl" />
+        <FIELD NAME="enclosureurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Public file url" PREVIOUS="enclosure" NEXT="enclosuretype" />
+        <FIELD NAME="enclosuretype" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Mimetype of item" PREVIOUS="enclosureurl" NEXT="enclosurelength" />
+        <FIELD NAME="enclosurelength" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Length of item" PREVIOUS="enclosuretype" NEXT="source" />
+        <FIELD NAME="source" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Source title of item" PREVIOUS="enclosurelength" NEXT="sourceurl" />
+        <FIELD NAME="sourceurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Source url of item" PREVIOUS="source" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Time created (publication date)" PREVIOUS="sourceurl" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Last modification date" PREVIOUS="timecreated" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="enclosure" UNIQUE="false" FIELDS="enclosure" NEXT="channel" />
+        <INDEX NAME="channel" UNIQUE="false" FIELDS="channel" PREVIOUS="enclosure" />
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="podcaster_item_element" COMMENT="Podcast user defined elements" PREVIOUS="podcaster_item" NEXT="podcaster_repository">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="item"/>
+        <FIELD NAME="item" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Item element belongs to" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Name of element" PREVIOUS="item" NEXT="value"/>
+        <FIELD NAME="value" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Value of element" PREVIOUS="name" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="item" UNIQUE="false" FIELDS="item" NEXT="name" />
+        <INDEX NAME="name" UNIQUE="false" FIELDS="name" PREVIOUS="item" />
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="podcaster_repository" COMMENT="Podcast repositories" PREVIOUS="podcaster_item_element" NEXT="podcaster_license">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="moodle" SEQUENCE="false" ENUM="false" COMMENT="Name of the repository" PREVIOUS="id" NEXT="prefix"/>
+        <FIELD NAME="prefix" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Protocol prefix of repository" PREVIOUS="name" NEXT="plugin"/>
+        <FIELD NAME="plugin" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Plugin" PREVIOUS="prefix" NEXT="license"/>
+        <FIELD NAME="license" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="License applicable for items stored in this repository" PREVIOUS="plugin" NEXT="rss" />
+        <FIELD NAME="rss" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="rss repository" PREVIOUS="license" NEXT="public" />
+        <FIELD NAME="public" TYPE="int" LENGTH="1" UNSIGNED="true" DEFAULT="0" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Is it a public repository?" PREVIOUS="rss" NEXT="shared" />
+        <FIELD NAME="shared" TYPE="int" LENGTH="1" UNSIGNED="true" DEFAULT="0" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Is it a shared repository?" PREVIOUS="public" NEXT="synchronize" />
+        <FIELD NAME="synchronize" TYPE="int" LENGTH="1" UNSIGNED="true" DEFAULT="0" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Wether to try synchronizing RSS status after modifications" PREVIOUS="shared" NEXT="enabled" />
+        <FIELD NAME="enabled" TYPE="int" LENGTH="1" UNSIGNED="true" DEFAULT="0" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Includes the item in one or more categories" PREVIOUS="synchronize" NEXT="isdefault" />
+        <FIELD NAME="isdefault" TYPE="int" LENGTH="1" UNSIGNED="true" DEFAULT="0" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="URL of a page for comments relating to the item" PREVIOUS="enabled" NEXT="filefilter" />
+        <FIELD NAME="filefilter" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Allowed file extensions" PREVIOUS="isdefault" NEXT="params" />
+        <FIELD NAME="params" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="URL of a page for comments relating to the item" PREVIOUS="filefilter" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="podcaster_license" COMMENT="Podcast licenses" PREVIOUS="podcaster_repository" NEXT="podcaster_language">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="license" SEQUENCE="false" ENUM="false" COMMENT="Name of license" PREVIOUS="id" NEXT="confirm" />
+        <FIELD NAME="confirm" TYPE="int" LENGTH="1" UNSIGNED="true" DEFAULT="0" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Require confirmation for file uploads" PREVIOUS="name" NEXT="isdefault" />
+        <FIELD NAME="isdefault" TYPE="int" LENGTH="1" UNSIGNED="true" DEFAULT="0" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="URL of a page for comments relating to the item" PREVIOUS="confirm" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="podcaster_language" COMMENT="Podcast translation of local configuration" PREVIOUS="podcaster_license" NEXT="podcaster_metachannel">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="language"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="Language" PREVIOUS="id" NEXT="name" />
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="lang" SEQUENCE="false" ENUM="false" COMMENT="String key" PREVIOUS="language" NEXT="value" />
+        <FIELD NAME="value" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Plugin" PREVIOUS="name" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="lang_name" UNIQUE="true" FIELDS="language,name" />
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="podcaster_metachannel" COMMENT="Podcaster channel indexes" PREVIOUS="podcaster_language">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="channel"/>
+        <FIELD NAME="channel" TYPE="int" LENGTH="10" UNSIGNED="true" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Associated channel" PREVIOUS="id" NEXT="name" />
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="Name of meta channel" PREVIOUS="channel" NEXT="path" />
+        <FIELD NAME="path" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="(Local) path of rss feed" PREVIOUS="name" NEXT="target" />
+        <FIELD NAME="target" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="repository" SEQUENCE="false" ENUM="true" ENUMVALUES="'repository', 'course'" COMMENT="Target type" PREVIOUS="path" NEXT="params"/>
+        <FIELD NAME="params" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" COMMENT="CSV separated list of repositories" PREVIOUS="target" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Time created" PREVIOUS="params" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Last modification date" PREVIOUS="timecreated" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="target" UNIQUE="false" FIELDS="target" />
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+
+  <STATEMENTS>
+    <STATEMENT NAME="insert log_display" TYPE="insert" TABLE="log_display" COMMENT="Initial insert of records on table log_display. Each record describes how data will be showed by log reports." NEXT="insert podcaster_repository">
+      <SENTENCES>
+        <SENTENCE TEXT="(module, action, mtable, field) VALUES ('podcaster', 'add',    'podcaster', 'name')" />
+        <SENTENCE TEXT="(module, action, mtable, field) VALUES ('podcaster', 'update', 'podcaster', 'name')" />
+        <SENTENCE TEXT="(module, action, mtable, field) VALUES ('podcaster', 'view',   'podcaster', 'name')" />
+      </SENTENCES>
+    </STATEMENT>
+    
+    <STATEMENT NAME="insert podcaster_repository" TYPE="insert" TABLE="podcaster_repository" COMMENT="Initial insert of records on table podcaster_repository." PREVIOUS="insert log_display" NEXT="insert podcaster_license">
+      <SENTENCES>
+        <SENTENCE TEXT="(name, prefix, plugin, license, enabled, isdefault, filefilter) VALUES ('moodle', 'moodle',    'moodle', 1, '1', '1', '3gp,ai,aif,aiff,avi,au,bmp,dv,dif,eps,flv,gif,ico,jpe,jpeg,jpg,mov,movie,mp3,mp4,mpeg,mpe,mpg,pct,pdf,pic,pict,png,ps,qt,ra,ram,rtf,svg,svgz,swa,swf,swfl,tif,tiff,wav,wmv,xdp,xml')" />
+        <SENTENCE TEXT="(name, prefix, plugin, license, enabled, isdefault, filefilter) VALUES ('public', 'public',    'local',  2, '0', '0', '3gp,ai,aif,aiff,avi,au,bmp,dv,dif,eps,flv,gif,ico,jpe,jpeg,jpg,mov,movie,mp3,mp4,mpeg,mpe,mpg,pct,pdf,pic,pict,png,ps,qt,ra,ram,rtf,svg,svgz,swa,swf,swfl,tif,tiff,wav,wmv,xdp,xml')" />
+        <SENTENCE TEXT="(name, prefix, plugin, license, enabled, isdefault, filefilter) VALUES ('ftp',    'ftpserver', 'ftp',    2, '0', '0', '3gp,ai,aif,aiff,avi,au,bmp,dv,dif,eps,flv,gif,ico,jpe,jpeg,jpg,mov,movie,mp3,mp4,mpeg,mpe,mpg,pct,pdf,pic,pict,png,ps,qt,ra,ram,rtf,svg,svgz,swa,swf,swfl,tif,tiff,wav,wmv,xdp,xml')" />
+      </SENTENCES>
+    </STATEMENT>
+
+    <STATEMENT NAME="insert podcaster_license" TYPE="insert" TABLE="podcaster_license" COMMENT="Initial insert of records on table podcaster_license." PREVIOUS="insert podcaster_repository" NEXT="insert podcaster_language">
+      <SENTENCES>
+        <SENTENCE TEXT="(name, confirm, isdefault) VALUES ('site',   '0', '1')" />
+        <SENTENCE TEXT="(name, confirm, isdefault) VALUES ('public', '1', '0')" />
+      </SENTENCES>
+    </STATEMENT>
+  
+    <STATEMENT NAME="insert podcaster_language" TYPE="insert" TABLE="podcaster_language" COMMENT="Internationalization of example configuration (english and german)" PREVIOUS="insert podcaster_license" NEXT="insert config">
+      <SENTENCES>
+        <!-- repository descriptions -->
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_moodle_title', 'en_utf8', 'Moodle internal / protected')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_moodle_title', 'de_utf8', 'Moodle intern / geschützt')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_moodle_desc',  'en_utf8', 'Access to podcasts and media is restricted to course members')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_moodle_desc',  'de_utf8', 'Zugriff auf Podcasts und Medien ist auf Mitglieder des Kurses beschränkt.')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_public_title', 'en_utf8', 'Public area')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_public_title', 'de_utf8', 'Öffentlicher Bereich')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_public_desc',  'en_utf8', 'Podcasts and media will be stored in a public accessible area on the webserver')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_public_desc',  'de_utf8', 'Podcasts und Medien werden in einem öffentlichen Bereich des Webservers gespeichert')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_ftp_title',    'en_utf8', 'Public server')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_ftp_title',    'de_utf8', 'Öffentlicher Server')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_ftp_desc',     'en_utf8', 'Podcasts and media will be uploaded to a public accessible webserver')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('repository_ftp_desc',     'de_utf8', 'Podcasts und Medien werden auf einen öffentlichen Webservers hochgeladen')" />
+
+        <!-- license descriptions -->
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_site_title',      'en_utf8', 'Site policy')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_site_title',      'de_utf8', 'Nutzungsbedingungen der Seite')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_site_desc',       'en_utf8', 'Podcasts and media subject to site policy and terms of use')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_site_desc',       'de_utf8', 'Podcasts und Medien unterliegen den für diese Seite geltenden Lizenz- und Nutzungsbedingungen.')" />
+          
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_public_title', 'en_utf8', 'Public')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_public_title', 'de_utf8', 'Öffentlich')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_public_desc',  'en_utf8', 'Description of terms of usage for public license.')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('license_public_desc',  'de_utf8', 'Beschreibung der Nutzungsbedingungen der öffentlichen Lizenz.')" />
+          
+        <!-- some isdefault formats will also be installed: -->
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rssfull_title', 'en_utf8', 'RSS 2.0')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rssfull_title', 'de_utf8', 'RSS 2.0')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rssfull_desc',  'en_utf8', 'RSS 2.0 full specification')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rssfull_desc',  'de_utf8', 'RSS 2.0 komplette Spezifikation')" />
+        
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rss_title',     'en_utf8', 'RSS')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rss_title',     'de_utf8', 'RSS')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rss_desc',      'en_utf8', 'RSS 2.0 for general purpose')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_rss_desc',      'de_utf8', 'RSS 2.0 für übliche Anwendungen')" />
+
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_hu_title',      'en_utf8', 'HU Berlin')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_hu_title',      'de_utf8', 'HU Berlin')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_hu_desc',       'en_utf8', 'Based on RSS 2.0 with some extensions specific to requirements of the &quot;Humboldt-Universität zu Berlin&quot;.')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_hu_desc',       'de_utf8', 'Basiert auf RSS 2.0 mit spezifischen Erweiterungen für die Humboldt-Universität zu Berlin.')" />
+
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_itunes_title',  'en_utf8', 'itunes (alpha)')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_itunes_title',  'de_utf8', 'itunes (alpha)')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_itunes_desc',   'en_utf8', 'RSS 2.0 with itunes extensions. Implementation status: proof of concept.')" />
+        <SENTENCE TEXT="(name, language, value) VALUES ('format_itunes_desc',   'de_utf8', 'RSS 2.0 mit itunes Erweiterungen. Die derzeitige Implementierung hat nur Demonstrationscharakter.')" />
+       </SENTENCES>
+    </STATEMENT>
+
+    <STATEMENT NAME="insert config" TYPE="insert" TABLE="config" COMMENT="Set a flag that module has just been installed" PREVIOUS="insert podcaster_language">
+      <SENTENCES>
+        <SENTENCE TEXT="(name, value) VALUES ('podcaster_dopostinstall',   '1')" />
+      </SENTENCES>
+    </STATEMENT>
+
+  </STATEMENTS>
+</XMLDB>

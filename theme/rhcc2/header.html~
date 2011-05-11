@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html<?php echo $direction ?>>
+<?php
+include_once($CFG->dirroot.'/course/format/page/lib.php');
+$church_color = 'blue';
+$thistheme = $CFG->themewww .'/'. current_theme();
+require_js($thistheme.'/scripts.js');
+?>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+  html { height: 100% }
+  body, #page, #content{ height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
+</style>
+    <?php echo $meta ?>
+    <meta name="keywords" content="moodle, <?php echo $title ?> " />
+    <title><?php echo $title ?></title>
+    <link rel="shortcut icon" href="<?php echo  $thistheme; ?>/favicon.jpg" />
+    <?php include("$CFG->javascript"); ?>
+    <style type="text/css">
+        #headerContainer {background-image: url('<?php echo $thistheme; ?>/images/<?php echo $church_color;?>/header_tile.jpg');}
+        #header {background-image: url('<?php echo $thistheme; ?>/images/<?php echo $church_color;?>/header.jpg');}
+        #featured li h2 a {background-image:  url('<?php echo $thistheme; ?>/images/<?php echo $church_color;?>/slidertitle.jpg');}
+        <?php if($church_color == "blue") { ?>
+        a {color: #456770;}
+        <?php } elseif($church_color == "purple") { ?>
+        a {color: #544570;}
+        <?php } elseif($church_color == "red") { ?>
+        a {color: #704545;}
+        <?php } elseif($church_color == "yellow") { ?>
+        a {color: #706b45;}
+        <?php } elseif($church_color == "green") { ?>
+        a {color: #457046;}
+        <?php } ?>
+    </style>
+</head>
+
+<body<?php
+    echo " $bodytags";
+    if ($focus) {
+        echo " onload=\"setfocus()\"";
+    }
+    ?>>
+
+<div id="pageContainer">
+<div id="page">
+<?php if ($home || $heading) { ?>
+		<?php echo '<div id="headerContainer">'; print_container_start(true, '', 'header'); ?>
+                    <?php if (false /*!isloggedin() || isguestuser()*/) { ?>
+                    <div id="new">
+                        <a class="tooltip" href="<?php echo $CFG->wwwroot ?>/im-new" title="Get Connected!"><img src="<?php echo $thistheme; ?>/images/new-trans.png" alt="I'm New" width="120" height="132" /></a>
+                    </div><!--end new-->
+                    <?} ?>
+                    <a href="<?php echo $CFG->wwwroot;?>/index.php?page=2">
+                    <img src="<?php echo $thistheme; ?>/images/rhcc-logo.png" alt="RHCC" />
+                    </a>
+                    <div class="theme-title">
+                        <a href="<?php echo $CFG->wwwroot;?>/index.php?page=2"><?php print_string('theme-title', 'rhcc'); ?></a>
+                    </div>
+                    <div class="pagenav" style="clear both">
+                        <?php echo page_print_site_page_structure_ul(null, 'dropmenu');?>
+                    </div>
+
+<?php //Accessibility: breadcrumb trail/navbar now a DIV, not a table.
+      if ($navigation) { ?>
+            <div class="navbutton"><?php echo $button; ?></div>
+<?php } ?>
+
+<?php print_container_end(); echo '</div>'; /*end header*/?>
+<?php } /* end header wrapper */?>
+
+    <!-- END OF HEADER -->
+    <?php print_container_start(false, '', 'content'); ?>
+    

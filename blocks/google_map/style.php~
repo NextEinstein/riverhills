@@ -1,0 +1,11 @@
+table#block_google_map_table {
+    display: none;
+}
+
+table#block_google_map_table td {
+    width: 100%;
+}
+
+table#block_google_map_table td:first-child {
+    width: auto;
+}

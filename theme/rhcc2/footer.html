@@ -1,0 +1,29 @@
+<?php
+
+    print_container_end(); // content container
+
+    echo '<div id="footerContainer">';
+    print_container_start(false, '', 'footer');
+
+    if ($navigation and false) { ?>
+                    <div class="navbar clearfix">
+                        <div class="breadcrumb"><?php print_navigation($navigation); ?></div>
+                        <div class="menu"><?php echo $menu; ?></div>
+                    </div>
+<?php }
+
+    echo $loggedinas;
+    echo '<br />';
+
+    if (!empty($performanceinfo)) {
+        echo $performanceinfo;
+    }
+
+    print_container_end();
+    echo '</div>';
+
+?>
+            </div>
+</div>
+    </body>
+</html>

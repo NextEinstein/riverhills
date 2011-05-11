@@ -1,0 +1,109 @@
+<?php 
+    global $CFG;
+
+    if ($CFG->mobiledevice && file_exists($CFG->dirroot.'/theme/'.current_theme().'/header-mobile.html')) {
+        include_once('header-mobile.html'); 
+        return;
+    }
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html<?php echo $direction ?>>
+<head>
+<script type="text/javascript" src="<?php echo $CFG->wwwroot.'/theme/'.current_theme().'/js/hotkeys.min.js';?>"></script>
+<script>
+var hotkeyconfig = "<?php echo $CFG->wwwroot; ?>";
+var sesskeyconfig = "<?php echo $USER->sesskey; ?>";
+</script>
+
+    <?php echo $meta ?>
+    <meta name="keywords" content="moodle, <?php echo $title ?> " />
+    <title><?php echo $title ?></title>
+    <link rel="shortcut icon" href="<?php echo $CFG->themewww .'/'. current_theme() ?>/favicon.jpg" />
+    <?php include("$CFG->javascript"); ?>
+
+<script>
+function clearDefaultandCSS(el) {
+    if (el.defaultValue==el.value) el.value = ""
+    // If Dynamic Style is supported, clear the style
+    if (el.style) el.style.cssText = ""
+}
+</script>
+
+</head>
+
+<body<?php
+    echo " $bodytags";
+    if ($focus) {
+        echo " onload=\"setfocus()\"";
+    }
+    ?>>
+
+<?php //Accessibility: 'headermain' is now H1, see theme/standard/styles_layout.css: .headermain
+      if (($home || $heading) && !isguest()) {  // This is what gets printed on the home page only
+?>
+
+<div id="background">
+    <div id="wrapper">
+        <div id="page">
+        <?php print_container_start(true, '', 'header-home'); ?>
+            <table border="0" class="header-table">
+              <tr>
+                <td class="rhcc-logo"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/images/rhcc/banner_left.jpg" /></td>
+                <td class="rhcc-name"><div class="rhcc-name">
+		    <span class="river hills">
+                      <span class="letter">R</span>iver
+                      <span class="letter">H</span>ills
+		    </span>
+		    <span class="community church">
+                      <span class="letter">C</span>ommunity
+                      <span class="letter">C</span>hurch
+		    </span>
+                </td>
+                <td class="headermenu">
+                  <?php include('profileblock.php');   ?>
+                </td>
+              </tr>
+            </table>
+      <?php print_container_end(); ?>
+
+
+
+<div id="menubox" style="clear both"><?php include 'menu.php';?></div>
+
+        <!--<div class="top_menu"><?php  //include('topmenu.php');   ?></div>-->      
+
+
+<?php } else if (($home || $heading) && isguest()) {  // we don't want guests seeing the profile block
+?>
+<div id="background">
+    <div id="wrapper">
+        <div id="page">
+        <?php print_container_start(true, '', 'header'); ?>
+        <table border="0" class="header-table">
+              <tr>
+                <td class="rhcc-logo"><img src="<?php echo $CFG->themewww.'/'.current_theme();?>/images/rhcc/banner_left.jpg" /></td>
+                <td class="rhcc-name"><span class="rhcc-name">
+                    <span class="letter">R</span>iver 
+                    <span class="letter">H</span>ills 
+                    <span class="letter">C</span>ommunity
+                    <span class="letter">C</span>hurch
+                  </span>
+                </td>
+              </tr>
+            </table>
+        <?php print_container_end(); ?>
+<div id="menubox" style="clear both"><?php include 'menu.php';?></div>
+      <?php } ?>
+
+<?php //Accessibility: breadcrumb trail/navbar now a DIV, not a table.
+    global $COURSE;
+      if ($navigation && $COURSE->id != SITEID) { // This is the navigation bar with breadcrumbs and i don't think we want it anywhere yet  ?>
+    <div class="navbar clearfix">
+        <div class="breadcrumb"><?php print_navigation($navigation); ?></div>
+    </div>
+<?php } else if ($heading) { // If no navigation, but a heading, then print a line
+?>
+<?php } ?>
+    <!-- END OF HEADER -->
+    <?php print_container_start(false, '', 'content'); ?>

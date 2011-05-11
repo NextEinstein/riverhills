@@ -1,0 +1,197 @@
+/* podcaster default css */
+
+#mod-podcaster-itemdetail,
+#mod-podcaster-itemlist,
+#mod-podcaster-channel {
+  text-align:center;
+  width:80%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#mod-podcaster-channel .channel {	
+  text-align:left;
+}
+
+#mod-podcaster-channel .channel .title {
+  font-weight:bold;
+  text-align:left;
+}
+
+#mod-podcaster-channel .channel .description {
+  font-size:0.95em;
+}
+
+#mod-podcaster-itemdetail .channellinks,
+#mod-podcaster-itemlist .channellinks,
+#mod-podcaster-channel .channellinks {
+  float:right;
+}
+
+#mod-podcaster-itemdetail .channellink,
+#mod-podcaster-itemlist .channellink,
+#mod-podcaster-channel .channellink {
+}
+
+#mod-podcaster-itemdetail .channellink:hover,
+#mod-podcaster-itemlist .channellink:hover,
+#mod-podcaster-channel .channellink:hover {
+  opacity:0.8;
+}
+
+#mod-podcaster-itemdetail .item,
+#mod-podcaster-itemlist .item {
+  padding:5px;
+  text-align:left;
+}
+
+#mod-podcaster-channel .scheduled,
+#mod-podcaster-itemlist .scheduled,
+#mod-podcaster-itemdetail .scheduled  {
+  opacity:0.7;
+}
+
+#mod-podcaster-itemlist .item .scheduledtime {
+  font-size:0.95em;
+  color:#333333;
+}
+
+#mod-podcaster-channel .timecreated,
+#mod-podcaster-itemlist .item .timecreated {
+  font-size:0.95em;
+  color:#333333;
+}
+
+#mod-podcaster-itemlist .item .timemodified {
+  font-size:0.95em;
+  color:#333333;
+}
+
+#mod-podcaster-channel .title,
+#mod-podcaster-itemdetail .item .title,
+#mod-podcaster-itemlist .item .title {
+  margin-top:4px;
+  float:left;
+  font-weight:bold;
+}
+
+#mod-podcaster-channel .author,
+#mod-podcaster-itemdetail .item .author,
+#mod-podcaster-itemlist .item .author {
+  margin-top:4px;
+}
+
+#mod-podcaster-itemdetail .item .download,
+#mod-podcaster-itemlist .item .download {
+  font-size:0.9em;
+  color:gray;
+  margin-bottom:8px;
+  margin-top:4px;
+  clear:both;
+}
+
+#mod-podcaster-itemdetail .item .actions,
+#mod-podcaster-itemlist .item .actions {
+  float:right;
+}
+
+#mod-podcaster-itemdetail .item .actions {
+  padding-top:18px;
+}
+
+#mod-podcaster-itemdetail .item .description,
+#mod-podcaster-itemlist .item .description {
+  font-size:0.95em;
+  color:#333333;
+}
+
+#mod-podcaster-itemdetail .item .separator,
+#mod-podcaster-itemlist .item .separator {
+  margin:10px;
+  clear:both;
+}
+
+#mod-podcaster-itemdetail {
+}
+
+#mod-podcaster-itemdetail .item {
+}
+
+#mod-podcaster-upload .license {
+  border:1px solid #999999;
+  padding:4px;
+  margin-bottom:8px;
+}
+
+#mod-podcaster-upload-headline {
+}
+
+
+/* media */
+#mod-podcaster-itemdetail .enclosure {
+  margin:4px;
+  float:left;
+  margin-right:10px;
+}
+
+#mod-podcaster-itemdetail .enclosure object {
+  height:400px;
+  width:600px;
+}
+
+#mod-podcaster-itemdetail .item .enclosure img {
+  max-height:400px;
+  max-width:600px;
+}
+
+#mod-podcaster-itemlist .item .enclosure {
+  margin:4px;
+  float:left;
+  margin-right:10px;
+}
+
+#mod-podcaster-itemlist .item .enclosure object {
+  height:200px;
+  width:300px;
+}
+
+#mod-podcaster-itemlist .item .enclosure img {
+  max-height:200px;
+  max-width:300px;
+}
+
+#mod-podcaster-channel .image {
+  float:right;
+  margin-right:10px;
+  max-width:144px;
+  max-height:400px;
+}
+
+#mod-podcaster-channel .image img {
+  max-width:144px;
+  max-height:400px;
+}
+
+.mod-podcaster-mp3 {
+}
+
+.mod-podcaster-flv {  
+}
+
+.mod-podcaster-wmv {
+}
+
+.mod-podcaster-mpeg {
+}
+
+.mod-podcaster-quicktime {
+}
+
+.mod-podcaster-swf {
+}
+
+.mod-podcaster-zip {
+}
+
+.mod-podcaster-pdf {
+}

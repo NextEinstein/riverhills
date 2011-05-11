@@ -1,0 +1,95 @@
+<?php
+    $usehtmleditor = can_use_html_editor();
+
+    $vars = array('title', 'center', 'zoom', 'markers', 'width', 'height', 'markerbubbles');
+    foreach ($vars as $varname) {
+        $$varname = isset($this->config->{$varname}) ? $this->config->{$varname} : '';
+    }
+
+    define('BLOCK_GOOGLE_MAP_POLYGON_COUNT', 6);
+?>
+
+<div syle="display: none" id="select-poly-points-div"></div>
+
+<table cellspacing="0" id="block_google_map_table" border="1">
+
+<!-- Map Title -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('configtitle', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px"><input type="center" name="title" size="30" value="<?php echo $title ?>" /></td>
+</tr>
+
+<!-- Map Center -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('mapcenter', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px"><input type="center" name="center" size="30" value="<?php echo $center ?>" /></td>
+</tr>
+
+<!-- Map zoom -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('mapzoom', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px"><select name="zoom">
+        <?php 
+            for($x=1;$x<=20;$x++) {
+
+                $selected = $zoom == $x || ( empty($zoom) && $x==9 ) ? ' SELECTED="selected" ' : ' ';
+                echo "<option value=\"{$x}\" {$selected}>{$x}</option>";
+            }
+        ?>
+        </select>
+    </td>
+</tr>
+
+<!-- Map dimensions -->
+<tr valign="top">
+    <td align="right" style="padding: 9px"><?php print_string('dimensions', 'block_google_map'); ?>:</td>
+    <td style="padding: 9px">
+        <?php print_string('width', 'block_google_map');?><br /><input type="text" size="10" name="width" value="<?php echo $width;?>" /><?php print_string('px', 'block_google_map'); ?><br />
+        <?php print_string('height', 'block_google_map');?><br /><input type="text" size="10" name="height" value="<?php echo $height;?>" /><?php print_string('px', 'block_google_map'); ?>
+</tr>
+
+<!-- Polygon -->
+<tr valign="top">
+    <?php $opacityoptions = range(0,1,.1); ?>
+
+    <td align="right" style="padding-right: 9px"><?php print_string('poly', 'block_google_map'); ?>:</td>
+    <td>
+        <table border="0" cellpadding="5">
+        <tr>
+            <th style="text-align: center"><?php print_string('polyhex', 'block_google_map'); ?></th>
+            <th style="text-align: center"><?php print_string('polyfillopacity', 'block_google_map'); ?></th>
+            <th style="text-align: center"><?php print_string('polylineopacity', 'block_google_map'); ?></th>
+            <th style="text-align: center"><?php print_string('selectpoints', 'block_google_map'); ?></th>
+        </tr><tr>
+            <td style="text-align: center"><input type="text" name="polyhex[]" /></td>
+            <td style="text-align: center"><select name="polyfillopacity[]"><?php foreach ($opacityoptions as $op) echo "<option value=\"{$op}\">{$op}</option>"; ?></select></td>
+            <td style="text-align: center"><select name="polylineopacity[]"><?php foreach ($opacityoptions as $op) echo "<option value=\"{$op}\">{$op}</option>"; ?></select></td>
+            <td style="text-align: center"><a href="#" class="select-poly-points"><img src="<?php echo $CFG->pixpath; ?>/t/edit.gif" /></td>
+        </tr>
+        </table>
+</tr>
+
+<tr><td colspan="2">&nbsp;</td></tr>
+<!-- Map Markers -->
+<tr valign="top">
+    <td><?php print_string('markerlocation', 'block_google_map');?></td>
+    <td><input type="text" name="markerlocation[]" /></td>
+</tr>
+<tr valign="top">
+    <td><?php print_string('markerhtml', 'block_google_map');?></td>
+    <td><?php print_textarea($usehtmleditor, 15, 70, 0, 0, 'markerhtml[]'); ?></td>
+</tr>
+<tr>
+    <td style="padding:2px; padding-left: 9px; padding-right: 9px;">&nbsp;</td>
+    <td style="padding:9px; padding-top: 2px;"> <a href="#" id="add-marker-link"><?php print_string('addmarkerlink', 'block_google_map'); ?></a></td>
+</tr>
+
+<tr>
+    <td colspan="3" align="center">
+    <input type="submit" value="<?php print_string('savechanges') ?>" /></td>
+</tr>
+</table>
+<?php if ($usehtmleditor) {
+          use_html_editor(); 
+      }
+?>

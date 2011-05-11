@@ -1,0 +1,2 @@
+[20-Mar-2011 20:30:56] PHP Fatal error:  Call to undefined function  current_theme() in /home4/riverhi1/public_html/new/mod/moodle_optimization/styles.css on line 37
+[20-Mar-2011 20:30:56] PHP Fatal error:  Call to undefined function  moodle_optimization_run_javascript_mod_cron() in /home4/riverhi1/public_html/new/mod/moodle_optimization/javascript-mod.js on line 44

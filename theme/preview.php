@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php // $Id: preview.php,v 1.6.2.1 2008/05/02 04:07:33 dongsheng Exp $
 
     require_once("../config.php");
 

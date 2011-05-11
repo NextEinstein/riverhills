@@ -1,0 +1,149 @@
+
+body {
+    margin: 0;
+}
+
+#page {
+    padding: 0;
+}
+
+#header-home, #header {
+    padding: 2px;
+    border: 1px solid #2a3a5b;
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+
+    -khtml-border-top-left-radius: 0;
+    -khtml-border-top-right-radius: 0;
+
+    behavior: url(js/border-radius.htc);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+table.header-table td {
+    background-color: #fff;
+    border-bottom: 2px solid #888;
+}
+
+#page, #content, #footer-wrapper, #footer{
+    background-color: transparent;
+    border: none;
+}
+
+#footer-wrapper {
+    display: none;
+}
+
+.generalbox {
+    background-color: #eee;
+}
+
+.rhcc-name {
+    text-align: center;
+}
+
+.rhcc-name span {
+    text-align: center;
+    font-size: 2.2em;
+    white-space: nowrap;
+}
+
+div.day-verse-title {
+    text-align: center;
+    background-color: #9ba5f2;
+    border: 1px solid #4a56b6;
+}
+
+div.week-verse-title {
+    background-color: #d2543e;
+    border: 1px solid #833a2d;
+    text-align: center;
+}
+
+div.month-verse-title {
+    background-color: #9bd18c;
+    border: 1px solid #57774e;
+    text-align: center;
+}
+
+div.quarter-verse-title {
+    background-color: #a288c4;
+    border: 1px solid #593982;
+    text-align: center;
+}
+
+table.memorization-verse {
+    border: 1px solid #aaa;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+div.add-verse {
+    display: inline;
+    float: right;
+}
+
+table.memorization-verse .verse {
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    overflow: hidden;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+table.memorization-verse .progress {
+    float: bottom;
+    position: relative;
+    background-repeat: repeat-x;
+    bottom: 0;
+    background-position: right bottom;
+    background-image: url(../../mod/memorization/pix/progress.jpg);
+}
+
+table.memorization-verse .hint {
+    padding: .2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-right: 1px dotted #555;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+table.memorization-verse img {
+    height: 16px;
+}
+table.memorization-verse .check {
+    padding: .2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-left: 1px dotted #555;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+
+div.progress-bar {
+    height: 5px;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    display: inline;
+    background-color: red;
+    width: 50%;
+}
+
+div.TB_window {
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+    margin: 0;
+    width: auto;
+}
