@@ -1,4 +1,4 @@
-<?PHP /*  $Id$ */
+<?PHP /*  $Id: docstyles.php,v 1.3 2006/05/23 09:16:17 skodak Exp $ */
 
 /// We use PHP so we can do value substitutions into the styles
     $nomoodlecookie = true;

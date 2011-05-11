@@ -66,3 +66,5 @@ form.mform textarea {
 .drag select {
     visibility: visible;
 }
+
+ul.dropdown ul li                   { display: inline; width: 100%; } 

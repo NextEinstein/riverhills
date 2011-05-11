@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>ESV Popup</title>
+    <base target="_blank"/>
+    <link rel="stylesheet" type="text/css"
+      href="http://www.gnpcb.org/esv/assets/style/text.css"/>
+    <style type="text/css">
+      body {
+        background-color: #ffc;
+        border: none;
+        font-family: Arial, sans-serif;
+        font-size: 75%;
+        height: 100%;
+        overflow: auto;
+      }
+      #container {
+        margin: 5px 10px;
+      }
+    </style>
+    <!--[if IE 6]>
+    <style type="text/css">
+      body {
+        border: #888 solid 1px;
+      }
+    </style>
+    <![endif]-->
+    <!--[if IE 7]>
+    <style type="text/css">
+      html {
+        height: 100%;
+      }
+    </style>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="container">
+      <script type="text/javascript">
+        //<![CDATA[
+        var passage = window.location.href.indexOf('?passage=');
+        if (passage)
+          passage = '&' + window.location.href.substr(passage + 1);
+        else
+          passage = '';
+        var html = '<script type="text/javascript" id="script" ' +
+          'src="http://www.gnpcb.org/esv/share/js/?action=doPassageQuery' +
+          passage + '"></' + 'script>';
+        document.write(html);
+        //]]>
+      </script>
+    </div>
+  </body>
+</html>

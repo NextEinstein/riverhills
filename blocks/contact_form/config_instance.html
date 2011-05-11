@@ -1,0 +1,105 @@
+<table cellpadding="9" cellspacing="0">
+<tr valign="top">
+    <td align="right">
+        <?php print_string('configtitle', 'block_contact_form'); ?>:
+    </td>
+    <td>
+        <?php 
+            $thistitle = '';
+            if (isset($this->config) && isset($this->config->title)) {
+                $thistitle = $this->config->title;
+            }
+            echo '<input type="text" name="title" size="30" value="'. $thistitle .'" />';
+        ?>
+    </td>
+    <td>
+        <?php print_string('titleandlinkifblank', 'block_contact_form'); ?>
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <?php print_string('linktext', 'block_contact_form'); ?>:
+    </td>
+    <td>
+        <?php 
+            $thistext = '';
+            if (isset($this->config) && isset($this->config->linktext)) {
+                $thistext = $this->config->linktext;
+            }
+            echo '<input type="linktext" name="linktext" size="30" value="'. $thistext .'" />';
+        ?>
+    </td>
+    <td>
+        <?php print_string('titleandlinkifblank', 'block_contact_form'); ?>
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <?php print_string('displaytype', 'block_contact_form') ?>:
+    </td>
+    <td>
+        <?php
+            if (isset($this->config) && isset($this->config->displaytype)) {
+                $selected = $this->config->displaytype;
+            } else {
+                if (! isset($CFG->block_contact_form_display_type) ) {
+                        $CFG->block_contact_form_display_type = '0';
+                }
+                $selected = $CFG->block_contact_form_display_type;
+            }
+            $options = array ( '0' => get_string('displayasabutton', 'block_contact_form'),
+                               '1' => get_string('displayasalink', 'block_contact_form') );
+            choose_from_menu ($options, 'displaytype', $selected);
+        ?>
+    </td>
+    <td>
+        <?php print_string('displaytypedesc', 'block_contact_form') ?>
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <?php print_string('receipt', 'block_contact_form') ?>:
+    </td>
+    <td>
+        <?php
+        // i due valori sono:
+        // dei settaggi generali: $CFG->block_contact_form_receipt
+        // dei settaggi locali  : $this->config->receipt
+
+        $options = array();
+        $options[] = get_string('force_receipt_to_0', 'block_contact_form');
+        $options[] = get_string('force_receipt_to_1', 'block_contact_form');
+        // Se è definito un settaggio locale
+        if (isset($this->config) && isset($this->config->receipt)) {
+            if (isset($CFG->block_contact_form_receipt)) {
+                $options[] = get_string('use_global_receipt', 'block_contact_form');        
+            }
+            $selected = $this->config->receipt;
+        } else {
+            // Manca il settaggio locale allora comanda il settaggio globale/generale
+            // qualora mancasse anche il settaggio generale, allora vale il default: '0'
+            $selected = (isset($CFG->block_contact_form_receipt)) ? '2' : '0';
+            $options[] = get_string('use_global_receipt', 'block_contact_form');   
+        }
+        choose_from_menu ($options, 'receipt', $selected, '');
+        ?>
+    </td>
+    <td>
+        <?php print_string('receipt_info', 'block_contact_form') ?>
+    </td>
+</tr>
+<tr valign="top">
+    <td align="right">
+        <?php print_string('additional_cc', 'block_contact_form'); ?>
+    </td>
+    <td colspan="2" align="left">
+        <?php print_string('capabilitiestogetallemail', 'block_contact_form') ?>
+    </td>
+</tr>
+<tr>
+    <td colspan="3" align="center">
+        <!--<input type="hidden" name="sesskey" value="<?php global $USER; echo $USER->sesskey;?>">-->
+        <input type="submit" value="<?php print_string('savechanges') ?>" />
+    </td>
+</tr>
+</table>

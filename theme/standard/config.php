@@ -1,4 +1,4 @@
-<?PHP // $Id$
+<?PHP // $Id: config.php,v 1.26 2007/05/11 11:29:47 nfreear Exp $
 
 ////////////////////////////////////////////////////////////////////////////////
 /// This file contains a few configuration variables that control 
@@ -13,7 +13,7 @@ $THEME->sheets = array('styles_layout', 'styles_fonts', 'styles_color');
 ////////////////////////////////////////////////////////////////////////////////
 
 
-$THEME->standardsheets = true;  
+$THEME->standardsheets = array('styles_layout', 'styles_fonts', 'styles_color', 'dropdown', 'mods', 'jqueryui');
 
 /// This variable can be set to an array containing
 /// filenames from the *STANDARD* theme.  If the 
@@ -88,7 +88,7 @@ $THEME->courseformatsheets = true;
 /// their own default styles.
 
 
-$THEME->metainclude = false;
+$THEME->metainclude = true;
 
 /// When this is enabled (or not set!) then Moodle will try 
 /// to include a file meta.php from this theme into the 
