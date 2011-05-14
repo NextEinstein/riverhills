@@ -3,7 +3,7 @@
 class block_featured extends block_base {
 
     function init() {
-        $this->title = get_string('html', 'block_html');
+        $this->title = get_string('featuredblock', 'block_featured');
         $this->version = 2011030600;
     }
 

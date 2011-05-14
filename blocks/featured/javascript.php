@@ -224,14 +224,16 @@
 
 
 //FEATURED SLIDER SCRIPT
-jQuery("div.rounded-featured div.content ul:first-child").easySlider({
-        prevText: '&lsaquo;',
-        nextText: '&rsaquo;',
-        auto: true,
-        pause: 10000,
-        continuous: true,
-        controlsFade: false,
-        controlsShow: true,
-        numeric: false,
-        speed: 600
+jQuery(document).ready(function () {
+    jQuery("div#featuredContent").easySlider({
+            prevText: '&lsaquo;',
+            nextText: '&rsaquo;',
+            auto: true,
+            pause: 10000,
+            continuous: true,
+            controlsFade: false,
+            controlsShow: true,
+            numeric: false,
+            speed: 600
+    });
 });

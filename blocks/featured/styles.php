@@ -7,6 +7,7 @@
 #featuredContainer {margin:0; padding: 0; margin-top: 35px; width:100%; position:relative; height:100%; overflow:hidden; border: 1px solid #666; border-bottom:none;}
 #featuredContent {overflow:hidden; width:100%; height:100%; position:relative;}
 #featuredContent ul, #featuredContent li{margin:0;padding:0;list-style:none; position:relative; overflow:hidden; width:100%; height:290px;}
+#featuredContent li h2 {margin: 0;}
 #featuredContent li h2 a {position: absolute; bottom:0; left: 0; right: 0; line-height: 36px; padding:0; text-align:center; font-size: 12px; color: #fff; background-repeat: repeat-x; background-position: left center; width: 100%; font-weight:bold;}
 #featuredContent li h2 a {color:#fff;}
 span#prevBtn a,
