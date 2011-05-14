@@ -354,27 +354,6 @@ jQuery.noConflict();
 	});
 	jQuery("#dropmenu ul li ul").parent().children("a").prepend("<span style='float:right;'>&rsaquo;</span>");
 
-	//FEATURED SLIDER SCRIPT
-	jQuery("#featured").easySlider({
-		prevText: '&lsaquo;',
-		nextText: '&rsaquo;',
-		auto: true,
-		pause: 10000,
-		continuous: true,
-		controlsFade: false,
-		controlsShow: true,
-		numeric: false,
-		speed: 600
-
-	});
-
-	jQuery("#featured li h2 a").animate({opacity : ".90"}, 300);
-	jQuery("#featured li h2 a").hover(function() {
-		jQuery(this).animate({opacity : '1'}, 300);
-		}, function() {
-		jQuery(this).animate({opacity : ".90"}, 300);
-	});
-	
 	jQuery("#new").hover(function() {
 		jQuery(this).animate({marginTop : '0'}, 300);
 		}, function() {
