@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
         googlemap.initialize(settings);
         googlemap.initPolygonBuilder(receiver);
 
-        $('#dialog').dialog({
+        jQuery('#dialog').dialog({
             autoOpen: true,
             title: "Polygon Point Chooser",
             width: "900",
@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
             modal: true
         });
         
-        $('#dialog').dialog('open');
+        jQuery('#dialog').dialog('open');
 
     });
 });

@@ -101,9 +101,30 @@ class format_page_editpage_form extends moodleform {
             $mform->addElement('hidden', 'parent', 0);
             $mform->setType('parent', PARAM_INT);
         }
+
+        $choices = array();
+        $roles = get_records('role','','','sortorder');
+        if (!empty($roles)) {
+            foreach($roles as $role) {
+               $choices[$role->id] = $role->name;
+            }
+        }
+
+        /// What roles can see this page
+        $mform->addElement('checkbox', 'visibletoallroles', get_string('visibletoallroles', 'format_page'));
+        $mform->setDefault('visibletoallroles', 1);
+
+        $mform->addElement('select', 'visibletoroles', get_string('visibletoroles', 'format_page'), $choices, array('multiple' => 'multiple'));
+        $mform->disabledIf('visibletoroles', 'visibletoallroles', 'checked');
+
         $mform->setHelpButton('parent', array('parent', get_string('parent', 'format_page'), 'format_page'));
 
         $this->add_action_buttons();
+    }
+
+    function set_data($default_values, $slashed=false) {
+        $default_values->visibletoroles = !empty($default_values->visibletoroles) ? explode(',', $default_values->visibletoroles) : false;
+        return parent::set_data($default_values, $slashed);
     }
 }
 ?>

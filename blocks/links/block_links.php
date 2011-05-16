@@ -1,39 +1,59 @@
-<?php //$Id: block_html.php,v 1.8.22.8 2009/10/30 23:36:26 poltawski Exp $
+<?php //$Id$
 
-class block_featured extends block_base {
+class block_links extends block_base {
 
     function init() {
-        $this->title = get_string('featuredblock', 'block_featured');
-        $this->version = 2011030600;
+        $this->title = get_string('title', 'block_links');
+        $this->version = 2007101509;
     }
 
     function applicable_formats() {
         return array('all' => true);
     }
 
+    function specialization() {
+        $this->title = isset($this->config->title) ? format_string($this->config->title) : format_string(get_string('newlinksblock', 'block_links'));
+    }
+
     function instance_allow_multiple() {
         return true;
     }
 
-function get_content() {
+    function get_content() {
         if ($this->content !== NULL) {
             return $this->content;
         }
 
-        if (!empty($this->instance->pinned) or $this->instance->pagetype === 'course-view') {
-            // fancy html allowed only on course page and in pinned blocks for security reasons
-            $filteropt = new stdClass;
-            $filteropt->noclean = true;
-        } else {
-            $filteropt = null;
+        $this->content = new stdClass;
+
+        $this->content->text = '<table align="center" style="width: 800px;" class="link-table"><tr>';
+
+        $counter = 1;
+        foreach ($this->config->text as $idx => $text) {
+            if (empty($this->config->links[$idx])) {
+                $this->content->text .= '<td class="c1" colspan="3"><h2>'.$text.'</h2></td>';
+            } else {
+                $this->content->text .= '<td class="c1" style="width: 15px">&nbsp;</td>';
+
+                $this->content->text .= '<td class="c2" style="width: 16px; height: 16px;">';
+                if (!empty($this->config->images[$idx])) {
+                    $this->content->text .= '<img style="width: 16px; height: 16px;" src="'.$this->config->images[$idx].'" />';
+                } else {
+                    $this->content->text .= '&nbsp;';
+                }
+                $this->content->text .= '</td>';
+
+                $this->content->text .= '<td class="c3"><a href="'.$this->config->links[$idx].'">'.$text.'</a></td>';
+            }
+
+            if ($counter++ % 2 == 0) {
+                $this->content->text .= '</tr><tr>';
+            }
         }
 
-        $this->content = new stdClass;
-        $this->content->text = isset($this->config->text) ? format_text($this->config->text, FORMAT_HTML, $filteropt) : '';
-        $this->content->text = preg_replace(array('/\<ul/', '/\<\/ul\>/'), array('<div id="featuredContainer"><div id="featuredContent"><ul', '</ul></div></div>'), $this->content->text, 1);
-        $this->content->footer = '';
+        $this->content->text .= '</tr></table>';
 
-        unset($filteropt); // memory footprint
+        $this->content->footer = '';
 
         return $this->content;
     }
@@ -55,10 +75,10 @@ function get_content() {
 
     /**
      * This function makes all the necessary calls to {@link restore_decode_content_links_worker()}
-     * function in order to decode contents of this block from the backup
-     * format to destination site/course in order to mantain inter-activities
-     * working in the backup/restore process.
-     *
+     * function in order to decode contents of this block from the backup 
+     * format to destination site/course in order to mantain inter-activities 
+     * working in the backup/restore process. 
+     * 
      * This is called from {@link restore_decode_content_links()} function in the restore process.
      *
      * NOTE: There is no block instance when this method is called.
@@ -74,11 +94,11 @@ function get_content() {
             $sql = "SELECT bi.*
                       FROM {$CFG->prefix}block_instance bi
                            JOIN {$CFG->prefix}block b ON b.id = bi.blockid
-                     WHERE b.name = 'html' AND bi.id IN ($restored_blocks)";
+                     WHERE b.name = 'links' AND bi.id IN ($restored_blocks)";
 
             if ($instances = get_records_sql($sql)) {
                 foreach ($instances as $instance) {
-                    $blockobject = block_instance('featured', $instance);
+                    $blockobject = block_instance('links', $instance);
                     $blockobject->config->text = restore_decode_absolute_links($blockobject->config->text);
                     $blockobject->config->text = restore_decode_content_links_worker($blockobject->config->text, $restore);
                     $blockobject->instance_config_commit($blockobject->pinned);
@@ -87,10 +107,6 @@ function get_content() {
         }
 
         return true;
-    }
-
-    function specialization() {
-        $this->title = isset($this->config->title) ? format_string($this->config->title) : format_string(get_string('newhtmlblock', 'block_html'));
     }
 
     /*

@@ -1,0 +1,40 @@
+<table cellpadding="9" cellspacing="0">
+<tr valign="top">
+    <td align="right"><?php print_string('configtitle', 'block_html'); ?>:</td>
+    <td><input type="text" name="title" size="30" value="<?php echo isset($this->config->title)?p($this->config->title):''; ?>" /> (<?php print_string('leaveblanktohide', 'block_html'); ?>)</td>
+</tr>
+</table>
+<table cellpadding="9" cellspacing="0" class="generaltable general-table" align="center">
+<tr>
+    <th><?php print_string('text', 'block_links');?></th>
+    <th><?php print_string('image', 'block_links');?></th>
+    <th style="margin-right: 20px"><?php print_string('link', 'block_links');?></th>
+
+    <th><?php print_string('text', 'block_links');?></th>
+    <th><?php print_string('image', 'block_links');?></th>
+    <th><?php print_string('link', 'block_links');?></th>
+</tr>
+<?php
+$top = 70;
+$x = 0
+?>
+<?php while ($x < $top) {?>
+<tr valign="top">
+    <td align="right"><input type="text" name="text[]"  value="<?php echo !empty($this->config->text[$x]) ? $this->config->text[$x] : ''; ?>"/></td>
+    <td align="right"><input type="text" name="images[]"  value="<?php echo !empty($this->config->images[$x]) ? $this->config->images[$x] : ''; ?>"/></td>
+    <td align="right"><input type="text" name="links[]" value="<?php echo !empty($this->config->text[$x]) ? $this->config->links[$x] : ''; ?>"/></td>
+
+    <?php $x++; ?>
+    <td align="right"><input type="text" name="text[]"  value="<?php echo !empty($this->config->text[$x]) ? $this->config->text[$x] : ''; ?>"/></td>
+    <td align="right"><input type="text" name="images[]"  value="<?php echo !empty($this->config->images[$x]) ? $this->config->images[$x] : ''; ?>"/></td>
+    <td align="right"><input type="text" name="links[]" value="<?php echo !empty($this->config->text[$x]) ? $this->config->links[$x] : ''; ?>"/></td>
+    <?php $x++; ?>
+</tr>
+<?php }?>
+</table>
+
+<tr>
+    <td colspan="4" align="center">
+    <input type="submit" value="<?php print_string('savechanges') ?>" /></td>
+</tr>
+

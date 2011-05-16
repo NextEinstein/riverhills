@@ -30,7 +30,6 @@ class block_google_map extends block_base {
         global $CFG;
 
         require_js('http://maps.google.com/maps/api/js?sensor=true');
-        require_js($CFG->wwwroot.'/blocks/google_map/javascript.js');
 
         static $content = false;
 

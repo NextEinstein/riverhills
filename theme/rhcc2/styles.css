@@ -1,3 +1,8 @@
+div.sideblock .content h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
 /*
 Theme Name: WP Church
 Theme URI: http://www.rainnetdev.com/demo/wpchurch
@@ -355,10 +360,14 @@ div.mod-pagemenu img.active {display: none;}
 #calendar .event_global,
 .minicalendar .event_global,
 .block_calendar_month .event_global {
-  border-color:#1f3b46 !important; /* #C5E7BC */
-  background-color:#1f3b46;
+  border-color:#EDECD8 !important;
+  background-color:#8E896B;
 }
 
+td.today {
+    font-weight: bold;
+    color: black !important;
+}
 .generaltable th {
     background-color: #456770;
 }

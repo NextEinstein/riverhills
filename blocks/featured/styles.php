@@ -41,7 +41,6 @@ span#prevBtn a:active, span#nextBtn a:active {background: #6a3b14 url('../../blo
 		line-height:180%;
 		margin:0;
 		padding:0;
-		text-align:center;
 	}
 	h1{
 		font-size:180%;

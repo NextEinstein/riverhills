@@ -142,4 +142,6 @@ $string['pageformatonfrontpagedesc'] = 'This will enable the page format on the 
 
 $string['resource:sermon'] = 'Sermon';
 $string['redirect'] = 'Redirect Page';
+$string['visibletoroles'] = 'Visible to these roles';
+$string['visibletoallroles'] = 'Visible to all roles';
 ?>

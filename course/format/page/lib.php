@@ -1158,7 +1158,17 @@ function page_get_master_pages($courseid, $limit=0, $display=DISP_PUBLISH) {
 
     $pages = !empty($limit) ? array_slice($allpages, $limit - 1) : $allpages;
 
+    $coursectx = get_context_instance(CONTEXT_COURSE, $courseid);
+    $userroles = get_user_roles($coursectx);
+    $userroleids = array();
+    foreach ($userroles as $idx => $role) {
+        $userroleids[] = $role->roleid;
+    }
+
     array_walk($pages, 'page_null_page_not_matching_display', $display);
+    $pages = array_filter($pages, 'page_unset_null_page');
+
+    array_walk($pages, 'page_null_page_if_user_doesnot_match_role', $userroleids);
     $pages = array_filter($pages, 'page_unset_null_page');
 
     if (empty($pages)) {
@@ -1180,6 +1190,22 @@ function page_unset_null_page(&$page) {
     return $page;
 }
 
+function page_null_page_if_user_doesnot_match_role(&$page, $ignore, $userroleids) {
+    $pagevisibletoroles = empty($page->visibletoallroles) && !empty($page->visibletoroles) ? explode(',', $page->visibletoroles) : array();
+    $overlappingroles = array_intersect($userroleids, $pagevisibletoroles);
+if ($page->nameone == 'Hiden page') {
+    //var_dump($pagevisibletoroles, $userroleids);
+    //var_dump(empty($page->visibletoallroles), empty($overlappingroles), !has_capability('moodle/site:doanything', get_system_context()));
+}
+    if (empty($page->visibletoallroles) && empty($overlappingroles) && !has_capability('moodle/site:doanything', get_system_context())) {
+        $page = null;
+        return;
+    }
+
+    if (is_array($page->children)) {
+        array_walk($page->children, 'page_null_page_not_matching_display', $userroleids);
+    }
+}
 /**
  * This function is used to recursively filter out all the pages that don't match the display  
  * 

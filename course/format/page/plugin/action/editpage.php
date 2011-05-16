@@ -69,6 +69,8 @@ class format_page_action_editpage extends format_page_action {
             $page->template        = $data->template;
             $page->showbuttons     = $data->showbuttons;
             $page->parent          = $data->parent;
+            $page->visibletoroles  = implode(',', $data->visibletoroles);
+            $page->visibletoallroles = $data->visibletoallroles;
 
             // There can only be one!
             if ($page->template) {

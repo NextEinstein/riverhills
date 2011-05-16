@@ -260,7 +260,26 @@ function xmldb_format_page_upgrade($oldversion=0) {
         // XMLDB_TYPE_CHAR isn't the same as varchar???
         //$alter = "ALTER TABLE {$CFG->prefix}format_page CHANGE prefleftwidth prefleftwidth varchar(8)";
     }
-    
+
+    if ($result && $oldversion < 2009060201) {
+
+    /// Define field visibletoallroles to be added to format_page
+        $table = new XMLDBTable('format_page');
+        $field = new XMLDBField('visibletoallroles');
+        $field->setAttributes(XMLDB_TYPE_INTEGER, '1', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '1', 'locks');
+
+    /// Launch add field visibletoallroles
+        $result = $result && add_field($table, $field);
+
+    /// Define field visibletoroles to be added to format_page
+        $table = new XMLDBTable('format_page');
+        $field = new XMLDBField('visibletoroles');
+        $field->setAttributes(XMLDB_TYPE_CHAR, '28', null, null, null, null, null, null, 'visibletoallroles');
+
+    /// Launch add field visibletoroles
+        $result = $result && add_field($table, $field);
+    }
+
 
     return $result;
 }

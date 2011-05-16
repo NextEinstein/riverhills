@@ -7,7 +7,7 @@
  * @package format_page
  **/
 
-$plugin->version  = 2009060200; // Plugin version (update when tables change) if this line is changed ensure that the following line 
+$plugin->version  = 2009060201; // Plugin version (update when tables change) if this line is changed ensure that the following line
                                 // in blocks/course_format_page/block_course_format_page.php is changed to reflect the proper version number
                                 // set_config('format_page_version', '2008121000');        // trick the page course format into thinking its already installed.
 $plugin->requires = 2007021501; // Required Moodle version
