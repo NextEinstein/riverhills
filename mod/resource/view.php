@@ -33,6 +33,9 @@
 
     require_course_login($course, true, $cm);
 
+    $ctx = get_context_instance(CONTEXT_MODULE, $cm->id);
+
+    require_capability("mod/resource:view", $ctx);
     require ($CFG->dirroot.'/mod/resource/type/'.$resource->type.'/resource.class.php');
     $resourceclass = 'resource_'.$resource->type;
     $resourceinstance = new $resourceclass($cm->id);
