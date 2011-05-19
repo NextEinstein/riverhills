@@ -33,6 +33,12 @@ class format_page_pageitem_resource extends format_page_pageitem {
         require_once($CFG->dirroot.'/mod/resource/lib.php'); 
         require_once($CFG->dirroot.'/mod/resource/type/'.$resource->type.'/resource.class.php');
 
+        $ctx = get_context_instance(CONTEXT_MODULE, $block->cm->id);
+
+        if (!has_capability("mod/resource:view", $ctx)) {
+            return null;
+        }
+
         $resclass    = 'resource_'.$resource->type;
         $resourceobj = new $resclass($block->cm->id);
 

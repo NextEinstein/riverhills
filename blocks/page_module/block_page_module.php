@@ -68,6 +68,10 @@ class block_page_module extends block_base {
         // Gets all of our variables and caches result
         $result = block_page_module_init($this->config->cmid);
 
+        if (is_null($result)) {
+            return null;
+        }
+
         if ($result !== false and is_array($result)) {
             // Get all of the variables out
             list($this->cm,     $this->module, $this->moduleinstance,
@@ -85,6 +89,10 @@ class block_page_module extends block_base {
 
                 // Calling hook, set_instance, and passing $this by reference
                 $result = block_page_module_hook($this->module->name, 'set_instance', array(&$this));
+
+                if (is_null($result)) {
+                    return null;
+                }
 
                 if (!empty($this->content->text) and !$this->cm->visible) {
                     $this->content->text = '<span class="dimmed_text">'.$this->content->text.'</span>';

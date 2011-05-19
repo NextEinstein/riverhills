@@ -1166,8 +1166,6 @@ function page_get_master_pages($courseid, $limit=0, $display=DISP_PUBLISH) {
     }
 
     array_walk($pages, 'page_null_page_not_matching_display', $display);
-    $pages = array_filter($pages, 'page_unset_null_page');
-
     array_walk($pages, 'page_null_page_if_user_doesnot_match_role', $userroleids);
     $pages = array_filter($pages, 'page_unset_null_page');
 
@@ -1191,19 +1189,19 @@ function page_unset_null_page(&$page) {
 }
 
 function page_null_page_if_user_doesnot_match_role(&$page, $ignore, $userroleids) {
-    $pagevisibletoroles = empty($page->visibletoallroles) && !empty($page->visibletoroles) ? explode(',', $page->visibletoroles) : array();
+    $pagevisibletoroles = array();
+    if (empty($page->visibletoallroles) && !empty($page->visibletoroles)) {
+        explode(',', $page->visibletoroles);
+    }
     $overlappingroles = array_intersect($userroleids, $pagevisibletoroles);
-if ($page->nameone == 'Hiden page') {
-    //var_dump($pagevisibletoroles, $userroleids);
-    //var_dump(empty($page->visibletoallroles), empty($overlappingroles), !has_capability('moodle/site:doanything', get_system_context()));
-}
+
     if (empty($page->visibletoallroles) && empty($overlappingroles) && !has_capability('moodle/site:doanything', get_system_context())) {
         $page = null;
         return;
     }
 
-    if (is_array($page->children)) {
-        array_walk($page->children, 'page_null_page_not_matching_display', $userroleids);
+    if (!empty($page->children) && is_array($page->children)) {
+        array_walk($page->children, 'page_null_page_if_user_doesnot_match_role', $userroleids);
     }
 }
 /**
@@ -1213,7 +1211,9 @@ if ($page->nameone == 'Hiden page') {
  * @return unknown_type
  */
 function page_null_page_not_matching_display(&$page, $ignore, $display) {
-
+    if (is_null($page)) {
+        return;
+    }
     if (($page->display & $display) != $display) {
         $page = null;
         return;
